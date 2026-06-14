@@ -739,8 +739,11 @@ function renderizar() {
     curso.unidades.forEach(u => {
       if (busca && !normalizar(u.nome).includes(busca) && !normalizar(curso.nome).includes(busca)) return;
       if (filtroMod) {
-        if (filtroMod === "Específico" && !u.modulo.toLowerCase().includes("específico") && !u.modulo.toLowerCase().includes("especifico")) return;
-        else if (filtroMod !== "Específico" && !u.modulo.toLowerCase().includes(normalizar(filtroMod))) return;
+        const moduloNormalizado = normalizar(u.modulo);
+        const filtroModNormalizado = normalizar(filtroMod);
+        if (filtroModNormalizado === "especifico") {
+          if (!moduloNormalizado.includes("especifico")) return;
+        } else if (!moduloNormalizado.includes(filtroModNormalizado)) return;
       }
       if (filtroPerido && u.periodo !== filtroPerido) return;
       linhas.push({curso: curso.nome, url: curso.url, periodo: u.periodo, modulo: u.modulo, nome: u.nome, horas: u.horas});
