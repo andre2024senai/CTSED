@@ -109,7 +109,7 @@
     return { sheetName: preferred, rows };
   }
 
-  function compareGeaneRows(rows, turmaMap) {
+  function compareADMRows(rows, turmaMap) {
     const matched = [];
     const unmatched = [];
     rows.forEach((row, index) => {
@@ -122,7 +122,7 @@
         idTurma,
         unidade: row.Unidade || '',
         modalidade: row.Modaliade || row.Modalidade || '',
-        produtoGeane: row.Produto || '',
+        produtoADM: row.Produto || '',
         terminoTurma: row['T\u00e9rmino Turma'] || '',
         aluno: row.Nome || row.NOME || '',
         ucReprovada: row['UC Reprovada'] || '',
@@ -192,27 +192,27 @@
     );
   }
 
-  function ImportPanel({ geane, onImport, onClearImport, onSearchUc }) {
-    const hasRows = geane.matched.length > 0;
+  function ImportPanel({ adm, onImport, onClearImport, onSearchUc }) {
+    const hasRows = adm.matched.length > 0;
     return h('aside', { className: 'import-panel' },
       h('div', { className: 'panel-card' },
         h('div', { className: 'panel-title' },
-          h('span', { className: 'eyebrow' }, 'Planilha da Geane'),
+          h('span', { className: 'eyebrow' }, 'Planilha ADM'),
           h('h2', null, 'Importar pend\u00eancias')
         ),
         h('label', { className: 'upload-box' },
           h('input', { type: 'file', accept: '.xlsx,.xls', onChange: onImport }),
           h('strong', null, 'Selecionar planilha'),
-          h('span', null, geane.fileName || 'Use o relat\u00f3rio com a aba UCsReprovadasBase')
+          h('span', null, adm.fileName || 'Use o relat\u00f3rio com a aba UCsReprovadasBase')
         ),
-        geane.error ? h('div', { className: 'notice danger' }, geane.error) : null,
-        geane.fileName ? h('div', { className: 'notice' }, 'Aba lida: ' + (geane.sheetName || 'n\u00e3o identificada')) : null,
+        adm.error ? h('div', { className: 'notice danger' }, adm.error) : null,
+        adm.fileName ? h('div', { className: 'notice' }, 'Aba lida: ' + (adm.sheetName || 'n\u00e3o identificada')) : null,
         h('div', { className: 'metric-grid' },
-          h('div', { className: 'metric' }, h('strong', null, geane.totalImported), h('span', null, 'linhas lidas')),
-          h('div', { className: 'metric success' }, h('strong', null, geane.matched.length), h('span', null, 'alunos ETG')),
-          h('div', { className: 'metric muted' }, h('strong', null, geane.unmatched.length), h('span', null, 'fora da base'))
+          h('div', { className: 'metric' }, h('strong', null, adm.totalImported), h('span', null, 'linhas lidas')),
+          h('div', { className: 'metric success' }, h('strong', null, adm.matched.length), h('span', null, 'alunos ETG')),
+          h('div', { className: 'metric muted' }, h('strong', null, adm.unmatched.length), h('span', null, 'fora da base'))
         ),
-        geane.fileName ? h('button', { className: 'ghost-btn', type: 'button', onClick: onClearImport }, 'Limpar importa\u00e7\u00e3o') : null
+        adm.fileName ? h('button', { className: 'ghost-btn', type: 'button', onClick: onClearImport }, 'Limpar importa\u00e7\u00e3o') : null
       ),
       h('div', { className: 'panel-card compact' },
         h('div', { className: 'panel-title' },
@@ -220,18 +220,18 @@
           h('h2', null, 'UCs reprovadas em turmas ETG')
         ),
         hasRows ? h('div', { className: 'matched-list' },
-          geane.matched.slice(0, 120).map((item) => h('article', { className: 'student-item', key: item.rowNumber + item.idTurma + item.aluno },
+          adm.matched.slice(0, 120).map((item) => h('article', { className: 'student-item', key: item.rowNumber + item.idTurma + item.aluno },
             h('div', { className: 'student-head' },
               h('strong', null, item.aluno || 'Aluno sem nome'),
-              h('span', null, '#' + item.idTurma)
+              item.turmaBase.linkTurma ? h('a', { className: 'turma-link', href: item.turmaBase.linkTurma, target: '_blank', rel: 'noreferrer' }, '#' + item.idTurma) : h('span', null, '#' + item.idTurma)
             ),
             h('p', null, item.turmaBase.nomeTurma + ' \u00b7 ' + item.turmaBase.produto),
             h('div', { className: 'uc-chip-row' },
               item.ucs.map((uc) => h('button', { key: uc, type: 'button', className: 'uc-chip', onClick: () => onSearchUc(uc, item.turmaBase.produto) }, uc))
             )
           )),
-          geane.matched.length > 120 ? h('div', { className: 'notice' }, 'Mostrando 120 de ' + geane.matched.length + ' registros filtrados.') : null
-        ) : h('div', { className: 'empty-panel' }, geane.fileName ? 'Nenhum ID Turma encontrado na base ETG.' : 'Importe a planilha para ver os alunos filtrados automaticamente.')
+          adm.matched.length > 120 ? h('div', { className: 'notice' }, 'Mostrando 120 de ' + adm.matched.length + ' registros filtrados.') : null
+        ) : h('div', { className: 'empty-panel' }, adm.fileName ? 'Nenhum ID Turma encontrado na base ETG.' : 'Importe a planilha para ver os alunos filtrados automaticamente.')
       )
     );
   }
@@ -305,7 +305,7 @@
     const [periodo, setPeriodo] = useState('');
     const [sortCol, setSortCol] = useState('curso');
     const [sortAsc, setSortAsc] = useState(true);
-    const [geane, setGeane] = useState({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
+    const [adm, setADM] = useState({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
     const allRows = useMemo(flattenCursos, []);
     const totalHoras = useMemo(() => CURSOS.reduce((sum, item) => sum + item.totalHoras, 0), []);
     const turmaMap = useMemo(buildTurmaMap, []);
@@ -356,31 +356,31 @@
       const file = event.target.files && event.target.files[0];
       if (!file) return;
       if (!window.XLSX) {
-        setGeane({ fileName: file.name, sheetName: '', totalImported: 0, matched: [], unmatched: [], error: 'Biblioteca de leitura XLSX n\u00e3o carregada. Verifique sua conex\u00e3o e recarregue a p\u00e1gina.' });
+        setADM({ fileName: file.name, sheetName: '', totalImported: 0, matched: [], unmatched: [], error: 'Biblioteca de leitura XLSX n\u00e3o carregada. Verifique sua conex\u00e3o e recarregue a p\u00e1gina.' });
         return;
       }
       try {
         const buffer = await file.arrayBuffer();
         const workbook = XLSX.read(buffer, { type: 'array' });
         const { sheetName, rows: importedRows } = sheetToRows(workbook);
-        const compared = compareGeaneRows(importedRows, turmaMap);
-        setGeane({ fileName: file.name, sheetName, totalImported: importedRows.length, matched: compared.matched, unmatched: compared.unmatched, error: '' });
+        const compared = compareADMRows(importedRows, turmaMap);
+        setADM({ fileName: file.name, sheetName, totalImported: importedRows.length, matched: compared.matched, unmatched: compared.unmatched, error: '' });
       } catch (error) {
-        setGeane({ fileName: file.name, sheetName: '', totalImported: 0, matched: [], unmatched: [], error: 'N\u00e3o foi poss\u00edvel ler a planilha. Confirme se o arquivo est\u00e1 em .xlsx e possui a aba de UCs reprovadas.' });
+        setADM({ fileName: file.name, sheetName: '', totalImported: 0, matched: [], unmatched: [], error: 'N\u00e3o foi poss\u00edvel ler a planilha. Confirme se o arquivo est\u00e1 em .xlsx e possui a aba de UCs reprovadas.' });
       } finally {
         event.target.value = '';
       }
     }
 
     function clearImport() {
-      setGeane({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
+      setADM({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
     }
 
     return h('div', { className: 'app-shell' },
       h(Header, { totalCursos: CURSOS.length, totalUnidades: allRows.length, totalHoras }),
       h(Filters, { busca, setBusca, curso, setCurso, modulo, setModulo, periodo, setPeriodo, onClear: clearFilters }),
       h('main', { className: 'main-content workspace-layout' },
-        h(ImportPanel, { geane, onImport: handleImport, onClearImport: clearImport, onSearchUc: handleSearchUc }),
+        h(ImportPanel, { adm, onImport: handleImport, onClearImport: clearImport, onSearchUc: handleSearchUc }),
         h('div', { className: 'content-area' },
           h(CourseCards, { cursoSelecionado: curso, onSelect: setCurso }),
           h(UnitsTable, { rows, busca, sortCol, sortAsc, onSort: handleSort }),

@@ -453,3 +453,12 @@ mark {
   .metric-grid { grid-template-columns: 1fr; }
   .student-head { align-items: flex-start; flex-direction: column; gap: 3px; }
 }
+
+.turma-link {
+  color: var(--azul);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.turma-link:hover { color: var(--azul-vivo); text-decoration: underline; }
