@@ -295,3 +295,161 @@ mark {
   .section-head { align-items: flex-start; flex-direction: column; gap: 6px; }
   .course-grid { grid-template-columns: 1fr; }
 }
+
+
+.workspace-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.content-area { min-width: 0; }
+.import-panel {
+  position: sticky;
+  top: 86px;
+  display: grid;
+  gap: 14px;
+}
+.panel-card {
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--superficie);
+  box-shadow: 0 12px 28px rgba(16,20,77,0.08);
+  padding: 14px;
+}
+.panel-card.compact { padding: 0; overflow: hidden; }
+.panel-card.compact .panel-title { padding: 14px 14px 10px; }
+.panel-title { display: grid; gap: 3px; margin-bottom: 12px; }
+.panel-title h2 { margin: 0; font-size: 1rem; color: var(--azul-noite); }
+.eyebrow {
+  color: var(--azul);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.upload-box {
+  display: grid;
+  gap: 5px;
+  min-height: 104px;
+  padding: 16px;
+  border: 1.5px dashed var(--azul-claro);
+  border-radius: 8px;
+  background: #F6F9FF;
+  color: var(--texto);
+  place-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.16s, background 0.16s;
+}
+.upload-box:hover { border-color: var(--azul-vivo); background: #EEF7FF; }
+.upload-box input { position: absolute; opacity: 0; pointer-events: none; }
+.upload-box strong { font-size: 0.94rem; }
+.upload-box span { color: var(--muted); font-size: 0.8rem; line-height: 1.35; }
+.notice {
+  margin-top: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  background: #EEF7FF;
+  color: var(--azul-noite);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.notice.danger { background: #FFF1F2; color: #9F1239; }
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.metric {
+  min-height: 64px;
+  padding: 10px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: #F9F9FF;
+}
+.metric strong { display: block; color: var(--azul-noite); font-size: 1.2rem; line-height: 1; }
+.metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 0.72rem; font-weight: 800; }
+.metric.success { background: var(--verde-claro); border-color: var(--verde-logo); }
+.metric.muted { background: #F4F7FF; }
+.ghost-btn {
+  width: 100%;
+  min-height: 36px;
+  margin-top: 12px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--azul);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+.matched-list {
+  max-height: 68vh;
+  overflow: auto;
+  border-top: 1px solid var(--borda);
+}
+.student-item {
+  padding: 12px 14px;
+  border-bottom: 1px solid #E6ECFF;
+  background: #fff;
+}
+.student-item:nth-child(even) { background: #F9FBFF; }
+.student-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+.student-head strong {
+  color: var(--azul-noite);
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+.student-head span {
+  color: var(--azul);
+  font-size: 0.76rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.student-item p {
+  margin: 6px 0 9px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+.uc-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.uc-chip {
+  max-width: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--azul-claro);
+  border-radius: 999px;
+  background: #EAF1FF;
+  color: var(--azul);
+  font-size: 0.72rem;
+  font-weight: 850;
+  line-height: 1.25;
+  text-align: left;
+}
+.uc-chip:hover { border-color: var(--azul-vivo); background: #EEF7FF; }
+.empty-panel {
+  padding: 18px 14px;
+  border-top: 1px solid var(--borda);
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 750;
+  line-height: 1.45;
+}
+@media (max-width: 1150px) {
+  .workspace-layout { grid-template-columns: 1fr; }
+  .import-panel { position: static; }
+  .matched-list { max-height: 420px; }
+}
+@media (max-width: 700px) {
+  .metric-grid { grid-template-columns: 1fr; }
+  .student-head { align-items: flex-start; flex-direction: column; gap: 3px; }
+}

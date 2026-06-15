@@ -2,9 +2,30 @@
   const { useMemo, useState } = React;
   const h = React.createElement;
   const CURSOS = window.CURSOS || [];
+  const TURMAS_ETG = window.TURMAS_ETG || [];
 
   function normalizar(texto) {
     return String(texto || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+  }
+
+  function onlyDigits(value) {
+    const raw = String(value == null ? '' : value).trim();
+    if (!raw) return '';
+    const numeric = Number(raw.replace(',', '.'));
+    if (Number.isFinite(numeric)) return String(Math.trunc(numeric));
+    return raw.replace(/\D/g, '');
+  }
+
+  function cleanUcName(value) {
+    return String(value || '').replace(/^"|"$/g, '').trim();
+  }
+
+  function splitUcs(value) {
+    const text = String(value || '').trim();
+    if (!text) return [];
+    const quoted = [...text.matchAll(/"([^"]+)"/g)].map((match) => cleanUcName(match[1]));
+    if (quoted.length) return quoted.filter(Boolean);
+    return text.split(',').map(cleanUcName).filter(Boolean);
   }
 
   function classeModulo(modulo) {
@@ -42,7 +63,7 @@
   }
 
   function sortRows(rows, sortCol, sortAsc) {
-    const periodoOrdem = { '1º Período': 1, '2º Período': 2, '3º Período': 3, '4º Período': 4 };
+    const periodoOrdem = { '1\u00ba Per\u00edodo': 1, '2\u00ba Per\u00edodo': 2, '3\u00ba Per\u00edodo': 3, '4\u00ba Per\u00edodo': 4 };
     return [...rows].sort((a, b) => {
       let va = a[sortCol];
       let vb = b[sortCol];
@@ -62,19 +83,73 @@
     });
   }
 
+  function buildTurmaMap() {
+    const map = new Map();
+    TURMAS_ETG.forEach((turma) => {
+      const codigo = onlyDigits(turma.codigoTurma);
+      if (codigo) map.set(codigo, turma);
+    });
+    return map;
+  }
+
+  function sheetToRows(workbook) {
+    const sheetNames = workbook.SheetNames || [];
+    const preferred = sheetNames.find((name) => normalizar(name).includes('ucsreprovadasbase')) || sheetNames[0];
+    const sheet = workbook.Sheets[preferred];
+    const rows = XLSX.utils.sheet_to_json(sheet, { defval: '', raw: false });
+    if (rows.some((row) => row['ID Turma'] !== undefined && row['UC Reprovada'] !== undefined)) {
+      return { sheetName: preferred, rows };
+    }
+    for (const name of sheetNames) {
+      const candidate = XLSX.utils.sheet_to_json(workbook.Sheets[name], { defval: '', raw: false });
+      if (candidate.some((row) => row['ID Turma'] !== undefined && row['UC Reprovada'] !== undefined)) {
+        return { sheetName: name, rows: candidate };
+      }
+    }
+    return { sheetName: preferred, rows };
+  }
+
+  function compareGeaneRows(rows, turmaMap) {
+    const matched = [];
+    const unmatched = [];
+    rows.forEach((row, index) => {
+      const idTurma = onlyDigits(row['ID Turma']);
+      if (!idTurma) return;
+      const turmaBase = turmaMap.get(idTurma);
+      const ucs = splitUcs(row['UC Reprovada']);
+      const item = {
+        rowNumber: index + 2,
+        idTurma,
+        unidade: row.Unidade || '',
+        modalidade: row.Modaliade || row.Modalidade || '',
+        produtoGeane: row.Produto || '',
+        terminoTurma: row['T\u00e9rmino Turma'] || '',
+        aluno: row.Nome || row.NOME || '',
+        ucReprovada: row['UC Reprovada'] || '',
+        ucs,
+        encaminhamento: row['Encaminhamento (Supervisor)'] || row.Encaminhamento || '',
+        turmaBase
+      };
+      if (turmaBase) matched.push(item);
+      else unmatched.push(item);
+    });
+    return { matched, unmatched };
+  }
+
   function Header({ totalCursos, totalUnidades, totalHoras }) {
     return h('header', { className: 'topbar' },
       h('div', { className: 'color-line' }),
       h('div', { className: 'header-inner' },
-        h('img', { className: 'brand-logo', src: 'assets/logo-ensino-tecnico-gratuito.png', alt: 'Ensino Técnico Gratuito' }),
+        h('img', { className: 'brand-logo', src: 'assets/logo-ensino-tecnico-gratuito.png', alt: 'Ensino T\u00e9cnico Gratuito' }),
         h('div', { className: 'header-copy' },
-          h('h1', null, 'Cursos Técnicos Gratuitos SED — Unidades Curriculares'),
-          h('p', { className: 'subtitle' }, 'Consulta rápida por curso, módulo, período e carga horária')
+          h('h1', null, 'Cursos T\u00e9cnicos Gratuitos SED \u2014 Unidades Curriculares'),
+          h('p', { className: 'subtitle' }, 'Consulta, importa\u00e7\u00e3o e compara\u00e7\u00e3o de pend\u00eancias por turma')
         )
       ),
       h('div', { className: 'stats-strip' },
         h('span', { className: 'stat-pill' }, totalCursos + ' cursos'),
         h('span', { className: 'stat-pill' }, totalUnidades + ' unidades curriculares'),
+        h('span', { className: 'stat-pill' }, TURMAS_ETG.length + ' turmas ETG'),
         h('span', { className: 'stat-pill' }, totalHoras.toLocaleString('pt-BR') + 'h mapeadas')
       ),
       h('div', { className: 'color-line' })
@@ -86,7 +161,7 @@
       h('div', { className: 'controls-inner' },
         h('label', { className: 'field' },
           h('span', null, 'Buscar unidade curricular'),
-          h('input', { value: busca, onChange: (event) => setBusca(event.target.value), placeholder: 'Ex: manutenção, projetos, química...' })
+          h('input', { value: busca, onChange: (event) => setBusca(event.target.value), placeholder: 'Ex: manuten\u00e7\u00e3o, projetos, qu\u00edmica...' })
         ),
         h('label', { className: 'field' },
           h('span', null, 'Curso'),
@@ -96,23 +171,67 @@
           )
         ),
         h('label', { className: 'field' },
-          h('span', null, 'Módulo'),
+          h('span', null, 'M\u00f3dulo'),
           h('select', { value: modulo, onChange: (event) => setModulo(event.target.value) },
-            h('option', { value: '' }, 'Todos os módulos'),
-            h('option', { value: 'Indústria' }, 'Indústria'),
-            h('option', { value: 'Introdutório' }, 'Introdutório'),
-            h('option', { value: 'Específico' }, 'Específico (I / II / III...)'),
-            h('option', { value: 'Inovação' }, 'Inovação')
+            h('option', { value: '' }, 'Todos os m\u00f3dulos'),
+            h('option', { value: 'Ind\u00fastria' }, 'Ind\u00fastria'),
+            h('option', { value: 'Introdut\u00f3rio' }, 'Introdut\u00f3rio'),
+            h('option', { value: 'Espec\u00edfico' }, 'Espec\u00edfico (I / II / III...)'),
+            h('option', { value: 'Inova\u00e7\u00e3o' }, 'Inova\u00e7\u00e3o')
           )
         ),
         h('label', { className: 'field' },
-          h('span', null, 'Período'),
+          h('span', null, 'Per\u00edodo'),
           h('select', { value: periodo, onChange: (event) => setPeriodo(event.target.value) },
-            h('option', { value: '' }, 'Todos os períodos'),
-            ['1º Período', '2º Período', '3º Período', '4º Período'].map((p) => h('option', { key: p, value: p }, p))
+            h('option', { value: '' }, 'Todos os per\u00edodos'),
+            ['1\u00ba Per\u00edodo', '2\u00ba Per\u00edodo', '3\u00ba Per\u00edodo', '4\u00ba Per\u00edodo'].map((p) => h('option', { key: p, value: p }, p))
           )
         ),
         h('button', { className: 'clear-btn', type: 'button', onClick: onClear }, 'Limpar filtros')
+      )
+    );
+  }
+
+  function ImportPanel({ geane, onImport, onClearImport, onSearchUc }) {
+    const hasRows = geane.matched.length > 0;
+    return h('aside', { className: 'import-panel' },
+      h('div', { className: 'panel-card' },
+        h('div', { className: 'panel-title' },
+          h('span', { className: 'eyebrow' }, 'Planilha da Geane'),
+          h('h2', null, 'Importar pend\u00eancias')
+        ),
+        h('label', { className: 'upload-box' },
+          h('input', { type: 'file', accept: '.xlsx,.xls', onChange: onImport }),
+          h('strong', null, 'Selecionar planilha'),
+          h('span', null, geane.fileName || 'Use o relat\u00f3rio com a aba UCsReprovadasBase')
+        ),
+        geane.error ? h('div', { className: 'notice danger' }, geane.error) : null,
+        geane.fileName ? h('div', { className: 'notice' }, 'Aba lida: ' + (geane.sheetName || 'n\u00e3o identificada')) : null,
+        h('div', { className: 'metric-grid' },
+          h('div', { className: 'metric' }, h('strong', null, geane.totalImported), h('span', null, 'linhas lidas')),
+          h('div', { className: 'metric success' }, h('strong', null, geane.matched.length), h('span', null, 'alunos ETG')),
+          h('div', { className: 'metric muted' }, h('strong', null, geane.unmatched.length), h('span', null, 'fora da base'))
+        ),
+        geane.fileName ? h('button', { className: 'ghost-btn', type: 'button', onClick: onClearImport }, 'Limpar importa\u00e7\u00e3o') : null
+      ),
+      h('div', { className: 'panel-card compact' },
+        h('div', { className: 'panel-title' },
+          h('span', { className: 'eyebrow' }, 'Resultado filtrado'),
+          h('h2', null, 'UCs reprovadas em turmas ETG')
+        ),
+        hasRows ? h('div', { className: 'matched-list' },
+          geane.matched.slice(0, 120).map((item) => h('article', { className: 'student-item', key: item.rowNumber + item.idTurma + item.aluno },
+            h('div', { className: 'student-head' },
+              h('strong', null, item.aluno || 'Aluno sem nome'),
+              h('span', null, '#' + item.idTurma)
+            ),
+            h('p', null, item.turmaBase.nomeTurma + ' \u00b7 ' + item.turmaBase.produto),
+            h('div', { className: 'uc-chip-row' },
+              item.ucs.map((uc) => h('button', { key: uc, type: 'button', className: 'uc-chip', onClick: () => onSearchUc(uc, item.turmaBase.produto) }, uc))
+            )
+          )),
+          geane.matched.length > 120 ? h('div', { className: 'notice' }, 'Mostrando 120 de ' + geane.matched.length + ' registros filtrados.') : null
+        ) : h('div', { className: 'empty-panel' }, geane.fileName ? 'Nenhum ID Turma encontrado na base ETG.' : 'Importe a planilha para ver os alunos filtrados automaticamente.')
       )
     );
   }
@@ -131,7 +250,7 @@
           onClick: () => onSelect(cursoSelecionado === curso.nome ? '' : curso.nome)
         },
           h('strong', null, curso.nome),
-          h('small', null, curso.unidades.length + ' UCs · ' + curso.totalHoras + 'h')
+          h('small', null, curso.unidades.length + ' UCs \u00b7 ' + curso.totalHoras + 'h')
         ))
       )
     );
@@ -141,7 +260,7 @@
     const active = sortCol === column;
     return h('th', { className: 'sortable' + (center ? ' center' : ''), onClick: () => onSort(column) },
       label,
-      h('span', { 'aria-hidden': 'true' }, active ? (sortAsc ? ' ▲' : ' ▼') : '')
+      h('span', { 'aria-hidden': 'true' }, active ? (sortAsc ? ' \u25b2' : ' \u25bc') : '')
     );
   }
 
@@ -157,10 +276,10 @@
             h('thead', null,
               h('tr', null,
                 h(TableHeader, { label: 'Curso', column: 'curso', sortCol, sortAsc, onSort }),
-                h(TableHeader, { label: 'Período', column: 'periodo', sortCol, sortAsc, onSort }),
-                h(TableHeader, { label: 'Módulo', column: 'modulo', sortCol, sortAsc, onSort }),
+                h(TableHeader, { label: 'Per\u00edodo', column: 'periodo', sortCol, sortAsc, onSort }),
+                h(TableHeader, { label: 'M\u00f3dulo', column: 'modulo', sortCol, sortAsc, onSort }),
                 h(TableHeader, { label: 'Unidade Curricular', column: 'nome', sortCol, sortAsc, onSort }),
-                h(TableHeader, { label: 'Carga Horária', column: 'horas', sortCol, sortAsc, onSort, center: true })
+                h(TableHeader, { label: 'Carga Hor\u00e1ria', column: 'horas', sortCol, sortAsc, onSort, center: true })
               )
             ),
             h('tbody', null,
@@ -186,8 +305,10 @@
     const [periodo, setPeriodo] = useState('');
     const [sortCol, setSortCol] = useState('curso');
     const [sortAsc, setSortAsc] = useState(true);
+    const [geane, setGeane] = useState({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
     const allRows = useMemo(flattenCursos, []);
     const totalHoras = useMemo(() => CURSOS.reduce((sum, item) => sum + item.totalHoras, 0), []);
+    const turmaMap = useMemo(buildTurmaMap, []);
 
     const rows = useMemo(() => {
       const termoBusca = normalizar(busca);
@@ -221,13 +342,50 @@
       }
     }
 
+    function handleSearchUc(uc, produto) {
+      setBusca(uc);
+      setModulo('');
+      setPeriodo('');
+      const produtoNorm = normalizar(produto).replace(/\s*\(2025\)$/, '');
+      const matchedCourse = CURSOS.find((item) => normalizar(item.nome) === produtoNorm || produtoNorm.includes(normalizar(item.nome)) || normalizar(item.nome).includes(produtoNorm));
+      setCurso(matchedCourse ? matchedCourse.nome : '');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function handleImport(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (!window.XLSX) {
+        setGeane({ fileName: file.name, sheetName: '', totalImported: 0, matched: [], unmatched: [], error: 'Biblioteca de leitura XLSX n\u00e3o carregada. Verifique sua conex\u00e3o e recarregue a p\u00e1gina.' });
+        return;
+      }
+      try {
+        const buffer = await file.arrayBuffer();
+        const workbook = XLSX.read(buffer, { type: 'array' });
+        const { sheetName, rows: importedRows } = sheetToRows(workbook);
+        const compared = compareGeaneRows(importedRows, turmaMap);
+        setGeane({ fileName: file.name, sheetName, totalImported: importedRows.length, matched: compared.matched, unmatched: compared.unmatched, error: '' });
+      } catch (error) {
+        setGeane({ fileName: file.name, sheetName: '', totalImported: 0, matched: [], unmatched: [], error: 'N\u00e3o foi poss\u00edvel ler a planilha. Confirme se o arquivo est\u00e1 em .xlsx e possui a aba de UCs reprovadas.' });
+      } finally {
+        event.target.value = '';
+      }
+    }
+
+    function clearImport() {
+      setGeane({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
+    }
+
     return h('div', { className: 'app-shell' },
       h(Header, { totalCursos: CURSOS.length, totalUnidades: allRows.length, totalHoras }),
       h(Filters, { busca, setBusca, curso, setCurso, modulo, setModulo, periodo, setPeriodo, onClear: clearFilters }),
-      h('main', { className: 'main-content' },
-        h(CourseCards, { cursoSelecionado: curso, onSelect: setCurso }),
-        h(UnitsTable, { rows, busca, sortCol, sortAsc, onSort: handleSort }),
-        h('div', { className: 'footer-note' }, 'Dados organizados para consulta das unidades curriculares dos cursos técnicos gratuitos.')
+      h('main', { className: 'main-content workspace-layout' },
+        h(ImportPanel, { geane, onImport: handleImport, onClearImport: clearImport, onSearchUc: handleSearchUc }),
+        h('div', { className: 'content-area' },
+          h(CourseCards, { cursoSelecionado: curso, onSelect: setCurso }),
+          h(UnitsTable, { rows, busca, sortCol, sortAsc, onSort: handleSort }),
+          h('div', { className: 'footer-note' }, 'Dados organizados para consulta das unidades curriculares dos cursos t\u00e9cnicos gratuitos.')
+        )
       )
     );
   }
