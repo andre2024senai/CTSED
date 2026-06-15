@@ -223,7 +223,7 @@
           adm.matched.slice(0, 120).map((item) => h('article', { className: 'student-item', key: item.rowNumber + item.idTurma + item.aluno },
             h('div', { className: 'student-head' },
               h('strong', null, item.aluno || 'Aluno sem nome'),
-              item.turmaBase.linkTurma ? h('a', { className: 'turma-link', href: item.turmaBase.linkTurma, target: '_blank', rel: 'noreferrer' }, '#' + item.idTurma) : h('span', null, '#' + item.idTurma)
+              h('a', { className: 'turma-link', href: item.turmaBase.linkTurma || ('https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=' + item.idTurma), target: '_blank', rel: 'noreferrer', title: 'Abrir turma no SGN' }, '#' + item.idTurma)
             ),
             h('p', null, item.turmaBase.nomeTurma + ' \u00b7 ' + item.turmaBase.produto),
             h('div', { className: 'uc-chip-row' },
