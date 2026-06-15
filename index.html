@@ -6,21 +6,28 @@
 <title>Cursos Técnicos Gratuitos SED SENAI — Unidades Curriculares</title>
 <style>
   :root {
-    --roxo:       #A040C8;
-    --magenta:    #D42090;
-    --laranja:    #E05818;
-    --verde:      #3CB832;
-    --verde-logo: #50E860;
-    --grad: linear-gradient(135deg, #A040C8 0%, #D42090 30%, #E05818 60%, #3CB832 100%);
-    --grad-h: linear-gradient(135deg, #8A30A8 0%, #B81878 30%, #C04010 60%, #2A9824 100%);
-    --verde-claro: #EDFBEE;
-    --cinza:      #F5F5F5;
-    --borda:      #DDD;
-    --texto:      #1A1A1A;
+    --azul-noite: #10144D;
+    --azul-senai: #005CA9;
+    --azul: #1351B9;
+    --azul-vivo: #166AF7;
+    --azul-claro: #B1C7FF;
+    --verde: #3BDD56;
+    --verde-logo: #7EFD93;
+    --ciano: #26C6AF;
+    --turquesa: #12A095;
+    --fundo: #F9F9FF;
+    --superficie: #FFFFFF;
+    --borda: #DCE5FF;
+    --texto: #10144D;
+    --texto-suave: #333A3F;
+    --grad: linear-gradient(135deg, #10144D 0%, #1351B9 48%, #166AF7 74%, #3BDD56 100%);
+    --grad-h: linear-gradient(135deg, #0B0E3A 0%, #005CA9 48%, #1351B9 78%, #26C6AF 100%);
+    --verde-claro: #E9FFF0;
+    --cinza: #F4F7FF;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #F7F7F7; color: var(--texto); }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--fundo); color: var(--texto); }
 
   /* ── Header com gradiente Ensino Técnico Gratuito ── */
   header {
@@ -38,14 +45,14 @@
     font-size: 1.65rem;
     font-weight: 900;
     letter-spacing: 0;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.28);
     color: #fff;
   }
   header h1 { font-size: 1.25rem; font-weight: 700; line-height: 1.3; }
-  header p  { font-size: 0.82rem; opacity: 0.9; margin-top: 3px; }
+  header p  { font-size: 0.82rem; color: var(--azul-claro); margin-top: 3px; font-weight: 600; }
   .header-faixa {
     height: 5px;
-    background: linear-gradient(90deg, #A040C8, #D42090, #E05818, #CDA010, #3CB832);
+    background: linear-gradient(90deg, #10144D, #1351B9, #166AF7, #26C6AF, #3BDD56);
   }
 
   /* ── Barra de controles ── */
@@ -60,7 +67,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 14px rgba(16,20,77,0.10);
   }
   .controles input, .controles select {
     padding: 8px 12px;
@@ -72,8 +79,8 @@
     background: #FAFAFA;
   }
   .controles input:focus, .controles select:focus {
-    border-color: var(--magenta);
-    box-shadow: 0 0 0 3px rgba(212,32,144,0.12);
+    border-color: var(--azul-vivo);
+    box-shadow: 0 0 0 3px rgba(22,106,247,0.14);
     background: #fff;
   }
   .controles input { width: 280px; }
@@ -82,12 +89,12 @@
   #contador { margin-left: auto; font-size: 0.84rem; color: #777; white-space: nowrap; font-weight: 600; }
   #btn-limpar {
     padding: 8px 16px;
-    background: var(--grad);
+    background: var(--verde);
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 0.84rem;
-    color: #fff;
+    color: var(--azul-noite);
     font-weight: 700;
     letter-spacing: 0.3px;
     transition: opacity 0.2s;
@@ -99,10 +106,10 @@
   .conteudo { padding: 22px 32px; }
 
   /* ── Tabela ── */
-  .tabela-wrapper { overflow-x: auto; border-radius: 10px; border: 1px solid var(--borda); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .tabela-wrapper { overflow-x: auto; border-radius: 10px; border: 1px solid var(--borda); box-shadow: 0 2px 12px rgba(16,20,77,0.08); }
   table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
   thead th {
-    background: linear-gradient(90deg, #8A30A8, #C01878, #C84010, #2A9824);
+    background: linear-gradient(90deg, #10144D, #1351B9, #166AF7);
     color: #fff;
     padding: 12px 14px;
     text-align: left;
@@ -116,9 +123,9 @@
   }
   thead th:hover { filter: brightness(1.15); }
   thead th .seta { font-size: 0.7rem; margin-left: 4px; opacity: 0.8; }
-  tbody tr { border-bottom: 1px solid #EEE; transition: background 0.15s; }
+  tbody tr { border-bottom: 1px solid #E6ECFF; transition: background 0.15s; }
   tbody tr:nth-child(even) { background: var(--cinza); }
-  tbody tr:hover { background: var(--verde-claro); }
+  tbody tr:hover { background: #EEF7FF; }
   td { padding: 9px 14px; vertical-align: middle; }
 
   /* ── Badges de módulo ── */
@@ -132,11 +139,11 @@
     text-transform: uppercase;
     letter-spacing: 0.4px;
   }
-  .mod-industria    { background: #FCE4EC; color: #C2185B; border: 1px solid #F48FB1; }
-  .mod-introdutorio { background: #EDE7F6; color: #6A1B9A; border: 1px solid #CE93D8; }
-  .mod-especifico   { background: #E3F2FD; color: #0D47A1; border: 1px solid #90CAF9; }
-  .mod-inovacao     { background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
-  .mod-outro        { background: #ECEFF1; color: #37474F; border: 1px solid #B0BEC5; }
+  .mod-industria    { background: #EAF1FF; color: #1351B9; border: 1px solid #B1C7FF; }
+  .mod-introdutorio { background: #E9FFFB; color: #0B766D; border: 1px solid #26C6AF; }
+  .mod-especifico   { background: #E9FFF0; color: #0C6B24; border: 1px solid #7EFD93; }
+  .mod-inovacao     { background: #EEF2FF; color: #10144D; border: 1px solid #166AF7; }
+  .mod-outro        { background: #F1F4FA; color: #333A3F; border: 1px solid #DCE5FF; }
 
   /* ── Badge de período ── */
   .badge-periodo {
@@ -145,15 +152,15 @@
     border-radius: 6px;
     font-size: 0.72rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #A040C8, #D42090);
+    background: #10144D;
     color: #fff;
     white-space: nowrap;
   }
 
-  .link-curso { color: var(--roxo); text-decoration: none; font-weight: 700; }
-  .link-curso:hover { color: var(--magenta); text-decoration: underline; }
+  .link-curso { color: var(--azul); text-decoration: none; font-weight: 800; }
+  .link-curso:hover { color: var(--azul-vivo); text-decoration: underline; }
 
-  .horas { font-weight: 800; text-align: center; color: var(--verde); }
+  .horas { font-weight: 800; text-align: center; color: #0C6B24; }
 
   .nenhum { text-align: center; padding: 48px; color: #AAA; font-size: 1rem; }
 
@@ -172,23 +179,23 @@
     transition: border 0.2s, box-shadow 0.2s, transform 0.15s;
   }
   .card-curso:hover {
-    border-color: var(--magenta);
-    box-shadow: 0 3px 12px rgba(212,32,144,0.18);
+    border-color: var(--azul-vivo);
+    box-shadow: 0 3px 12px rgba(22,106,247,0.16);
     transform: translateY(-1px);
   }
   .card-curso.ativo {
     border-color: var(--verde);
     background: var(--verde-claro);
-    box-shadow: 0 3px 12px rgba(60,184,50,0.20);
+    box-shadow: 0 3px 12px rgba(59,221,86,0.18);
   }
-  .card-curso .nome-curso { font-weight: 800; color: var(--roxo); font-size: 0.83rem; }
-  .card-curso.ativo .nome-curso { color: var(--verde); }
+  .card-curso .nome-curso { font-weight: 800; color: var(--azul); font-size: 0.83rem; }
+  .card-curso.ativo .nome-curso { color: #0C6B24; }
   .card-curso .info-curso { color: #888; font-size: 0.78rem; }
 
   /* ── Faixa decorativa abaixo dos controles ── */
   .faixa-grad {
     height: 3px;
-    background: linear-gradient(90deg, #A040C8, #D42090, #E05818, #CDA010, #3CB832);
+    background: linear-gradient(90deg, #10144D, #1351B9, #166AF7, #26C6AF, #3BDD56);
   }
 
   @media (max-width: 700px) {
