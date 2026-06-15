@@ -42,14 +42,18 @@
     gap: 16px;
   }
   .logo-catec {
-    font-size: 1.65rem;
-    font-weight: 900;
-    letter-spacing: 0;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.28);
-    color: #fff;
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+  .logo-catec img {
+    display: block;
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.22);
   }
   header h1 { font-size: 1.25rem; font-weight: 700; line-height: 1.3; }
-  header p  { font-size: 0.82rem; color: var(--azul-claro); margin-top: 3px; font-weight: 600; }
   .header-faixa {
     height: 5px;
     background: linear-gradient(90deg, #10144D, #1351B9, #166AF7, #26C6AF, #3BDD56);
@@ -204,7 +208,7 @@
     .conteudo { padding: 14px 16px; }
     .header-inner { padding: 14px 16px; }
     header h1 { font-size: 1rem; }
-    .logo-catec { font-size: 1.5rem; }
+    .logo-catec img { width: 96px; }
   }
 </style>
 </head>
@@ -213,10 +217,9 @@
 <header>
   <div class="header-faixa"></div>
   <div class="header-inner">
-    <div class="logo-catec">Ensino Técnico Gratuito</div>
+    <div class="logo-catec"><img src="assets/logo-ensino-tecnico-gratuito.png" alt="Ensino Técnico Gratuito"></div>
     <div>
       <h1>Cursos Técnicos Gratuitos SED — Unidades Curriculares</h1>
-      <p>15 cursos consolidados | Itinerário Nacional 2023 | Catálogo do MEC 4ª Edição</p>
     </div>
   </div>
   <div class="header-faixa"></div>
