@@ -35,8 +35,22 @@ window.TURMAS_CTC = [
     "linkTurma": ""
   },
   {
+    "codigoTurma": "105633",
+    "nomeTurma": "T TELM 2025/1 M1",
+    "produto": "T\u00e9cnico em Eletromec\u00e2nica",
+    "origem": "CTC",
+    "linkTurma": ""
+  },
+  {
     "codigoTurma": "105634",
     "nomeTurma": "T TELM 2025/1 N1",
+    "produto": "T\u00e9cnico em Eletromec\u00e2nica",
+    "origem": "CTC",
+    "linkTurma": ""
+  },
+  {
+    "codigoTurma": "114311",
+    "nomeTurma": "T TELM 2025/2 M1",
     "produto": "T\u00e9cnico em Eletromec\u00e2nica",
     "origem": "CTC",
     "linkTurma": ""
@@ -45,6 +59,20 @@ window.TURMAS_CTC = [
     "codigoTurma": "120278",
     "nomeTurma": "T TELM 2026/1 N1",
     "produto": "T\u00e9cnico em Eletromec\u00e2nica",
+    "origem": "CTC",
+    "linkTurma": ""
+  },
+  {
+    "codigoTurma": "130641",
+    "nomeTurma": "T TELM 2026/2 M1",
+    "produto": "T\u00e9cnico em Eletromec\u00e2nica",
+    "origem": "CTC",
+    "linkTurma": ""
+  },
+  {
+    "codigoTurma": "105639",
+    "nomeTurma": "T TELT 2025/1 M1",
+    "produto": "T\u00e9cnico em Eletrot\u00e9cnica",
     "origem": "CTC",
     "linkTurma": ""
   },
@@ -58,6 +86,13 @@ window.TURMAS_CTC = [
   {
     "codigoTurma": "114315",
     "nomeTurma": "T TELT 2025/2 N1",
+    "produto": "T\u00e9cnico em Eletrot\u00e9cnica",
+    "origem": "CTC",
+    "linkTurma": ""
+  },
+  {
+    "codigoTurma": "120273",
+    "nomeTurma": "T TELT 2026/1 M1",
     "produto": "T\u00e9cnico em Eletrot\u00e9cnica",
     "origem": "CTC",
     "linkTurma": ""
@@ -98,6 +133,13 @@ window.TURMAS_CTC = [
     "linkTurma": ""
   },
   {
+    "codigoTurma": "105635",
+    "nomeTurma": "T TMEC 2025/1 M1",
+    "produto": "T\u00e9cnico em Mec\u00e2nica",
+    "origem": "CTC",
+    "linkTurma": ""
+  },
+  {
     "codigoTurma": "105637",
     "nomeTurma": "T TMEC 2025/1 N1",
     "produto": "T\u00e9cnico em Mec\u00e2nica",
@@ -107,6 +149,13 @@ window.TURMAS_CTC = [
   {
     "codigoTurma": "114310",
     "nomeTurma": "T TMEC 2025/2 N1",
+    "produto": "T\u00e9cnico em Mec\u00e2nica",
+    "origem": "CTC",
+    "linkTurma": ""
+  },
+  {
+    "codigoTurma": "120276",
+    "nomeTurma": "T TMEC 2026/1 M1",
     "produto": "T\u00e9cnico em Mec\u00e2nica",
     "origem": "CTC",
     "linkTurma": ""
