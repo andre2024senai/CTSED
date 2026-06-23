@@ -1,4 +1,4 @@
-#root {
+﻿#root {
   min-height: 100vh;
 }
 
@@ -358,7 +358,7 @@ mark {
 .notice.danger { background: #FFF1F2; color: #9F1239; }
 .metric-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 12px;
 }
@@ -372,6 +372,7 @@ mark {
 .metric strong { display: block; color: var(--azul-noite); font-size: 1.2rem; line-height: 1; }
 .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 0.72rem; font-weight: 800; }
 .metric.success { background: var(--verde-claro); border-color: var(--verde-logo); }
+.metric.ctc { background: #E9FFFB; border-color: var(--ciano); }
 .metric.muted { background: #F4F7FF; }
 .ghost-btn {
   width: 100%;
@@ -412,6 +413,17 @@ mark {
   font-weight: 900;
   white-space: nowrap;
 }
+.student-head .turma-code { color: var(--texto-suave); }
+.student-head .origin-badge {
+  min-height: 22px;
+  padding: 3px 7px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+.origin-etg { background: var(--verde-claro); color: #0C6B24; border: 1px solid var(--verde-logo); }
+.origin-ctc { background: #E9FFFB; color: #0B766D; border: 1px solid var(--ciano); }
 .student-item p {
   margin: 6px 0 9px;
   color: var(--muted);
@@ -462,3 +474,6 @@ mark {
   white-space: nowrap;
 }
 .turma-link:hover { color: var(--azul-vivo); text-decoration: underline; }
+.student-head .turma-link { margin-left: auto; }
+.student-head .turma-code { margin-left: auto; }
+

@@ -3,6 +3,11 @@
   const h = React.createElement;
   const CURSOS = window.CURSOS || [];
   const TURMAS_ETG = window.TURMAS_ETG || [];
+  const TURMAS_CTC = window.TURMAS_CTC || [];
+  const TURMAS_BASE = [
+    ...TURMAS_ETG.map((turma) => ({ ...turma, origem: turma.origem || 'ETG' })),
+    ...TURMAS_CTC.map((turma) => ({ ...turma, origem: turma.origem || 'CTC' }))
+  ];
 
   function normalizar(texto) {
     return String(texto || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
@@ -85,9 +90,9 @@
 
   function buildTurmaMap() {
     const map = new Map();
-    TURMAS_ETG.forEach((turma) => {
+    TURMAS_BASE.forEach((turma) => {
       const codigo = onlyDigits(turma.codigoTurma);
-      if (codigo) map.set(codigo, turma);
+      if (codigo && !map.has(codigo)) map.set(codigo, turma);
     });
     return map;
   }
@@ -150,6 +155,7 @@
         h('span', { className: 'stat-pill' }, totalCursos + ' cursos'),
         h('span', { className: 'stat-pill' }, totalUnidades + ' unidades curriculares'),
         h('span', { className: 'stat-pill' }, TURMAS_ETG.length + ' turmas ETG'),
+        h('span', { className: 'stat-pill' }, TURMAS_CTC.length + ' turmas CTC'),
         h('span', { className: 'stat-pill' }, totalHoras.toLocaleString('pt-BR') + 'h mapeadas')
       ),
       h('div', { className: 'color-line' })
@@ -194,6 +200,8 @@
 
   function ImportPanel({ adm, onImport, onClearImport, onSearchUc }) {
     const hasRows = adm.matched.length > 0;
+    const totalETG = adm.matched.filter((item) => item.turmaBase && item.turmaBase.origem === 'ETG').length;
+    const totalCTC = adm.matched.filter((item) => item.turmaBase && item.turmaBase.origem === 'CTC').length;
     return h('aside', { className: 'import-panel' },
       h('div', { className: 'panel-card' },
         h('div', { className: 'panel-title' },
@@ -209,7 +217,8 @@
         adm.fileName ? h('div', { className: 'notice' }, 'Aba lida: ' + (adm.sheetName || 'n\u00e3o identificada')) : null,
         h('div', { className: 'metric-grid' },
           h('div', { className: 'metric' }, h('strong', null, adm.totalImported), h('span', null, 'linhas lidas')),
-          h('div', { className: 'metric success' }, h('strong', null, adm.matched.length), h('span', null, 'alunos ETG')),
+          h('div', { className: 'metric success' }, h('strong', null, totalETG), h('span', null, 'alunos ETG')),
+          h('div', { className: 'metric ctc' }, h('strong', null, totalCTC), h('span', null, 'alunos CTC')),
           h('div', { className: 'metric muted' }, h('strong', null, adm.unmatched.length), h('span', null, 'fora da base'))
         ),
         adm.fileName ? h('button', { className: 'ghost-btn', type: 'button', onClick: onClearImport }, 'Limpar importa\u00e7\u00e3o') : null
@@ -217,13 +226,16 @@
       h('div', { className: 'panel-card compact' },
         h('div', { className: 'panel-title' },
           h('span', { className: 'eyebrow' }, 'Resultado filtrado'),
-          h('h2', null, 'UCs reprovadas em turmas ETG')
+          h('h2', null, 'UCs reprovadas em turmas ETG e CTC')
         ),
         hasRows ? h('div', { className: 'matched-list' },
           adm.matched.slice(0, 120).map((item) => h('article', { className: 'student-item', key: item.rowNumber + item.idTurma + item.aluno },
             h('div', { className: 'student-head' },
               h('strong', null, item.aluno || 'Aluno sem nome'),
-              h('a', { className: 'turma-link', href: item.turmaBase.linkTurma || ('https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=' + item.idTurma), target: '_blank', rel: 'noreferrer', title: 'Abrir turma no SGN' }, '#' + item.idTurma)
+              item.turmaBase.linkTurma
+                ? h('a', { className: 'turma-link', href: item.turmaBase.linkTurma, target: '_blank', rel: 'noreferrer', title: 'Abrir turma no SGN' }, '#' + item.idTurma)
+                : h('span', { className: 'turma-code' }, '#' + item.idTurma),
+              h('span', { className: 'origin-badge origin-' + normalizar(item.turmaBase.origem) }, item.turmaBase.origem)
             ),
             h('p', null, item.turmaBase.nomeTurma + ' \u00b7 ' + item.turmaBase.produto),
             h('div', { className: 'uc-chip-row' },
@@ -231,7 +243,7 @@
             )
           )),
           adm.matched.length > 120 ? h('div', { className: 'notice' }, 'Mostrando 120 de ' + adm.matched.length + ' registros filtrados.') : null
-        ) : h('div', { className: 'empty-panel' }, adm.fileName ? 'Nenhum ID Turma encontrado na base ETG.' : 'Importe a planilha para ver os alunos filtrados automaticamente.')
+        ) : h('div', { className: 'empty-panel' }, adm.fileName ? 'Nenhum ID Turma encontrado nas bases ETG/CTC.' : 'Importe a planilha para ver os alunos filtrados automaticamente.')
       )
     );
   }
