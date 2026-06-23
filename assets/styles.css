@@ -493,3 +493,127 @@ mark {
 .turma-link:hover { color: var(--azul-vivo); text-decoration: underline; }
 .student-head .turma-link { margin-left: auto; }
 .student-head .turma-code { margin-left: auto; }
+.workspace-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--borda);
+}
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  background: transparent;
+  color: var(--texto-suave);
+  font-weight: 850;
+}
+.tab-btn strong {
+  min-width: 28px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #EAF1FF;
+  color: var(--azul);
+  font-size: 0.72rem;
+  text-align: center;
+}
+.tab-btn.active {
+  border-color: var(--borda);
+  background: var(--superficie);
+  color: var(--azul-noite);
+  box-shadow: 0 -2px 14px rgba(16,20,77,0.05);
+}
+.adm-results-section {
+  min-width: 0;
+}
+.adm-head {
+  align-items: center;
+}
+.adm-head p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+.adm-empty {
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--superficie);
+  box-shadow: var(--sombra);
+}
+.adm-group-list {
+  display: grid;
+  gap: 12px;
+}
+.adm-group {
+  overflow: hidden;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--superficie);
+  box-shadow: 0 10px 26px rgba(16,20,77,0.07);
+}
+.adm-group-head {
+  padding: 13px 15px;
+  border-bottom: 1px solid #E6ECFF;
+  background: #F9FBFF;
+}
+.adm-group-main { min-width: 0; }
+.adm-group-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.adm-group-title strong {
+  margin-left: auto;
+  color: var(--azul-noite);
+  font-size: 0.82rem;
+}
+.adm-group p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.turma-link.large,
+.turma-code.large {
+  color: var(--azul);
+  font-size: 0.9rem;
+  font-weight: 950;
+}
+.adm-student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0;
+}
+.adm-student {
+  min-width: 0;
+  padding: 12px 14px;
+  border-right: 1px solid #E6ECFF;
+  border-bottom: 1px solid #E6ECFF;
+}
+.adm-student-name {
+  margin-bottom: 8px;
+  color: var(--azul-noite);
+  font-size: 0.88rem;
+  font-weight: 850;
+  line-height: 1.3;
+}
+.adm-note {
+  margin: 9px 0 0;
+  color: var(--texto-suave);
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+@media (max-width: 700px) {
+  .workspace-tabs { overflow-x: auto; }
+  .tab-btn { flex: 1 0 auto; }
+  .adm-head { align-items: flex-start; }
+  .adm-group-title strong { margin-left: 0; width: 100%; }
+  .adm-student-grid { grid-template-columns: 1fr; }
+}
