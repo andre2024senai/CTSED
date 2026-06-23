@@ -198,10 +198,23 @@
     );
   }
 
-  function ImportPanel({ adm, onImport, onClearImport, onSearchUc }) {
-    const hasRows = adm.matched.length > 0;
+  function ImportPanel({ adm, admFilter, onFilterADM, onImport, onClearImport, onSearchUc }) {
     const totalETG = adm.matched.filter((item) => item.turmaBase && item.turmaBase.origem === 'ETG').length;
     const totalCTC = adm.matched.filter((item) => item.turmaBase && item.turmaBase.origem === 'CTC').length;
+    const totalFora = adm.unmatched.length;
+    const allItems = [...adm.matched, ...adm.unmatched];
+    const visibleItems = admFilter === 'etg'
+      ? adm.matched.filter((item) => item.turmaBase && item.turmaBase.origem === 'ETG')
+      : admFilter === 'ctc'
+        ? adm.matched.filter((item) => item.turmaBase && item.turmaBase.origem === 'CTC')
+        : admFilter === 'fora'
+          ? adm.unmatched
+          : allItems;
+    const hasRows = visibleItems.length > 0;
+    const filterTitle = admFilter === 'etg' ? 'Alunos ETG'
+      : admFilter === 'ctc' ? 'Alunos CTC'
+        : admFilter === 'fora' ? 'Fora da base'
+          : 'Todos os registros';
     return h('aside', { className: 'import-panel' },
       h('div', { className: 'panel-card' },
         h('div', { className: 'panel-title' },
@@ -216,34 +229,43 @@
         adm.error ? h('div', { className: 'notice danger' }, adm.error) : null,
         adm.fileName ? h('div', { className: 'notice' }, 'Aba lida: ' + (adm.sheetName || 'n\u00e3o identificada')) : null,
         h('div', { className: 'metric-grid' },
-          h('div', { className: 'metric' }, h('strong', null, adm.totalImported), h('span', null, 'linhas lidas')),
-          h('div', { className: 'metric success' }, h('strong', null, totalETG), h('span', null, 'alunos ETG')),
-          h('div', { className: 'metric ctc' }, h('strong', null, totalCTC), h('span', null, 'alunos CTC')),
-          h('div', { className: 'metric muted' }, h('strong', null, adm.unmatched.length), h('span', null, 'fora da base'))
+          h('button', { type: 'button', className: 'metric metric-btn' + (admFilter === 'all' ? ' active' : ''), onClick: () => onFilterADM('all') }, h('strong', null, adm.totalImported), h('span', null, 'linhas lidas')),
+          h('button', { type: 'button', className: 'metric metric-btn success' + (admFilter === 'etg' ? ' active' : ''), onClick: () => onFilterADM('etg') }, h('strong', null, totalETG), h('span', null, 'alunos ETG')),
+          h('button', { type: 'button', className: 'metric metric-btn ctc' + (admFilter === 'ctc' ? ' active' : ''), onClick: () => onFilterADM('ctc') }, h('strong', null, totalCTC), h('span', null, 'alunos CTC')),
+          h('button', { type: 'button', className: 'metric metric-btn muted' + (admFilter === 'fora' ? ' active' : ''), onClick: () => onFilterADM('fora') }, h('strong', null, totalFora), h('span', null, 'fora da base'))
         ),
         adm.fileName ? h('button', { className: 'ghost-btn', type: 'button', onClick: onClearImport }, 'Limpar importa\u00e7\u00e3o') : null
       ),
       h('div', { className: 'panel-card compact' },
         h('div', { className: 'panel-title' },
           h('span', { className: 'eyebrow' }, 'Resultado filtrado'),
-          h('h2', null, 'UCs reprovadas em turmas ETG e CTC')
+          h('h2', null, filterTitle)
         ),
         hasRows ? h('div', { className: 'matched-list' },
-          adm.matched.slice(0, 120).map((item) => h('article', { className: 'student-item', key: item.rowNumber + item.idTurma + item.aluno },
-            h('div', { className: 'student-head' },
-              h('strong', null, item.aluno || 'Aluno sem nome'),
-              item.turmaBase.linkTurma
-                ? h('a', { className: 'turma-link', href: item.turmaBase.linkTurma, target: '_blank', rel: 'noreferrer', title: 'Abrir turma no SGN' }, '#' + item.idTurma)
-                : h('span', { className: 'turma-code' }, '#' + item.idTurma),
-              h('span', { className: 'origin-badge origin-' + normalizar(item.turmaBase.origem) }, item.turmaBase.origem)
-            ),
-            h('p', null, item.turmaBase.nomeTurma + ' \u00b7 ' + item.turmaBase.produto),
-            h('div', { className: 'uc-chip-row' },
-              item.ucs.map((uc) => h('button', { key: uc, type: 'button', className: 'uc-chip', onClick: () => onSearchUc(uc, item.turmaBase.produto) }, uc))
-            )
-          )),
-          adm.matched.length > 120 ? h('div', { className: 'notice' }, 'Mostrando 120 de ' + adm.matched.length + ' registros filtrados.') : null
-        ) : h('div', { className: 'empty-panel' }, adm.fileName ? 'Nenhum ID Turma encontrado nas bases ETG/CTC.' : 'Importe a planilha para ver os alunos filtrados automaticamente.')
+          visibleItems.slice(0, 120).map((item) => {
+            const origem = item.turmaBase ? item.turmaBase.origem : 'Fora da base';
+            const origemSlug = normalizar(origem).replace(/\s+/g, '-');
+            const detalhe = item.turmaBase
+              ? item.turmaBase.nomeTurma + ' \u00b7 ' + item.turmaBase.produto
+              : [item.produtoADM, item.modalidade, item.unidade].filter(Boolean).join(' \u00b7 ') || 'ID Turma n\u00e3o encontrado nas bases ETG/CTC';
+            return h('article', { className: 'student-item' + (item.turmaBase ? '' : ' unmatched'), key: item.rowNumber + item.idTurma + item.aluno },
+              h('div', { className: 'student-head' },
+                h('strong', null, item.aluno || 'Aluno sem nome'),
+                item.turmaBase && item.turmaBase.linkTurma
+                  ? h('a', { className: 'turma-link', href: item.turmaBase.linkTurma, target: '_blank', rel: 'noreferrer', title: 'Abrir turma no SGN' }, '#' + item.idTurma)
+                  : h('span', { className: 'turma-code' }, '#' + item.idTurma),
+                h('span', { className: 'origin-badge origin-' + origemSlug }, origem)
+              ),
+              h('p', null, detalhe),
+              h('div', { className: 'uc-chip-row' },
+                item.ucs.map((uc) => item.turmaBase
+                  ? h('button', { key: uc, type: 'button', className: 'uc-chip', onClick: () => onSearchUc(uc, item.turmaBase.produto) }, uc)
+                  : h('span', { key: uc, className: 'uc-chip static' }, uc))
+              )
+            );
+          }),
+          visibleItems.length > 120 ? h('div', { className: 'notice' }, 'Mostrando 120 de ' + visibleItems.length + ' registros filtrados.') : null
+        ) : h('div', { className: 'empty-panel' }, adm.fileName ? 'Nenhum registro para este filtro.' : 'Importe a planilha para ver os alunos filtrados automaticamente.')
       )
     );
   }
@@ -318,6 +340,7 @@
     const [sortCol, setSortCol] = useState('curso');
     const [sortAsc, setSortAsc] = useState(true);
     const [adm, setADM] = useState({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
+    const [admFilter, setADMFilter] = useState('all');
     const allRows = useMemo(flattenCursos, []);
     const totalHoras = useMemo(() => CURSOS.reduce((sum, item) => sum + item.totalHoras, 0), []);
     const turmaMap = useMemo(buildTurmaMap, []);
@@ -377,6 +400,7 @@
         const { sheetName, rows: importedRows } = sheetToRows(workbook);
         const compared = compareADMRows(importedRows, turmaMap);
         setADM({ fileName: file.name, sheetName, totalImported: importedRows.length, matched: compared.matched, unmatched: compared.unmatched, error: '' });
+        setADMFilter('all');
       } catch (error) {
         setADM({ fileName: file.name, sheetName: '', totalImported: 0, matched: [], unmatched: [], error: 'N\u00e3o foi poss\u00edvel ler a planilha. Confirme se o arquivo est\u00e1 em .xlsx e possui a aba de UCs reprovadas.' });
       } finally {
@@ -386,13 +410,14 @@
 
     function clearImport() {
       setADM({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
+      setADMFilter('all');
     }
 
     return h('div', { className: 'app-shell' },
       h(Header, { totalCursos: CURSOS.length, totalUnidades: allRows.length, totalHoras }),
       h(Filters, { busca, setBusca, curso, setCurso, modulo, setModulo, periodo, setPeriodo, onClear: clearFilters }),
       h('main', { className: 'main-content workspace-layout' },
-        h(ImportPanel, { adm, onImport: handleImport, onClearImport: clearImport, onSearchUc: handleSearchUc }),
+        h(ImportPanel, { adm, admFilter, onFilterADM: setADMFilter, onImport: handleImport, onClearImport: clearImport, onSearchUc: handleSearchUc }),
         h('div', { className: 'content-area' },
           h(CourseCards, { cursoSelecionado: curso, onSelect: setCurso }),
           h(UnitsTable, { rows, busca, sortCol, sortAsc, onSort: handleSort }),
