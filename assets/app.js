@@ -213,6 +213,28 @@
     return 'Todos os registros';
   }
 
+  function buildUCStats(items) {
+    const stats = new Map();
+    items.forEach((item) => {
+      const studentKey = item.idTurma + '|' + (normalizar(item.aluno) || item.rowNumber);
+      const seenInItem = new Set();
+      item.ucs.forEach((uc) => {
+        const key = normalizar(uc);
+        if (!key || seenInItem.has(key)) return;
+        seenInItem.add(key);
+        const stat = stats.get(key) || { key, label: uc, items: [], studentKeys: new Set() };
+        if (!stat.studentKeys.has(studentKey)) {
+          stat.studentKeys.add(studentKey);
+          stat.items.push(item);
+        }
+        stats.set(key, stat);
+      });
+    });
+    return [...stats.values()]
+      .map((stat) => ({ key: stat.key, label: stat.label, items: stat.items, count: stat.studentKeys.size }))
+      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'pt-BR'));
+  }
+
   function ImportPanel({ adm, admFilter, onFilterADM, onImport, onClearImport }) {
     const totalETG = adm.matched.filter((item) => item.turmaBase && item.turmaBase.origem === 'ETG').length;
     const totalCTC = adm.matched.filter((item) => item.turmaBase && item.turmaBase.origem === 'CTC').length;
@@ -254,9 +276,13 @@
     );
   }
 
-  function ADMResults({ adm, admFilter, onSearchUc }) {
-    const visibleItems = getADMItems(adm, admFilter);
-    const title = getADMFilterTitle(admFilter);
+  function ADMResults({ adm, admFilter, selectedUc, onSelectUC, onSearchUc }) {
+    const filteredItems = getADMItems(adm, admFilter);
+    const ucStats = buildUCStats(filteredItems);
+    const ucStatsByKey = new Map(ucStats.map((stat) => [stat.key, stat]));
+    const selectedStat = selectedUc ? ucStatsByKey.get(selectedUc) : null;
+    const visibleItems = selectedStat ? selectedStat.items : filteredItems;
+    const title = selectedStat ? selectedStat.label : getADMFilterTitle(admFilter);
     const groups = [...visibleItems.reduce((map, item) => {
       const group = map.get(item.idTurma) || { idTurma: item.idTurma, turmaBase: item.turmaBase, items: [] };
       group.items.push(item);
@@ -269,12 +295,39 @@
       h('div', { className: 'section-head adm-head' },
         h('div', null,
           h('h2', null, title),
-          h('p', null, adm.fileName ? visibleItems.length + ' registro' + (visibleItems.length === 1 ? '' : 's') + ' em ' + groups.length + ' turma' + (groups.length === 1 ? '' : 's') : 'Importe a planilha ADM para visualizar os alunos por turma')
+          h('p', null, adm.fileName ? visibleItems.length + ' aluno' + (visibleItems.length === 1 ? '' : 's') + ' em ' + groups.length + ' turma' + (groups.length === 1 ? '' : 's') : 'Importe a planilha ADM para visualizar os alunos por turma')
         ),
         adm.fileName ? h('span', { className: 'result-count' }, 'Aba: ' + (adm.sheetName || 'não identificada')) : null
       ),
       !adm.fileName ? h('div', { className: 'empty-state adm-empty' }, 'Os resultados da comparação aparecerão aqui em uma visualização ampla depois da importação.') : null,
-      adm.fileName && visibleItems.length === 0 ? h('div', { className: 'empty-state adm-empty' }, 'Nenhum registro para este filtro.') : null,
+      adm.fileName && ucStats.length ? h('div', { className: 'uc-analysis' },
+        h('div', { className: 'uc-analysis-head' },
+          h('div', null,
+            h('h3', null, 'UCs reprovadas'),
+            h('p', null, ucStats.length + ' unidade' + (ucStats.length === 1 ? '' : 's') + ' curricular' + (ucStats.length === 1 ? '' : 'es') + ' no filtro atual')
+          ),
+          selectedStat ? h('button', { type: 'button', className: 'ghost-inline-btn', onClick: () => onSelectUC('') }, 'Limpar UC') : null
+        ),
+        h('div', { className: 'uc-analysis-grid' },
+          ucStats.map((stat) => h('button', {
+            type: 'button',
+            key: stat.key,
+            className: 'uc-analysis-btn' + (selectedUc === stat.key ? ' active' : ''),
+            onClick: () => onSelectUC(stat.key)
+          },
+            h('span', null, stat.label),
+            h('strong', null, stat.count + ' aluno' + (stat.count === 1 ? '' : 's'))
+          ))
+        )
+      ) : null,
+      selectedStat ? h('div', { className: 'uc-selection-bar' },
+        h('div', null,
+          h('span', null, 'Unidade curricular selecionada'),
+          h('strong', null, selectedStat.count + ' aluno' + (selectedStat.count === 1 ? '' : 's') + ' reprovado' + (selectedStat.count === 1 ? '' : 's') + ' em ' + groups.length + ' turma' + (groups.length === 1 ? '' : 's'))
+        ),
+        h('button', { type: 'button', className: 'search-offer-btn', onClick: () => onSearchUc(selectedStat.label, '') }, 'Buscar oferta desta UC')
+      ) : null,
+      adm.fileName && visibleItems.length === 0 ? h('div', { className: 'empty-state adm-empty' }, 'Nenhum aluno encontrado para esta UC e filtro.') : null,
       groups.length ? h('div', { className: 'adm-group-list' },
         groups.map((group) => {
           const first = group.items[0];
@@ -300,9 +353,15 @@
               group.items.map((item) => h('div', { className: 'adm-student', key: item.rowNumber + item.idTurma + item.aluno },
                 h('div', { className: 'adm-student-name' }, item.aluno || 'Aluno sem nome'),
                 h('div', { className: 'uc-chip-row' },
-                  item.ucs.map((uc) => item.turmaBase
-                    ? h('button', { key: uc, type: 'button', className: 'uc-chip', onClick: () => onSearchUc(uc, item.turmaBase.produto) }, uc)
-                    : h('span', { key: uc, className: 'uc-chip static' }, uc))
+                  item.ucs.map((uc) => {
+                    const stat = ucStatsByKey.get(normalizar(uc));
+                    return item.turmaBase
+                      ? h('button', { key: uc, type: 'button', className: 'uc-chip' + (selectedUc === normalizar(uc) ? ' active' : ''), onClick: () => onSelectUC(normalizar(uc)) },
+                          h('span', null, uc),
+                          stat ? h('strong', null, stat.count) : null
+                        )
+                      : h('span', { key: uc, className: 'uc-chip static' }, uc);
+                  })
                 ),
                 item.encaminhamento ? h('p', { className: 'adm-note' }, item.encaminhamento) : null
               ))
@@ -341,7 +400,7 @@
     );
   }
 
-  function UnitsTable({ rows, busca, sortCol, sortAsc, onSort }) {
+  function UnitsTable({ rows, busca, sortCol, sortAsc, onSort, ucCounts, onInspectUC }) {
     return h('section', null,
       h('div', { className: 'section-head' },
         h('h2', null, 'Unidades curriculares'),
@@ -353,20 +412,29 @@
             h('thead', null,
               h('tr', null,
                 h(TableHeader, { label: 'Curso', column: 'curso', sortCol, sortAsc, onSort }),
-                h(TableHeader, { label: 'Per\u00edodo', column: 'periodo', sortCol, sortAsc, onSort }),
-                h(TableHeader, { label: 'M\u00f3dulo', column: 'modulo', sortCol, sortAsc, onSort }),
+                h(TableHeader, { label: 'Período', column: 'periodo', sortCol, sortAsc, onSort }),
+                h(TableHeader, { label: 'Módulo', column: 'modulo', sortCol, sortAsc, onSort }),
                 h(TableHeader, { label: 'Unidade Curricular', column: 'nome', sortCol, sortAsc, onSort }),
-                h(TableHeader, { label: 'Carga Hor\u00e1ria', column: 'horas', sortCol, sortAsc, onSort, center: true })
+                h(TableHeader, { label: 'Carga Horária', column: 'horas', sortCol, sortAsc, onSort, center: true })
               )
             ),
             h('tbody', null,
-              rows.map((row, index) => h('tr', { key: row.curso + row.nome + index },
-                h('td', null, h('a', { className: 'course-link', href: row.url, target: '_blank', rel: 'noreferrer' }, row.curso)),
-                h('td', null, h('span', { className: 'badge period-badge' }, row.periodo)),
-                h('td', null, h('span', { className: 'badge ' + classeModulo(row.modulo) }, row.modulo)),
-                h('td', null, highlight(row.nome, busca)),
-                h('td', { className: 'hours' }, row.horas + 'h')
-              ))
+              rows.map((row, index) => {
+                const failureCount = ucCounts.get(normalizar(row.nome)) || 0;
+                return h('tr', { key: row.curso + row.nome + index },
+                  h('td', null, h('a', { className: 'course-link', href: row.url, target: '_blank', rel: 'noreferrer' }, row.curso)),
+                  h('td', null, h('span', { className: 'badge period-badge' }, row.periodo)),
+                  h('td', null, h('span', { className: 'badge ' + classeModulo(row.modulo) }, row.modulo)),
+                  h('td', null, failureCount
+                    ? h('button', { type: 'button', className: 'unit-inspect-btn', onClick: () => onInspectUC(row.nome) },
+                        h('span', null, highlight(row.nome, busca)),
+                        h('strong', null, failureCount + ' reprovado' + (failureCount === 1 ? '' : 's'))
+                      )
+                    : highlight(row.nome, busca)
+                  ),
+                  h('td', { className: 'hours' }, row.horas + 'h')
+                );
+              })
             )
           )
         ),
@@ -385,9 +453,12 @@
     const [adm, setADM] = useState({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
     const [admFilter, setADMFilter] = useState('all');
     const [activeView, setActiveView] = useState('ucs');
+    const [selectedADMUC, setSelectedADMUC] = useState('');
     const allRows = useMemo(flattenCursos, []);
     const totalHoras = useMemo(() => CURSOS.reduce((sum, item) => sum + item.totalHoras, 0), []);
     const turmaMap = useMemo(buildTurmaMap, []);
+    const allAdmUCStats = useMemo(() => buildUCStats([...adm.matched, ...adm.unmatched]), [adm]);
+    const admUCCounts = useMemo(() => new Map(allAdmUCStats.map((stat) => [stat.key, stat.count])), [allAdmUCStats]);
 
     const rows = useMemo(() => {
       const termoBusca = normalizar(busca);
@@ -426,7 +497,7 @@
       setModulo('');
       setPeriodo('');
       const produtoNorm = normalizar(produto).replace(/\s*\(2025\)$/, '');
-      const matchedCourse = CURSOS.find((item) => normalizar(item.nome) === produtoNorm || produtoNorm.includes(normalizar(item.nome)) || normalizar(item.nome).includes(produtoNorm));
+      const matchedCourse = produtoNorm ? CURSOS.find((item) => normalizar(item.nome) === produtoNorm || produtoNorm.includes(normalizar(item.nome)) || normalizar(item.nome).includes(produtoNorm)) : null;
       setCurso(matchedCourse ? matchedCourse.nome : '');
       setActiveView('ucs');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -446,6 +517,7 @@
         const compared = compareADMRows(importedRows, turmaMap);
         setADM({ fileName: file.name, sheetName, totalImported: importedRows.length, matched: compared.matched, unmatched: compared.unmatched, error: '' });
         setADMFilter('all');
+        setSelectedADMUC('');
         setActiveView('adm');
       } catch (error) {
         setADM({ fileName: file.name, sheetName: '', totalImported: 0, matched: [], unmatched: [], error: 'N\u00e3o foi poss\u00edvel ler a planilha. Confirme se o arquivo est\u00e1 em .xlsx e possui a aba de UCs reprovadas.' });
@@ -457,11 +529,19 @@
     function clearImport() {
       setADM({ fileName: '', sheetName: '', totalImported: 0, matched: [], unmatched: [], error: '' });
       setADMFilter('all');
+      setSelectedADMUC('');
       setActiveView('ucs');
     }
 
     function handleADMFilter(filter) {
       setADMFilter(filter);
+      setSelectedADMUC('');
+      setActiveView('adm');
+    }
+
+    function handleInspectUC(uc) {
+      setADMFilter('all');
+      setSelectedADMUC(normalizar(uc));
       setActiveView('adm');
     }
 
@@ -474,8 +554,8 @@
           h(WorkspaceTabs, { activeView, onChange: setActiveView, admTotal: adm.totalImported, unitTotal: rows.length }),
           activeView === 'ucs' ? h(React.Fragment, null,
             h(CourseCards, { cursoSelecionado: curso, onSelect: setCurso }),
-            h(UnitsTable, { rows, busca, sortCol, sortAsc, onSort: handleSort })
-          ) : h(ADMResults, { adm, admFilter, onSearchUc: handleSearchUc }),
+            h(UnitsTable, { rows, busca, sortCol, sortAsc, onSort: handleSort, ucCounts: admUCCounts, onInspectUC: handleInspectUC })
+          ) : h(ADMResults, { adm, admFilter, selectedUc: selectedADMUC, onSelectUC: setSelectedADMUC, onSearchUc: handleSearchUc }),
           h('div', { className: 'footer-note' }, 'Dados organizados para consulta das unidades curriculares dos cursos técnicos gratuitos.')
         )
       )
