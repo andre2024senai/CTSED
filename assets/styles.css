@@ -296,3 +296,124 @@ mark {
   .course-grid { grid-template-columns: 1fr; }
 }
 
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.content-area { min-width: 0; }
+.ead-panel {
+  position: sticky;
+  top: 86px;
+}
+.ead-panel-note {
+  margin: -6px 0 10px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+.ead-panel .field { margin-bottom: 10px; }
+.ead-resumo {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--borda);
+}
+.ead-resumo p {
+  margin: 0 0 8px;
+  color: var(--texto-suave);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.ead-highlight {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--verde-claro);
+  color: #0C6B24;
+  font-weight: 800;
+}
+.ead-turma-detail {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--borda);
+}
+.ead-turma-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.ead-turma-head strong {
+  color: var(--azul-noite);
+  font-size: 0.88rem;
+  line-height: 1.3;
+}
+.ead-uc-list {
+  display: grid;
+  gap: 8px;
+  max-height: 60vh;
+  overflow: auto;
+}
+.ead-uc-item {
+  padding: 10px;
+  border: 1px solid var(--borda);
+  border-left: 3px solid var(--borda);
+  border-radius: 8px;
+  background: #F9FBFF;
+}
+.ead-uc-item.status-andamento { border-left-color: var(--verde); background: var(--verde-claro); }
+.ead-uc-item.status-futura { border-left-color: var(--azul-vivo); }
+.ead-uc-item.status-concluida { border-left-color: var(--muted); background: #F4F7FF; }
+.ead-uc-item.status-sem-diario { border-left-color: #FFB4B4; background: #FFF7F7; }
+.ead-uc-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ead-uc-name {
+  color: var(--azul-noite);
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.ead-status-badge {
+  flex: 0 0 auto;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: #EAF1FF;
+  color: var(--azul);
+}
+.ead-status-badge.status-andamento { background: #0C6B24; color: #fff; }
+.ead-status-badge.status-futura { background: var(--azul-vivo); color: #fff; }
+.ead-status-badge.status-concluida { background: var(--muted); color: #fff; }
+.ead-status-badge.status-sem-diario { background: #9F1239; color: #fff; }
+.ead-uc-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 5px;
+  color: var(--texto-suave);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.ead-uc-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+@media (max-width: 1150px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .ead-panel { position: static; }
+}
+
