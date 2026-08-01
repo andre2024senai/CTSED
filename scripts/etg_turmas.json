@@ -1,0 +1,9 @@
+{
+  "descricao": "IDs das turmas ETG (gratuitas) do SGN consideradas pelo painel 100% EAD do site. Nao ha campo de gratuidade por turma nos relatorios automaticos, entao essa lista precisa ser mantida manualmente quando turmas novas abrirem ou turmas antigas encerrarem.",
+  "atualizadoEm": "2026-07-27",
+  "ids": [
+    106004, 106005, 110373, 110374, 125097, 125099, 125100, 125101, 125102,
+    125103, 125106, 125108, 125109, 125111, 125113, 125114, 125152, 125153,
+    125154, 125505, 125506, 125507, 126659, 131139, 131141
+  ]
+}

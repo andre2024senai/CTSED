@@ -1,0 +1,17 @@
+{
+  "descricao": "Planilhas Google Sheets com a grade curricular (Carga Horaria Total/Presencial/EAD) de cada curso tecnico ETG. Uma UC e 100% EAD quando Carga Horaria Presencial = 0.",
+  "cursos": [
+    { "spreadsheetId": "1JZ1beqpBW-YrQ4vqZt6rVBigeU36v-4YKqd2OVCyA0k", "gid": "761283291", "curso": "Técnico em Segurança do Trabalho" },
+    { "spreadsheetId": "151Rf2o_K5QyIGThgoLf_YZVeyHDQrrtO", "gid": "1197597338", "curso": "Técnico em Química" },
+    { "spreadsheetId": "1T6_3zP3e2kP9egutTaX-Cpt9gAYbcUnb", "gid": "864973143", "curso": "Técnico em Planejamento e Controle da Produção" },
+    { "spreadsheetId": "14z9ON8oCeyR0hnoYrq5khnzBstDCPpNUuWMWf3VE9Lk", "gid": "1665895943", "curso": "Técnico em Mecânica" },
+    { "spreadsheetId": "1v7_ME7K6QiaqhwxJZ94TZ0fPPKibhL5PGARk6Jo7JpU", "gid": "39094474", "curso": "Técnico em Internet das Coisas" },
+    { "spreadsheetId": "1qFcj9BVR3TWUGKzYUdLdp5lNn2kzZo64w6zdMNNMmI8", "gid": "761283291", "curso": "Técnico em Eletromecânica" },
+    { "spreadsheetId": "1cnAHQGnUGBPSnIbLSWnaZTASy_vZXw8XipNMlE9PoXg", "gid": "39094474", "curso": "Técnico em Eletroeletrônica" },
+    { "spreadsheetId": "1BXEX07z5RVqflMYXcMMay-LpOsnDZcJJTT780BXJ5Dc", "gid": "438736037", "curso": "Técnico em Desenvolvimento de Sistemas" },
+    { "spreadsheetId": "18bTgy_5-3pkYXQCubzwrJqE21j5Aum8z", "gid": "1197597338", "curso": "Técnico em Automação Industrial" },
+    { "spreadsheetId": "1EPNADowyiIcvlTMu69TifFHwvRxrS5mVAjsnwyIuEPw", "gid": "761283291", "curso": "Técnico em Desenho de Construção Civil" },
+    { "spreadsheetId": "1NQ8lpkD-BxcHeEourzT6EBSBNUK2AhWM7DXjvoSVTlQ", "gid": "1665895943", "curso": "Técnico em Vestuário" },
+    { "spreadsheetId": "1RhLdRzM5KWwVoYrG_SRVoI-MaiSf-GplMfvp-6RcyCg", "gid": "39094474", "curso": "Técnico em Eletrotécnica" }
+  ]
+}
