@@ -9,56 +9,6 @@ window.EAD_OFERTAS = {
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=106005",
       "ucs": [
         {
-          "uc": "Introdução à Tecnologia da Informação e Comunicação",
-          "cargaHoraria": 40,
-          "inicio": "2024-11-27",
-          "fim": "2025-05-12",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
-          "uc": "Saúde e Segurança no Trabalho",
-          "cargaHoraria": 12,
-          "inicio": "2024-11-27",
-          "fim": "2025-05-12",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
-          "uc": "Introdução a Qualidade e Produtividade",
-          "cargaHoraria": 16,
-          "inicio": "2024-12-02",
-          "fim": "2025-05-13",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
-          "uc": "Criatividade e Ideação em Projetos de Inovação",
-          "cargaHoraria": 16,
-          "inicio": "2025-02-21",
-          "fim": "2025-04-11",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
-          "uc": "Introdução ao Desenvolvimento de Projetos",
-          "cargaHoraria": 12,
-          "inicio": "2025-05-26",
-          "fim": "2025-10-07",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
           "uc": "Sustentabilidade nos processos industriais",
           "cargaHoraria": 8,
           "inicio": "2026-04-13",
@@ -77,6 +27,56 @@ window.EAD_OFERTAS = {
           "cursando": 5,
           "aprovados": 13,
           "reprovados": 0
+        },
+        {
+          "uc": "Criatividade e Ideação em Projetos de Inovação",
+          "cargaHoraria": 16,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução a Qualidade e Produtividade",
+          "cargaHoraria": 16,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução ao Desenvolvimento de Projetos",
+          "cargaHoraria": 12,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução à Tecnologia da Informação e Comunicação",
+          "cargaHoraria": 40,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
+        },
+        {
+          "uc": "Saúde e Segurança no Trabalho",
+          "cargaHoraria": 12,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
         }
       ]
     },
@@ -87,56 +87,6 @@ window.EAD_OFERTAS = {
       "unidade": "Jaraguá do Sul",
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=106004",
       "ucs": [
-        {
-          "uc": "Introdução à Tecnologia da Informação e Comunicação",
-          "cargaHoraria": 40,
-          "inicio": "2024-11-27",
-          "fim": "2025-05-12",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
-          "uc": "Saúde e Segurança no Trabalho",
-          "cargaHoraria": 12,
-          "inicio": "2024-11-27",
-          "fim": "2025-05-12",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
-          "uc": "Introdução a Qualidade e Produtividade",
-          "cargaHoraria": 16,
-          "inicio": "2024-12-02",
-          "fim": "2025-05-13",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
-          "uc": "Criatividade e Ideação em Projetos de Inovação",
-          "cargaHoraria": 16,
-          "inicio": "2025-02-21",
-          "fim": "2025-04-11",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
-        {
-          "uc": "Introdução ao Desenvolvimento de Projetos",
-          "cargaHoraria": 12,
-          "inicio": "2025-05-26",
-          "fim": "2025-10-07",
-          "regulares": 18,
-          "cursando": 0,
-          "aprovados": 18,
-          "reprovados": 0
-        },
         {
           "uc": "Sustentabilidade nos processos industriais",
           "cargaHoraria": 8,
@@ -156,6 +106,56 @@ window.EAD_OFERTAS = {
           "cursando": 3,
           "aprovados": 15,
           "reprovados": 0
+        },
+        {
+          "uc": "Criatividade e Ideação em Projetos de Inovação",
+          "cargaHoraria": 16,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução a Qualidade e Produtividade",
+          "cargaHoraria": 16,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução ao Desenvolvimento de Projetos",
+          "cargaHoraria": 12,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução à Tecnologia da Informação e Comunicação",
+          "cargaHoraria": 40,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
+        },
+        {
+          "uc": "Saúde e Segurança no Trabalho",
+          "cargaHoraria": 12,
+          "inicio": null,
+          "fim": null,
+          "regulares": 18,
+          "cursando": 0,
+          "aprovados": 18,
+          "reprovados": 0
         }
       ]
     },
@@ -166,46 +166,6 @@ window.EAD_OFERTAS = {
       "unidade": "Jaraguá do Sul",
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=110373",
       "ucs": [
-        {
-          "uc": "Introdução à Tecnologia da Informação e Comunicação",
-          "cargaHoraria": 40,
-          "inicio": "2025-04-17",
-          "fim": "2025-08-29",
-          "regulares": 15,
-          "cursando": 0,
-          "aprovados": 15,
-          "reprovados": 0
-        },
-        {
-          "uc": "Saúde e Segurança no Trabalho",
-          "cargaHoraria": 12,
-          "inicio": "2025-04-22",
-          "fim": "2025-07-17",
-          "regulares": 15,
-          "cursando": 0,
-          "aprovados": 15,
-          "reprovados": 0
-        },
-        {
-          "uc": "Introdução a Qualidade e Produtividade",
-          "cargaHoraria": 16,
-          "inicio": "2025-04-23",
-          "fim": "2025-08-15",
-          "regulares": 15,
-          "cursando": 0,
-          "aprovados": 15,
-          "reprovados": 0
-        },
-        {
-          "uc": "Criatividade e Ideação em Projetos de Inovação",
-          "cargaHoraria": 16,
-          "inicio": "2025-07-18",
-          "fim": "2025-10-09",
-          "regulares": 15,
-          "cursando": 0,
-          "aprovados": 15,
-          "reprovados": 0
-        },
         {
           "uc": "Introdução a Indústria 4.0",
           "cargaHoraria": 24,
@@ -235,6 +195,46 @@ window.EAD_OFERTAS = {
           "cursando": 15,
           "aprovados": 0,
           "reprovados": 0
+        },
+        {
+          "uc": "Criatividade e Ideação em Projetos de Inovação",
+          "cargaHoraria": 16,
+          "inicio": null,
+          "fim": null,
+          "regulares": 15,
+          "cursando": 0,
+          "aprovados": 15,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução a Qualidade e Produtividade",
+          "cargaHoraria": 16,
+          "inicio": null,
+          "fim": null,
+          "regulares": 15,
+          "cursando": 0,
+          "aprovados": 15,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução à Tecnologia da Informação e Comunicação",
+          "cargaHoraria": 40,
+          "inicio": null,
+          "fim": null,
+          "regulares": 15,
+          "cursando": 0,
+          "aprovados": 15,
+          "reprovados": 0
+        },
+        {
+          "uc": "Saúde e Segurança no Trabalho",
+          "cargaHoraria": 12,
+          "inicio": null,
+          "fim": null,
+          "regulares": 15,
+          "cursando": 0,
+          "aprovados": 15,
+          "reprovados": 0
         }
       ]
     },
@@ -245,56 +245,6 @@ window.EAD_OFERTAS = {
       "unidade": "Jaraguá do Sul",
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=110374",
       "ucs": [
-        {
-          "uc": "Introdução à Tecnologia da Informação e Comunicação",
-          "cargaHoraria": 40,
-          "inicio": "2025-04-17",
-          "fim": "2025-08-08",
-          "regulares": 22,
-          "cursando": 0,
-          "aprovados": 22,
-          "reprovados": 0
-        },
-        {
-          "uc": "Saúde e Segurança no Trabalho",
-          "cargaHoraria": 12,
-          "inicio": "2025-04-22",
-          "fim": "2025-07-17",
-          "regulares": 22,
-          "cursando": 0,
-          "aprovados": 22,
-          "reprovados": 0
-        },
-        {
-          "uc": "Introdução a Qualidade e Produtividade",
-          "cargaHoraria": 16,
-          "inicio": "2025-04-23",
-          "fim": "2025-08-15",
-          "regulares": 22,
-          "cursando": 0,
-          "aprovados": 22,
-          "reprovados": 0
-        },
-        {
-          "uc": "Criatividade e Ideação em Projetos de Inovação",
-          "cargaHoraria": 16,
-          "inicio": "2025-07-18",
-          "fim": "2025-10-15",
-          "regulares": 22,
-          "cursando": 0,
-          "aprovados": 22,
-          "reprovados": 0
-        },
-        {
-          "uc": "Introdução ao Desenvolvimento de Projetos",
-          "cargaHoraria": 12,
-          "inicio": "2025-11-24",
-          "fim": "2026-03-27",
-          "regulares": 22,
-          "cursando": 0,
-          "aprovados": 22,
-          "reprovados": 0
-        },
         {
           "uc": "Introdução a Indústria 4.0",
           "cargaHoraria": 24,
@@ -313,6 +263,56 @@ window.EAD_OFERTAS = {
           "regulares": 22,
           "cursando": 22,
           "aprovados": 0,
+          "reprovados": 0
+        },
+        {
+          "uc": "Criatividade e Ideação em Projetos de Inovação",
+          "cargaHoraria": 16,
+          "inicio": null,
+          "fim": null,
+          "regulares": 22,
+          "cursando": 0,
+          "aprovados": 22,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução a Qualidade e Produtividade",
+          "cargaHoraria": 16,
+          "inicio": null,
+          "fim": null,
+          "regulares": 22,
+          "cursando": 0,
+          "aprovados": 22,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução ao Desenvolvimento de Projetos",
+          "cargaHoraria": 12,
+          "inicio": null,
+          "fim": null,
+          "regulares": 22,
+          "cursando": 0,
+          "aprovados": 22,
+          "reprovados": 0
+        },
+        {
+          "uc": "Introdução à Tecnologia da Informação e Comunicação",
+          "cargaHoraria": 40,
+          "inicio": null,
+          "fim": null,
+          "regulares": 22,
+          "cursando": 0,
+          "aprovados": 22,
+          "reprovados": 0
+        },
+        {
+          "uc": "Saúde e Segurança no Trabalho",
+          "cargaHoraria": 12,
+          "inicio": null,
+          "fim": null,
+          "regulares": 22,
+          "cursando": 0,
+          "aprovados": 22,
           "reprovados": 0
         }
       ]
@@ -469,7 +469,7 @@ window.EAD_OFERTAS = {
       "id": 125507,
       "nome": "T DESI 2026/1 N2",
       "curso": "Técnico em Desenvolvimento de Sistemas",
-      "unidade": "Extensão Schroeder",
+      "unidade": "Guaramirim - Extensão Schroeder",
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=125507",
       "ucs": [
         {
@@ -1269,7 +1269,7 @@ window.EAD_OFERTAS = {
       "id": 125505,
       "nome": "T TPCP 2026/1 V1",
       "curso": "Técnico em Planejamento e Controle da Produção",
-      "unidade": "Extensão Schroeder",
+      "unidade": "Guaramirim - Extensão Schroeder",
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=125505",
       "ucs": [
         {
@@ -1931,7 +1931,7 @@ window.EAD_OFERTAS = {
       "id": 125506,
       "nome": "T TVES 2026/1 V2",
       "curso": "Técnico em Vestuário",
-      "unidade": "Extensão Schroeder",
+      "unidade": "Guaramirim - Extensão Schroeder",
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=125506",
       "ucs": [
         {
