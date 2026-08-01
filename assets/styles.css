@@ -326,7 +326,7 @@ mark {
   box-shadow: 0 8px 20px rgba(16,20,77,0.18);
 }
 .ead-panel-centered {
-  width: min(720px, 100%);
+  width: min(1440px, 100%);
   margin: 0 auto;
 }
 .panel-card {
@@ -355,6 +355,7 @@ mark {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+  max-width: 640px;
 }
 .ead-filters-row .field { margin-bottom: 10px; }
 .ead-resumo {
@@ -394,9 +395,11 @@ mark {
 }
 .ead-uc-list {
   display: grid;
-  gap: 8px;
-  max-height: 60vh;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+  max-height: 70vh;
   overflow: auto;
+  align-content: start;
 }
 .ead-uc-item {
   padding: 10px;
