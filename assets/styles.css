@@ -296,16 +296,54 @@ mark {
   .course-grid { grid-template-columns: 1fr; }
 }
 
-.content-grid {
-  display: grid;
-  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
-  gap: 22px;
-  align-items: start;
+.main-nav {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 14px 32px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
-.content-area { min-width: 0; }
-.ead-panel {
-  position: sticky;
-  top: 86px;
+.nav-btn {
+  min-height: 42px;
+  padding: 0 20px;
+  border: 1.5px solid var(--borda);
+  border-radius: 999px;
+  background: var(--superficie);
+  color: var(--texto-suave);
+  font-size: 0.86rem;
+  font-weight: 800;
+  transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s, background 0.16s, color 0.16s;
+}
+.nav-btn:hover {
+  border-color: var(--azul-vivo);
+  color: var(--azul);
+}
+.nav-btn.active {
+  border-color: var(--azul-noite);
+  background: var(--grad);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(16,20,77,0.18);
+}
+.ead-panel-centered {
+  width: min(720px, 100%);
+  margin: 0 auto;
+}
+.panel-card {
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  background: var(--superficie);
+  box-shadow: 0 14px 32px rgba(16,20,77,0.08);
+  padding: 20px;
+}
+.panel-title { display: grid; gap: 3px; margin-bottom: 12px; }
+.panel-title h2 { margin: 0; font-size: 1.1rem; color: var(--azul-noite); }
+.eyebrow {
+  color: var(--azul);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .ead-panel-note {
   margin: -6px 0 10px;
@@ -313,7 +351,12 @@ mark {
   font-size: 0.76rem;
   font-weight: 700;
 }
-.ead-panel .field { margin-bottom: 10px; }
+.ead-filters-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.ead-filters-row .field { margin-bottom: 10px; }
 .ead-resumo {
   margin-top: 4px;
   padding-top: 10px;
@@ -412,8 +455,9 @@ mark {
   font-size: 0.68rem;
   font-weight: 800;
 }
-@media (max-width: 1150px) {
-  .content-grid { grid-template-columns: 1fr; }
-  .ead-panel { position: static; }
+@media (max-width: 700px) {
+  .main-nav { padding: 12px 16px 0; }
+  .nav-btn { flex: 1; padding: 0 10px; font-size: 0.8rem; }
+  .ead-filters-row { grid-template-columns: 1fr; }
 }
 

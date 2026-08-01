@@ -195,29 +195,46 @@
       setTurmaId('');
     }
 
-    return h('aside', { className: 'ead-panel' },
+    return h('section', { className: 'ead-panel-centered' },
       h('div', { className: 'panel-card' },
         h('div', { className: 'panel-title' },
           h('span', { className: 'eyebrow' }, 'Turmas ETG'),
           h('h2', null, 'Ofertas 100% EAD')
         ),
         EAD_OFERTAS.geradoEm ? h('p', { className: 'ead-panel-note' }, 'Matrículas de ' + formatarData(EAD_OFERTAS.geradoEm)) : null,
-        h('label', { className: 'field' },
-          h('span', null, 'Unidade'),
-          h('select', { value: unidade, onChange: onChangeUnidade },
-            h('option', { value: '' }, 'Todas as unidades'),
-            unidades.map((u) => h('option', { key: u, value: u }, u))
-          )
-        ),
-        h('label', { className: 'field' },
-          h('span', null, 'Turma'),
-          h('select', { value: turmaId, onChange: (event) => setTurmaId(event.target.value) },
-            h('option', { value: '' }, 'Selecione uma turma'),
-            turmasFiltradas.map((t) => h('option', { key: t.id, value: String(t.id) }, t.nome + ' — ' + t.curso))
+        h('div', { className: 'ead-filters-row' },
+          h('label', { className: 'field' },
+            h('span', null, 'Unidade'),
+            h('select', { value: unidade, onChange: onChangeUnidade },
+              h('option', { value: '' }, 'Todas as unidades'),
+              unidades.map((u) => h('option', { key: u, value: u }, u))
+            )
+          ),
+          h('label', { className: 'field' },
+            h('span', null, 'Turma'),
+            h('select', { value: turmaId, onChange: (event) => setTurmaId(event.target.value) },
+              h('option', { value: '' }, 'Selecione uma turma'),
+              turmasFiltradas.map((t) => h('option', { key: t.id, value: String(t.id) }, t.nome + ' — ' + t.curso))
+            )
           )
         ),
         turmaSelecionada ? h(EADTurmaDetail, { turma: turmaSelecionada }) : h(EADResumo, { turmas: turmasFiltradas })
       )
+    );
+  }
+
+  function MainNav({ activeView, onChange }) {
+    return h('nav', { className: 'main-nav', role: 'tablist', 'aria-label': 'Seções do site' },
+      h('button', {
+        type: 'button', role: 'tab', 'aria-selected': activeView === 'ead',
+        className: 'nav-btn' + (activeView === 'ead' ? ' active' : ''),
+        onClick: () => onChange('ead')
+      }, 'Ofertas 100% EAD'),
+      h('button', {
+        type: 'button', role: 'tab', 'aria-selected': activeView === 'cursos',
+        className: 'nav-btn' + (activeView === 'cursos' ? ' active' : ''),
+        onClick: () => onChange('cursos')
+      }, 'Cursos e Unidades Curriculares')
     );
   }
 
@@ -292,6 +309,7 @@
     const [sortAsc, setSortAsc] = useState(true);
     const [eadUnidade, setEadUnidade] = useState('');
     const [eadTurmaId, setEadTurmaId] = useState('');
+    const [activeView, setActiveView] = useState('ead');
     const allRows = useMemo(flattenCursos, []);
     const totalHoras = useMemo(() => CURSOS.reduce((sum, item) => sum + item.totalHoras, 0), []);
 
@@ -329,14 +347,18 @@
 
     return h('div', { className: 'app-shell' },
       h(Header, { totalCursos: CURSOS.length, totalUnidades: allRows.length, totalHoras }),
-      h(Filters, { busca, setBusca, curso, setCurso, modulo, setModulo, periodo, setPeriodo, onClear: clearFilters }),
-      h('main', { className: 'main-content content-grid' },
-        h(EADPanel, { unidade: eadUnidade, setUnidade: setEadUnidade, turmaId: eadTurmaId, setTurmaId: setEadTurmaId }),
-        h('div', { className: 'content-area' },
-          h(CourseCards, { cursoSelecionado: curso, onSelect: setCurso }),
-          h(UnitsTable, { rows, busca, sortCol, sortAsc, onSort: handleSort }),
-          h('div', { className: 'footer-note' }, 'Dados organizados para consulta das unidades curriculares dos cursos técnicos gratuitos.')
-        )
+      h(MainNav, { activeView, onChange: setActiveView }),
+      activeView === 'cursos'
+        ? h(Filters, { busca, setBusca, curso, setCurso, modulo, setModulo, periodo, setPeriodo, onClear: clearFilters })
+        : null,
+      h('main', { className: 'main-content' },
+        activeView === 'ead'
+          ? h(EADPanel, { unidade: eadUnidade, setUnidade: setEadUnidade, turmaId: eadTurmaId, setTurmaId: setEadTurmaId })
+          : h(React.Fragment, null,
+              h(CourseCards, { cursoSelecionado: curso, onSelect: setCurso }),
+              h(UnitsTable, { rows, busca, sortCol, sortAsc, onSort: handleSort })
+            ),
+        h('div', { className: 'footer-note' }, 'Dados organizados para consulta das unidades curriculares dos cursos técnicos gratuitos.')
       )
     );
   }
