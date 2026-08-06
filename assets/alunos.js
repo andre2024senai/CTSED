@@ -251,9 +251,9 @@
     if (!window.jspdf) { alert('Biblioteca de PDF não carregada. Recarregue a página.'); return; }
     if (!alunos.length) { alert('Nenhum aluno para exportar com esse filtro.'); return; }
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
 
-    doc.setFontSize(14);
+    doc.setFontSize(13);
     doc.setTextColor(16, 20, 77);
     doc.text(`${turma.nome} — ${turma.curso}`, 14, 15);
     doc.setFontSize(9);
@@ -261,26 +261,24 @@
     doc.text(`Unidade: ${turma.unidade}  ·  Gerado em ${new Date().toLocaleDateString('pt-BR')}  ·  ${alunos.length} aluno${alunos.length === 1 ? '' : 's'}`, 14, 21);
 
     doc.autoTable({
-      head: [['Aluno', 'Matrícula', 'Status', 'UCs reprovadas', 'UCs cursando', 'E-mail']],
+      head: [['Aluno', 'Matrícula', 'Status', 'UCs reprovadas', 'UCs cursando']],
       body: alunos.map((aluno) => [
         aluno.nome,
         aluno.matricula,
         aluno.status,
         (aluno.ucsReprovadas && aluno.ucsReprovadas.length) ? aluno.ucsReprovadas.join('\n') : '—',
         (aluno.ucsCursando && aluno.ucsCursando.length) ? aluno.ucsCursando.join('\n') : '—',
-        aluno.email || '',
       ]),
       startY: 26,
-      styles: { fontSize: 8, cellPadding: 2.2, valign: 'top', lineColor: [220, 229, 255], lineWidth: 0.1 },
+      styles: { fontSize: 7.5, cellPadding: 2, valign: 'top', lineColor: [220, 229, 255], lineWidth: 0.1 },
       headStyles: { fillColor: [16, 20, 77], textColor: 255, fontStyle: 'bold' },
       alternateRowStyles: { fillColor: [249, 251, 255] },
       columnStyles: {
-        0: { cellWidth: 50 },
-        1: { cellWidth: 22 },
-        2: { cellWidth: 32 },
-        3: { cellWidth: 68 },
-        4: { cellWidth: 68 },
-        5: { cellWidth: 45 },
+        0: { cellWidth: 40 },
+        1: { cellWidth: 18 },
+        2: { cellWidth: 26 },
+        3: { cellWidth: 45 },
+        4: { cellWidth: 45 },
       },
       didParseCell: (data) => {
         if (data.section === 'body' && data.column.index === 3 && data.cell.raw !== '—') {
