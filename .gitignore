@@ -1,2 +1,5 @@
-docs/
-cursos_tecnicos.html
+# Dados privados (nomes de alunos) - nunca versionar
+scripts/alunos-privado.json
+
+# Cache local do Firebase CLI
+.firebase/

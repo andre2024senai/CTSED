@@ -1,0 +1,73 @@
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--fundo);
+}
+.auth-panel {
+  width: min(420px, 100%);
+}
+.auth-panel h1 {
+  margin: 6px 0 4px;
+  color: var(--azul-noite);
+  font-size: 1.3rem;
+}
+.auth-subtitle {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+.auth-form { display: grid; gap: 12px; }
+.auth-form button { min-height: 42px; }
+.form-error {
+  min-height: 18px;
+  color: #9F1239;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.alunos-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+.alunos-toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+.empty-cell { color: var(--muted); }
+.alunos-sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.alunos-sortable:hover { background: rgba(255,255,255,0.12); }
+.alunos-sortable.active { background: rgba(255,255,255,0.18); }
+.uc-chip-stack {
+  display: grid;
+  gap: 4px;
+}
+.uc-chip-linha {
+  display: block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.uc-chip-linha.reprovada {
+  background: #FFF1F2;
+  color: #9F1239;
+  border: 1px solid #FFB4B4;
+}
+.uc-chip-linha.cursando {
+  background: #EAF1FF;
+  color: var(--azul);
+  border: 1px solid var(--azul-claro);
+}
+@media (max-width: 900px) {
+  .alunos-toolbar { grid-template-columns: 1fr; }
+}

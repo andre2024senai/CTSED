@@ -199,8 +199,10 @@ def main():
         if norm(row[idx["situacao_diario"]]) != "em andamento":
             continue
         idt = int(idt)
-        uc_norm = norm(row[idx["unidade_curricular"]])
+        uc_original = row[idx["unidade_curricular"]]
+        uc_norm = norm(uc_original)
         diarios_by_turma[idt][uc_norm].append({
+            "uc": uc_original,
             "inicio": row[idx["inicio_diario"]],
             "fim": row[idx["termino_diario"]],
         })
@@ -248,9 +250,22 @@ def main():
                 "reprovados": sum(1 for s in regs if uc_norm in s["reprovada"]),
             })
         ucs_out.sort(key=lambda u: (u["inicio"] or "9999", u["uc"]))
+
+        diario_turma_out = []
+        for uc_norm, diarios in diarios_by_turma.get(idt, {}).items():
+            escolhido = escolher_diario(diarios, hoje)
+            if not escolhido:
+                continue
+            diario_turma_out.append({
+                "uc": escolhido["uc"],
+                "inicio": escolhido["inicio"].date().isoformat() if escolhido["inicio"] else None,
+                "fim": escolhido["fim"].date().isoformat() if escolhido["fim"] else None,
+            })
+
         output_turmas.append({
             "id": t["id"], "nome": t["nome"], "curso": t["curso"],
             "unidade": t["unidade"], "link": t["link"], "ucs": ucs_out,
+            "diarioTurma": diario_turma_out,
         })
 
     output = {"geradoEm": gerado_em, "turmas": output_turmas}

@@ -145,13 +145,63 @@
     return { key: 'andamento', label: 'Em andamento' };
   }
 
+  function buscarUcDiario(turma, nomeUc) {
+    if (!turma.diarioTurma) return null;
+    const alvo = normalizar(nomeUc);
+    return turma.diarioTurma.find((d) => normalizar(d.uc) === alvo) || null;
+  }
+
+  function EADGradeCompleta({ turma }) {
+    const curso = CURSOS.find((c) => c.nome === turma.curso);
+    if (!curso) {
+      return h('p', { className: 'ead-panel-note' }, 'Grade curricular não encontrada para este curso.');
+    }
+    return h('div', { className: 'table-shell grade-completa-shell' },
+      h('div', { className: 'table-scroll' },
+        h('table', null,
+          h('thead', null,
+            h('tr', null,
+              h('th', null, 'Período'),
+              h('th', null, 'Módulo'),
+              h('th', null, 'Unidade Curricular'),
+              h('th', { className: 'center' }, 'Carga Horária'),
+              h('th', null, 'Início'),
+              h('th', null, 'Fim'),
+              h('th', null, 'Status')
+            )
+          ),
+          h('tbody', null,
+            curso.unidades.map((u) => {
+              const diario = buscarUcDiario(turma, u.nome);
+              const status = diario ? statusOfertaUC(diario) : { key: 'sem-diario', label: 'Sem diário' };
+              return h('tr', { key: u.periodo + '|' + u.nome },
+                h('td', null, h('span', { className: 'badge period-badge' }, u.periodo)),
+                h('td', null, h('span', { className: 'badge ' + classeModulo(u.modulo) }, u.modulo)),
+                h('td', null, u.nome),
+                h('td', { className: 'hours' }, u.horas + 'h'),
+                h('td', null, formatarData(diario ? diario.inicio : null)),
+                h('td', null, formatarData(diario ? diario.fim : null)),
+                h('td', null, h('span', { className: 'ead-status-badge status-' + status.key }, status.label))
+              );
+            })
+          )
+        )
+      )
+    );
+  }
+
   function EADTurmaDetail({ turma }) {
+    const [mostrarGrade, setMostrarGrade] = useState(false);
     return h('div', { className: 'ead-turma-detail' },
       h('div', { className: 'ead-turma-head' },
         h('strong', null, turma.curso),
-        turma.link ? h('a', { className: 'turma-link', href: turma.link, target: '_blank', rel: 'noreferrer' }, 'Abrir no SGN') : null
+        h('div', { className: 'ead-turma-head-actions' },
+          h('button', { type: 'button', className: 'ghost-inline-btn', onClick: () => setMostrarGrade((v) => !v) },
+            mostrarGrade ? 'Ver só as 100% EAD' : 'Ver grade completa da turma'),
+          turma.link ? h('a', { className: 'turma-link', href: turma.link, target: '_blank', rel: 'noreferrer' }, 'Abrir no SGN') : null
+        )
       ),
-      h('div', { className: 'ead-uc-list' },
+      mostrarGrade ? h(EADGradeCompleta, { turma }) : h('div', { className: 'ead-uc-list' },
         turma.ucs.map((uc) => {
           const status = statusOfertaUC(uc);
           return h('div', { className: 'ead-uc-item status-' + status.key, key: uc.uc },
