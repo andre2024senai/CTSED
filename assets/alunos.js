@@ -4,7 +4,12 @@
   const db = firebase.database();
   const root = document.getElementById('root');
 
-  const state = { user: null, profile: null, data: null, turmaId: '', search: '', sortCol: 'nome', sortAsc: true };
+  const state = {
+    user: null, profile: null, data: null,
+    view: 'alunos',
+    turmaId: '', search: '', sortCol: 'nome', sortAsc: true, somenteReprovados: false,
+    eadUnidade: '',
+  };
 
   function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>'"]/g, (char) => ({
@@ -34,7 +39,7 @@
             <button id="logout-btn" class="clear-btn" type="button">Sair</button>
           ` : `
             <form id="auth-form" class="auth-form">
-              ${mode === 'setup' ? '<label class="field"><span>Nome completo</span><input name="name" required autocomplete="name"></label>' : ''}
+              ${mode === 'setup' ? '<label class="field"><span>Nome completo</span><input name="name" required autocomplete="name"><\label>' : ''}
               <label class="field"><span>E-mail</span><input name="email" type="email" required autocomplete="username"></label>
               <label class="field"><span>Senha</span><input name="password" type="password" minlength="6" required autocomplete="${mode === 'setup' ? 'new-password' : 'current-password'}"></label>
               <button type="submit" class="clear-btn">${mode === 'setup' ? 'Criar administrador' : 'Entrar'}</button>
@@ -116,84 +121,67 @@
     });
   }
 
-  function renderApp() {
-    const turmas = (state.data && state.data.turmas) || {};
-    const options = turmaOptions(turmas);
-    const turma = state.turmaId ? turmas[state.turmaId] : null;
-    const term = state.search.toLocaleLowerCase('pt-BR').trim();
-    const alunos = turma
-      ? ordenarAlunos(turma.alunos.filter((aluno) => studentMatches(aluno, term)), state.sortCol, state.sortAsc)
-      : [];
+  function formatarData(str) {
+    if (!str) return '—';
+    const [y, m, d] = str.split('-');
+    return `${d}/${m}/${y}`;
+  }
 
-    root.innerHTML = `
-      <div class="app-shell">
-        <header class="topbar">
-          <div class="color-line"></div>
-          <div class="header-inner">
-            <div class="header-copy">
-              <h1>Alunos por Turma</h1>
-              <p class="subtitle">Área privada &middot; ${escapeHtml(state.profile.display_name || state.user.email)}</p>
-            </div>
-          </div>
-          <div class="stats-strip">
-            <span class="stat-pill">${escapeHtml(state.user.email)}</span>
-            <span class="stat-pill">Dados de ${formatarData(state.data ? state.data.geradoEm : '')}</span>
-          </div>
-          <div class="color-line"></div>
-        </header>
-        <main class="main-content">
-          <section class="ead-panel-centered">
-            <div class="panel-card">
-              <div class="panel-title">
-                <span class="eyebrow">Turmas ETG</span>
-                <h2>Consulta por turma</h2>
-              </div>
-              <div class="alunos-toolbar">
-                <label class="field">
-                  <span>Turma</span>
-                  <select id="turma-select">
-                    <option value="">Selecione uma turma</option>
-                    ${options.map((t) => `<option value="${t.id}" ${String(t.id) === state.turmaId ? 'selected' : ''}>${escapeHtml(t.nome)} — ${escapeHtml(t.curso)} (${t.alunos.length} alunos)</option>`).join('')}
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Buscar</span>
-                  <input id="busca-aluno" placeholder="Nome, matrícula ou UC" value="${escapeHtml(state.search)}" ${turma ? '' : 'disabled'}>
-                </label>
-                <div class="alunos-toolbar-actions">
-                  <button id="export-btn" class="clear-btn" type="button" ${turma ? '' : 'disabled'}>Exportar PDF</button>
-                  <button id="logout-btn" class="ghost-btn" type="button">Sair</button>
-                </div>
-              </div>
-              ${turma ? renderTurmaTable(turma, alunos) : '<div class="empty-state">Selecione uma turma para ver os alunos.</div>'}
-            </div>
-          </section>
-        </main>
-      </div>`;
+  function parseDataISO(str) {
+    if (!str) return null;
+    const [y, m, d] = str.split('-').map(Number);
+    if (!y || !m || !d) return null;
+    return new Date(y, m - 1, d);
+  }
 
-    document.getElementById('turma-select').addEventListener('change', (event) => {
-      state.turmaId = event.target.value;
-      state.search = '';
-      renderApp();
-    });
-    const buscaInput = document.getElementById('busca-aluno');
-    if (buscaInput) {
-      buscaInput.addEventListener('input', (event) => {
-        state.search = event.target.value;
-        renderApp();
-        document.getElementById('busca-aluno').focus();
-        document.getElementById('busca-aluno').selectionStart = document.getElementById('busca-aluno').value.length;
-      });
+  function fimDoSemestreVigente(hoje) {
+    const ano = hoje.getFullYear();
+    // Semestre 1: jan-jun · Semestre 2: jul-dez
+    return hoje.getMonth() < 6 ? new Date(ano, 5, 30) : new Date(ano, 11, 31);
+  }
+
+  function statusOfertaUC(uc) {
+    const inicio = parseDataISO(uc.inicio);
+    const fim = parseDataISO(uc.fim);
+    if (!inicio || !fim) return { key: 'sem-diario', label: 'Sem diário' };
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    if (fim < hoje) return { key: 'concluida', label: 'Concluída' };
+    if (inicio > hoje) {
+      // Só conta como "entrando" se o início cair dentro do semestre vigente;
+      // ofertas planejadas para semestres futuros ficam de fora deste painel.
+      if (inicio > fimDoSemestreVigente(hoje)) return { key: 'futuro-semestre', label: 'Semestre futuro' };
+      return { key: 'futura', label: 'Entrando' };
     }
-    document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
-    const exportBtn = document.getElementById('export-btn');
-    if (exportBtn && turma) exportBtn.addEventListener('click', () => exportTurmaToPdf(turma, alunos));
-    document.querySelectorAll('.alunos-sortable').forEach((th) => th.addEventListener('click', () => {
-      const col = th.dataset.col;
-      if (state.sortCol === col) state.sortAsc = !state.sortAsc;
-      else { state.sortCol = col; state.sortAsc = true; }
-      renderApp();
-    }));
+    return { key: 'andamento', label: 'Em andamento' };
+  }
+
+  function formatarTelefone(digitos) {
+    const semDDI = digitos.startsWith('55') && digitos.length > 11 ? digitos.slice(2) : digitos;
+    if (semDDI.length === 11) return `(${semDDI.slice(0, 2)}) ${semDDI.slice(2, 7)}-${semDDI.slice(7)}`;
+    if (semDDI.length === 10) return `(${semDDI.slice(0, 2)}) ${semDDI.slice(2, 6)}-${semDDI.slice(6)}`;
+    return digitos;
+  }
+
+  // ---------- Aba "Alunos por turma" ----------
+
+  function ucChips(lista, tipo) {
+    if (!lista || !lista.length) return '<span class="empty-cell">—</span>';
+    const n = lista.length;
+    const label = tipo === 'reprovada'
+      ? `${n} UC${n > 1 ? 's' : ''} reprovada${n > 1 ? 's' : ''}`
+      : `${n} UC${n > 1 ? 's' : ''} cursando`;
+    return `<details class="uc-collapse"><summary class="uc-collapse-summary ${tipo}">${label}</summary><div class="uc-chip-stack">${lista.map((uc) => `<span class="uc-chip-linha ${tipo}">${escapeHtml(uc)}</span>`).join('')}</div></details>`;
+  }
+
+  function contatoCell(aluno) {
+    const emailHtml = aluno.email
+      ? `<a class="contact-link" href="mailto:${escapeHtml(aluno.email)}">${escapeHtml(aluno.email)}</a>`
+      : '<span class="empty-cell">—</span>';
+    const telefonesHtml = (aluno.telefones && aluno.telefones.length)
+      ? '<br>' + aluno.telefones.map((tel) => `<a class="contact-link" href="tel:+${escapeHtml(tel)}">${escapeHtml(formatarTelefone(tel))}</a>`).join(', ')
+      : '';
+    return emailHtml + telefonesHtml;
   }
 
   function sortHeader(label, col) {
@@ -202,9 +190,10 @@
     return `<th class="alunos-sortable${active ? ' active' : ''}" data-col="${col}">${label}${arrow}</th>`;
   }
 
-  function ucChips(lista, tipo) {
-    if (!lista || !lista.length) return '<span class="empty-cell">—</span>';
-    return `<div class="uc-chip-stack">${lista.map((uc) => `<span class="uc-chip-linha ${tipo}">${escapeHtml(uc)}</span>`).join('')}</div>`;
+  function renderResumoTurma(turma) {
+    const total = turma.alunos.length;
+    const comPendencia = turma.alunos.filter((a) => a.ucsReprovadas && a.ucsReprovadas.length).length;
+    return `<p class="ead-panel-note">${total} estudante${total === 1 ? '' : 's'} regular${total === 1 ? '' : 'es'} nesta turma · ${comPendencia} com UC reprovada pendente</p>`;
   }
 
   function renderTurmaTable(turma, alunos) {
@@ -213,26 +202,30 @@
         <strong>${escapeHtml(turma.nome)} — ${escapeHtml(turma.curso)}</strong>
         ${turma.link ? `<a class="turma-link" href="${escapeHtml(turma.link)}" target="_blank" rel="noreferrer">Abrir no SGN</a>` : ''}
       </div>
+      ${renderResumoTurma(turma)}
       <div class="table-shell">
         <div class="table-scroll">
           <table>
             <thead><tr>
-              ${sortHeader('Aluno', 'nome')}
+              ${sortHeader('Estudante', 'nome')}
               ${sortHeader('Status', 'status')}
               ${sortHeader('UCs reprovadas', 'reprovadas')}
               ${sortHeader('UCs cursando', 'cursando')}
               ${sortHeader('Contato', 'contato')}
             </tr></thead>
             <tbody>
-              ${alunos.map((aluno) => `
-                <tr>
+              ${alunos.map((aluno) => {
+                const temReprovada = aluno.ucsReprovadas && aluno.ucsReprovadas.length;
+                return `
+                <tr class="${temReprovada ? 'row-alerta' : ''}">
                   <td><strong>${escapeHtml(aluno.nome)}</strong><br><small>Matrícula ${escapeHtml(aluno.matricula)}</small></td>
                   <td>${escapeHtml(aluno.status)}</td>
                   <td>${ucChips(aluno.ucsReprovadas, 'reprovada')}</td>
                   <td>${ucChips(aluno.ucsCursando, 'cursando')}</td>
-                  <td>${escapeHtml(aluno.email || '')}${aluno.telefones && aluno.telefones.length ? '<br>' + escapeHtml(aluno.telefones.join(', ')) : ''}</td>
+                  <td>${contatoCell(aluno)}</td>
                 </tr>
-              `).join('')}
+              `;
+              }).join('')}
             </tbody>
           </table>
         </div>
@@ -241,10 +234,50 @@
       <p class="result-count">${alunos.length} aluno${alunos.length === 1 ? '' : 's'}</p>`;
   }
 
-  function formatarData(str) {
-    if (!str) return '—';
-    const [y, m, d] = str.split('-');
-    return `${d}/${m}/${y}`;
+  function renderAlunosView() {
+    const turmas = (state.data && state.data.turmas) || {};
+    const options = turmaOptions(turmas);
+    const turma = state.turmaId ? turmas[state.turmaId] : null;
+    const term = state.search.toLocaleLowerCase('pt-BR').trim();
+    const alunos = turma
+      ? ordenarAlunos(
+          turma.alunos.filter((aluno) => studentMatches(aluno, term) && (!state.somenteReprovados || (aluno.ucsReprovadas && aluno.ucsReprovadas.length))),
+          state.sortCol, state.sortAsc,
+        )
+      : [];
+
+    return {
+      html: `
+        <div class="panel-card">
+          <div class="panel-title">
+            <span class="eyebrow">Turmas ETG</span>
+            <h2>Consulta por turma</h2>
+          </div>
+          <div class="alunos-toolbar">
+            <label class="field">
+              <span>Turma</span>
+              <select id="turma-select">
+                <option value="">Selecione uma turma</option>
+                ${options.map((t) => `<option value="${t.id}" ${String(t.id) === state.turmaId ? 'selected' : ''}>${escapeHtml(t.nome)} — ${escapeHtml(t.curso)} (${t.alunos.length} alunos)</option>`).join('')}
+              </select>
+            </label>
+            <label class="field">
+              <span>Buscar</span>
+              <input id="busca-aluno" placeholder="Nome, matrícula ou UC" value="${escapeHtml(state.search)}" ${turma ? '' : 'disabled'}>
+            </label>
+            <label class="field checkbox-field">
+              <span>&nbsp;</span>
+              <label class="checkbox-inline"><input type="checkbox" id="somente-reprovados" ${state.somenteReprovados ? 'checked' : ''} ${turma ? '' : 'disabled'}> Só com reprovação</label>
+            </label>
+            <div class="alunos-toolbar-actions">
+              <button id="export-btn" class="clear-btn" type="button" ${turma ? '' : 'disabled'}>Exportar PDF</button>
+              <button id="logout-btn" class="ghost-btn" type="button">Sair</button>
+            </div>
+          </div>
+          ${turma ? renderTurmaTable(turma, alunos) : '<div class="empty-state">Selecione uma turma para ver os alunos.</div>'}
+        </div>`,
+      turma, alunos,
+    };
   }
 
   function exportTurmaToPdf(turma, alunos) {
@@ -291,6 +324,209 @@
 
     const stamp = new Date().toISOString().slice(0, 10);
     doc.save(`alunos_${turma.nome.replace(/[^a-z0-9]+/gi, '-')}_${stamp}.pdf`);
+  }
+
+  // ---------- Aba "UCs EAD do semestre" ----------
+
+  function eadRows(unidadeFiltro) {
+    const turmas = (window.EAD_OFERTAS && window.EAD_OFERTAS.turmas) || [];
+    const rows = [];
+    turmas.forEach((turma) => {
+      if (unidadeFiltro && turma.unidade !== unidadeFiltro) return;
+      (turma.ucs || []).forEach((uc) => {
+        const status = statusOfertaUC(uc);
+        if (status.key !== 'andamento' && status.key !== 'futura') return;
+        rows.push({ turma, uc, status });
+      });
+    });
+    rows.sort((a, b) => {
+      if (a.status.key !== b.status.key) return a.status.key === 'andamento' ? -1 : 1;
+      const ia = a.uc.inicio || '9999';
+      const ib = b.uc.inicio || '9999';
+      if (ia !== ib) return ia < ib ? -1 : 1;
+      return a.turma.nome.localeCompare(b.turma.nome, 'pt-BR');
+    });
+    return rows;
+  }
+
+  function renderEadView() {
+    const turmas = (window.EAD_OFERTAS && window.EAD_OFERTAS.turmas) || [];
+    const unidades = [...new Set(turmas.map((t) => t.unidade))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    const rows = eadRows(state.eadUnidade);
+    const emAndamento = rows.filter((r) => r.status.key === 'andamento').length;
+    const entrando = rows.length - emAndamento;
+
+    const html = `
+      <div class="panel-card">
+        <div class="panel-title">
+          <span class="eyebrow">Turmas ETG</span>
+          <h2>UCs 100% EAD do semestre vigente</h2>
+        </div>
+        ${window.EAD_OFERTAS && window.EAD_OFERTAS.geradoEm ? `<p class="ead-panel-note">Matrículas de ${formatarData(window.EAD_OFERTAS.geradoEm)}</p>` : ''}
+        <div class="ead-resumo">
+          <p>${rows.length} oferta${rows.length === 1 ? '' : 's'} EAD ${state.eadUnidade ? 'nessa unidade' : 'no total'} — apenas o que está em andamento ou entrando (concluídas ficam de fora)</p>
+          ${emAndamento || entrando ? `<p class="ead-highlight">${emAndamento} em andamento agora · ${entrando} entrando em breve</p>` : ''}
+        </div>
+        <div class="alunos-toolbar">
+          <label class="field">
+            <span>Unidade</span>
+            <select id="ead-unidade-select">
+              <option value="">Todas as unidades</option>
+              ${unidades.map((u) => `<option value="${escapeHtml(u)}" ${u === state.eadUnidade ? 'selected' : ''}>${escapeHtml(u)}</option>`).join('')}
+            </select>
+          </label>
+          <div class="alunos-toolbar-actions">
+            <button id="export-ead-btn" class="clear-btn" type="button" ${rows.length ? '' : 'disabled'}>Exportar PDF</button>
+          </div>
+        </div>
+        ${rows.length ? `
+        <div class="table-shell">
+          <div class="table-scroll">
+            <table>
+              <thead><tr>
+                <th>Turma</th><th>Curso</th><th>Unidade</th><th>UC 100% EAD</th>
+                <th class="center">Carga Horária</th><th>Início</th><th>Fim</th><th>Status</th><th class="center">Cursando</th>
+              </tr></thead>
+              <tbody>
+                ${rows.map(({ turma, uc, status }) => `
+                  <tr>
+                    <td><strong>${escapeHtml(turma.nome)}</strong>${turma.link ? `<br><a class="turma-link" href="${escapeHtml(turma.link)}" target="_blank" rel="noreferrer">Abrir no SGN</a>` : ''}</td>
+                    <td>${escapeHtml(turma.curso)}</td>
+                    <td>${escapeHtml(turma.unidade)}</td>
+                    <td>${escapeHtml(uc.uc)}</td>
+                    <td class="center">${uc.cargaHoraria || '?'}h</td>
+                    <td>${formatarData(uc.inicio)}</td>
+                    <td>${formatarData(uc.fim)}</td>
+                    <td><span class="ead-status-badge status-${status.key}">${status.label}</span></td>
+                    <td class="center">${uc.cursando}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="result-count">${rows.length} oferta${rows.length === 1 ? '' : 's'} EAD</p>
+        ` : `<div class="empty-state">Nenhuma UC 100% EAD em andamento ou entrando no momento${state.eadUnidade ? ' nessa unidade' : ''}.</div>`}
+      </div>`;
+    return { html, rows };
+  }
+
+  function exportEadToPdf(rows, unidadeFiltro) {
+    if (!window.jspdf) { alert('Biblioteca de PDF não carregada. Recarregue a página.'); return; }
+    if (!rows.length) { alert('Nenhuma oferta para exportar com esse filtro.'); return; }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+
+    doc.setFontSize(13);
+    doc.setTextColor(16, 20, 77);
+    doc.text('UCs 100% EAD do semestre vigente' + (unidadeFiltro ? ' — ' + unidadeFiltro : ''), 14, 15);
+    doc.setFontSize(9);
+    doc.setTextColor(100);
+    doc.text(`Gerado em ${new Date().toLocaleDateString('pt-BR')}  ·  ${rows.length} oferta${rows.length === 1 ? '' : 's'} (em andamento ou entrando)`, 14, 21);
+
+    doc.autoTable({
+      head: [['Turma', 'Curso', 'Unidade', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status', 'Cursando']],
+      body: rows.map(({ turma, uc, status }) => [
+        turma.nome, turma.curso, turma.unidade, uc.uc, `${uc.cargaHoraria || '?'}h`,
+        formatarData(uc.inicio), formatarData(uc.fim), status.label, String(uc.cursando),
+      ]),
+      startY: 26,
+      styles: { fontSize: 8, cellPadding: 2, valign: 'top', lineColor: [220, 229, 255], lineWidth: 0.1 },
+      headStyles: { fillColor: [16, 20, 77], textColor: 255, fontStyle: 'bold' },
+      alternateRowStyles: { fillColor: [249, 251, 255] },
+      didParseCell: (data) => {
+        if (data.section === 'body' && data.column.index === 7 && data.cell.raw === 'Em andamento') {
+          data.cell.styles.textColor = [12, 107, 36];
+          data.cell.styles.fontStyle = 'bold';
+        }
+      },
+    });
+
+    const stamp = new Date().toISOString().slice(0, 10);
+    doc.save(`ucs-ead-semestre${unidadeFiltro ? '-' + unidadeFiltro.replace(/[^a-z0-9]+/gi, '-') : ''}_${stamp}.pdf`);
+  }
+
+  // ---------- Casca comum ----------
+
+  function renderApp() {
+    const alunosView = state.view === 'alunos' ? renderAlunosView() : null;
+    const eadView = state.view === 'ead' ? renderEadView() : null;
+
+    root.innerHTML = `
+      <div class="app-shell">
+        <header class="topbar">
+          <div class="color-line"></div>
+          <div class="header-inner">
+            <div class="header-copy">
+              <h1>Alunos por Turma</h1>
+              <p class="subtitle">Área privada &middot; ${escapeHtml(state.profile.display_name || state.user.email)}</p>
+            </div>
+          </div>
+          <div class="stats-strip">
+            <span class="stat-pill">${escapeHtml(state.user.email)}</span>
+            <span class="stat-pill">Dados de ${formatarData(state.data ? state.data.geradoEm : '')}</span>
+          </div>
+          <div class="color-line"></div>
+        </header>
+        <nav class="main-nav" role="tablist" aria-label="Seções">
+          <button type="button" role="tab" aria-selected="${state.view === 'alunos'}" class="nav-btn${state.view === 'alunos' ? ' active' : ''}" data-view="alunos">Alunos por Turma</button>
+          <button type="button" role="tab" aria-selected="${state.view === 'ead'}" class="nav-btn${state.view === 'ead' ? ' active' : ''}" data-view="ead">UCs EAD do semestre</button>
+        </nav>
+        <main class="main-content">
+          <section class="ead-panel-centered">
+            ${state.view === 'alunos' ? alunosView.html : eadView.html}
+          </section>
+        </main>
+      </div>`;
+
+    document.querySelectorAll('.main-nav .nav-btn').forEach((btn) => btn.addEventListener('click', () => {
+      state.view = btn.dataset.view;
+      renderApp();
+    }));
+
+    if (state.view === 'alunos') {
+      const { turma, alunos } = alunosView;
+      document.getElementById('turma-select').addEventListener('change', (event) => {
+        state.turmaId = event.target.value;
+        state.search = '';
+        renderApp();
+      });
+      const buscaInput = document.getElementById('busca-aluno');
+      if (buscaInput) {
+        buscaInput.addEventListener('input', (event) => {
+          state.search = event.target.value;
+          renderApp();
+          document.getElementById('busca-aluno').focus();
+          document.getElementById('busca-aluno').selectionStart = document.getElementById('busca-aluno').value.length;
+        });
+      }
+      const somenteReprovadosInput = document.getElementById('somente-reprovados');
+      if (somenteReprovadosInput) {
+        somenteReprovadosInput.addEventListener('change', (event) => {
+          state.somenteReprovados = event.target.checked;
+          renderApp();
+        });
+      }
+      document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
+      const exportBtn = document.getElementById('export-btn');
+      if (exportBtn && turma) exportBtn.addEventListener('click', () => exportTurmaToPdf(turma, alunos));
+      document.querySelectorAll('.alunos-sortable').forEach((th) => th.addEventListener('click', () => {
+        const col = th.dataset.col;
+        if (state.sortCol === col) state.sortAsc = !state.sortAsc;
+        else { state.sortCol = col; state.sortAsc = true; }
+        renderApp();
+      }));
+    } else {
+      const unidadeSelect = document.getElementById('ead-unidade-select');
+      if (unidadeSelect) {
+        unidadeSelect.addEventListener('change', (event) => {
+          state.eadUnidade = event.target.value;
+          renderApp();
+        });
+      }
+      const exportEadBtn = document.getElementById('export-ead-btn');
+      if (exportEadBtn) exportEadBtn.addEventListener('click', () => exportEadToPdf(eadView.rows, state.eadUnidade));
+    }
   }
 
   auth.onAuthStateChanged(async (user) => {
