@@ -6,7 +6,8 @@
 
   const state = {
     user: null, profile: null, data: null,
-    view: 'alunos',
+    authResolved: false, setupComplete: null, authErrorMsg: '',
+    view: 'ead',
     turmaId: '', search: '', sortCol: 'nome', sortAsc: true, somenteReprovados: false,
     eadUnidade: '',
   };
@@ -22,51 +23,74 @@
     if (node) node.textContent = message || '';
   }
 
-  function renderLogin(mode) {
+  // Painel de acesso restrito, incorporado dentro da casca comum (nav + header)
+  // em vez de tomar a tela inteira — assim quem so quer ver a oferta EAD
+  // nunca precisa passar por aqui.
+  function authMode() {
+    if (!state.authResolved) return 'loading';
+    if (!state.user) return state.setupComplete === false ? 'setup' : 'login';
+    if (state.profile && state.profile.active) return 'ready';
+    return state.setupComplete === false ? 'setup' : 'pending';
+  }
+
+  function renderAuthGatePanel(mode) {
+    if (mode === 'loading') {
+      return '<div class="panel-card"><div class="empty-state">Carregando…</div></div>';
+    }
     const titles = {
-      login: ['Área privada', 'Entrar com e-mail e senha para consultar os alunos por turma.'],
+      login: ['Acesso restrito', 'Entrar com e-mail e senha para consultar os alunos por turma.'],
       setup: ['Configuração inicial', 'Nenhum administrador cadastrado ainda. Crie o primeiro acesso (o seu).'],
       pending: ['Acesso pendente', 'Sua conta ainda não foi liberada. Peça para um administrador liberar seu acesso.'],
     };
     const [title, subtitle] = titles[mode] || titles.login;
-    root.innerHTML = `
-      <div class="auth-shell">
-        <div class="auth-panel panel-card">
-          <span class="eyebrow">CTSED &middot; privado</span>
-          <h1>${title}</h1>
-          <p class="auth-subtitle">${subtitle}</p>
-          ${mode === 'pending' ? `
-            <button id="logout-btn" class="clear-btn" type="button">Sair</button>
-          ` : `
-            <form id="auth-form" class="auth-form">
-              ${mode === 'setup' ? '<label class="field"><span>Nome completo</span><input name="name" required autocomplete="name"><\label>' : ''}
-              <label class="field"><span>E-mail</span><input name="email" type="email" required autocomplete="username"></label>
-              <label class="field"><span>Senha</span><input name="password" type="password" minlength="6" required autocomplete="${mode === 'setup' ? 'new-password' : 'current-password'}"></label>
-              <button type="submit" class="clear-btn">${mode === 'setup' ? 'Criar administrador' : 'Entrar'}</button>
-              <div id="auth-error" class="form-error"></div>
-            </form>
-          `}
-        </div>
+    return `
+      <div class="panel-card auth-panel">
+        <span class="eyebrow">CTSED &middot; acesso restrito</span>
+        <h1>${title}</h1>
+        <p class="auth-subtitle">${subtitle}</p>
+        ${mode === 'pending' ? `
+          <button id="logout-btn-gate" class="clear-btn" type="button">Sair</button>
+        ` : `
+          <form id="auth-form" class="auth-form">
+            ${mode === 'setup' ? '<label class="field"><span>Nome completo</span><input name="name" required autocomplete="name"></label>' : ''}
+            <label class="field"><span>E-mail</span><input name="email" type="email" required autocomplete="username"></label>
+            <label class="field"><span>Senha</span><input name="password" type="password" minlength="6" required autocomplete="${mode === 'setup' ? 'new-password' : 'current-password'}"></label>
+            <button type="submit" class="clear-btn">${mode === 'setup' ? 'Criar administrador' : 'Entrar'}</button>
+            <div id="auth-error" class="form-error"></div>
+          </form>
+        `}
       </div>`;
+  }
+
+  function wireAuthGate(mode) {
+    if (mode === 'loading') return;
     if (mode === 'pending') {
-      document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
+      const btn = document.getElementById('logout-btn-gate');
+      if (btn) btn.addEventListener('click', () => auth.signOut());
       return;
     }
-    document.getElementById('auth-form').addEventListener('submit', async (event) => {
+    const form = document.getElementById('auth-form');
+    if (!form) return;
+    if (state.authErrorMsg) {
+      showError(state.authErrorMsg);
+      state.authErrorMsg = '';
+    }
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       showError('');
-      const form = new FormData(event.currentTarget);
-      const email = form.get('email').trim();
-      const password = form.get('password');
+      const formData = new FormData(event.currentTarget);
+      const email = formData.get('email').trim();
+      const password = formData.get('password');
       try {
         if (mode === 'setup') {
           const credential = await auth.createUserWithEmailAndPassword(email, password);
           await db.ref('users/' + credential.user.uid).set({
-            display_name: form.get('name').trim(),
+            display_name: formData.get('name').trim(),
             role: 'admin',
             active: true,
           });
           await db.ref('public/setupComplete').set(true);
+          state.setupComplete = true;
         } else {
           await auth.signInWithEmailAndPassword(email, password);
         }
@@ -271,7 +295,6 @@
             </label>
             <div class="alunos-toolbar-actions">
               <button id="export-btn" class="clear-btn" type="button" ${turma ? '' : 'disabled'}>Exportar PDF</button>
-              <button id="logout-btn" class="ghost-btn" type="button">Sair</button>
             </div>
           </div>
           ${turma ? renderTurmaTable(turma, alunos) : '<div class="empty-state">Selecione uma turma para ver os alunos.</div>'}
@@ -376,9 +399,10 @@
             </select>
           </label>
           <div class="alunos-toolbar-actions">
-            <button id="export-ead-btn" class="clear-btn" type="button" ${rows.length ? '' : 'disabled'}>Exportar PDF</button>
+            <button id="export-ead-btn" class="clear-btn" type="button" ${rows.length ? '' : 'disabled'}>Exportar PDF por unidade</button>
           </div>
         </div>
+        <p class="ead-panel-note">O PDF organiza as turmas em blocos por Unidade SENAI, prontos pra repassar ao pedagógico avisar os alunos.</p>
         ${rows.length ? `
         <div class="table-shell">
           <div class="table-scroll">
@@ -416,41 +440,72 @@
     if (!rows.length) { alert('Nenhuma oferta para exportar com esse filtro.'); return; }
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+    const marginLeft = 14;
+    const pageHeight = doc.internal.pageSize.getHeight();
 
-    doc.setFontSize(13);
+    // Um bloco por Unidade SENAI, pra facilitar o pedagogico repassar aos alunos.
+    const grupos = new Map();
+    rows.forEach((row) => {
+      const chave = row.turma.unidade || 'Sem unidade';
+      if (!grupos.has(chave)) grupos.set(chave, []);
+      grupos.get(chave).push(row);
+    });
+    const unidades = [...grupos.keys()].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+    doc.setFontSize(14);
     doc.setTextColor(16, 20, 77);
-    doc.text('UCs 100% EAD do semestre vigente' + (unidadeFiltro ? ' — ' + unidadeFiltro : ''), 14, 15);
+    doc.text('UCs 100% EAD do semestre vigente' + (unidadeFiltro ? ' — ' + unidadeFiltro : ''), marginLeft, 16);
     doc.setFontSize(9);
     doc.setTextColor(100);
-    doc.text(`Gerado em ${new Date().toLocaleDateString('pt-BR')}  ·  ${rows.length} oferta${rows.length === 1 ? '' : 's'} (em andamento ou entrando)`, 14, 21);
+    doc.text(
+      `Gerado em ${new Date().toLocaleDateString('pt-BR')}  ·  ${rows.length} oferta${rows.length === 1 ? '' : 's'} em ${unidades.length} unidade${unidades.length === 1 ? '' : 's'} (em andamento ou entrando)`,
+      marginLeft, 22,
+    );
 
-    doc.autoTable({
-      head: [['Turma', 'Curso', 'Unidade', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status', 'Cursando']],
-      body: rows.map(({ turma, uc, status }) => [
-        turma.nome, turma.curso, turma.unidade, uc.uc, `${uc.cargaHoraria || '?'}h`,
-        formatarData(uc.inicio), formatarData(uc.fim), status.label, String(uc.cursando),
-      ]),
-      startY: 26,
-      styles: { fontSize: 8, cellPadding: 2, valign: 'top', lineColor: [220, 229, 255], lineWidth: 0.1 },
-      headStyles: { fillColor: [16, 20, 77], textColor: 255, fontStyle: 'bold' },
-      alternateRowStyles: { fillColor: [249, 251, 255] },
-      didParseCell: (data) => {
-        if (data.section === 'body' && data.column.index === 7 && data.cell.raw === 'Em andamento') {
-          data.cell.styles.textColor = [12, 107, 36];
-          data.cell.styles.fontStyle = 'bold';
-        }
-      },
+    let y = 30;
+    unidades.forEach((unidade) => {
+      const grupoRows = grupos.get(unidade);
+      if (y > pageHeight - 40) { doc.addPage(); y = 16; }
+      doc.setFontSize(11.5);
+      doc.setTextColor(16, 20, 77);
+      doc.text(`${unidade}  ·  ${grupoRows.length} oferta${grupoRows.length === 1 ? '' : 's'}`, marginLeft, y);
+      y += 5;
+
+      doc.autoTable({
+        head: [['Turma', 'Curso', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status', 'Cursando']],
+        body: grupoRows.map(({ turma, uc, status }) => [
+          turma.nome, turma.curso, uc.uc, `${uc.cargaHoraria || '?'}h`,
+          formatarData(uc.inicio), formatarData(uc.fim), status.label, String(uc.cursando),
+        ]),
+        startY: y,
+        margin: { left: marginLeft, right: marginLeft },
+        styles: { fontSize: 8, cellPadding: 2, valign: 'top', lineColor: [220, 229, 255], lineWidth: 0.1 },
+        headStyles: { fillColor: [16, 20, 77], textColor: 255, fontStyle: 'bold' },
+        alternateRowStyles: { fillColor: [249, 251, 255] },
+        didParseCell: (data) => {
+          if (data.section === 'body' && data.column.index === 6 && data.cell.raw === 'Em andamento') {
+            data.cell.styles.textColor = [12, 107, 36];
+            data.cell.styles.fontStyle = 'bold';
+          }
+        },
+      });
+      y = doc.lastAutoTable.finalY + 10;
     });
 
     const stamp = new Date().toISOString().slice(0, 10);
-    doc.save(`ucs-ead-semestre${unidadeFiltro ? '-' + unidadeFiltro.replace(/[^a-z0-9]+/gi, '-') : ''}_${stamp}.pdf`);
+    doc.save(`ucs-ead-semestre-por-unidade${unidadeFiltro ? '-' + unidadeFiltro.replace(/[^a-z0-9]+/gi, '-') : ''}_${stamp}.pdf`);
   }
 
   // ---------- Casca comum ----------
 
   function renderApp() {
-    const alunosView = state.view === 'alunos' ? renderAlunosView() : null;
+    const mode = authMode();
+    const authReady = mode === 'ready';
+    const alunosView = (state.view === 'alunos' && authReady) ? renderAlunosView() : null;
     const eadView = state.view === 'ead' ? renderEadView() : null;
+    const bodyHtml = state.view === 'ead'
+      ? eadView.html
+      : (authReady ? alunosView.html : renderAuthGatePanel(mode));
 
     root.innerHTML = `
       <div class="app-shell">
@@ -458,23 +513,25 @@
           <div class="color-line"></div>
           <div class="header-inner">
             <div class="header-copy">
-              <h1>Alunos por Turma</h1>
-              <p class="subtitle">Área privada &middot; ${escapeHtml(state.profile.display_name || state.user.email)}</p>
+              <h1>CTSED &middot; Turmas ETG</h1>
+              <p class="subtitle">${authReady ? `Área privada &middot; ${escapeHtml(state.profile.display_name || state.user.email)}` : 'Oferta de UCs 100% EAD do semestre vigente'}</p>
             </div>
           </div>
           <div class="stats-strip">
-            <span class="stat-pill">${escapeHtml(state.user.email)}</span>
-            <span class="stat-pill">Dados de ${formatarData(state.data ? state.data.geradoEm : '')}</span>
+            ${window.EAD_OFERTAS && window.EAD_OFERTAS.geradoEm ? `<span class="stat-pill">Oferta EAD de ${formatarData(window.EAD_OFERTAS.geradoEm)}</span>` : ''}
+            ${authReady ? `<span class="stat-pill">${escapeHtml(state.user.email)}</span>` : ''}
+            ${authReady ? `<span class="stat-pill">Alunos de ${formatarData(state.data ? state.data.geradoEm : '')}</span>` : ''}
+            ${authReady ? '<button id="logout-btn-header" class="stat-pill stat-pill-btn" type="button">Sair</button>' : ''}
           </div>
           <div class="color-line"></div>
         </header>
         <nav class="main-nav" role="tablist" aria-label="Seções">
-          <button type="button" role="tab" aria-selected="${state.view === 'alunos'}" class="nav-btn${state.view === 'alunos' ? ' active' : ''}" data-view="alunos">Alunos por Turma</button>
           <button type="button" role="tab" aria-selected="${state.view === 'ead'}" class="nav-btn${state.view === 'ead' ? ' active' : ''}" data-view="ead">UCs EAD do semestre</button>
+          <button type="button" role="tab" aria-selected="${state.view === 'alunos'}" class="nav-btn${state.view === 'alunos' ? ' active' : ''}" data-view="alunos">Alunos por Turma${authReady ? '' : ' 🔒'}</button>
         </nav>
         <main class="main-content">
           <section class="ead-panel-centered">
-            ${state.view === 'alunos' ? alunosView.html : eadView.html}
+            ${bodyHtml}
           </section>
         </main>
       </div>`;
@@ -484,39 +541,10 @@
       renderApp();
     }));
 
-    if (state.view === 'alunos') {
-      const { turma, alunos } = alunosView;
-      document.getElementById('turma-select').addEventListener('change', (event) => {
-        state.turmaId = event.target.value;
-        state.search = '';
-        renderApp();
-      });
-      const buscaInput = document.getElementById('busca-aluno');
-      if (buscaInput) {
-        buscaInput.addEventListener('input', (event) => {
-          state.search = event.target.value;
-          renderApp();
-          document.getElementById('busca-aluno').focus();
-          document.getElementById('busca-aluno').selectionStart = document.getElementById('busca-aluno').value.length;
-        });
-      }
-      const somenteReprovadosInput = document.getElementById('somente-reprovados');
-      if (somenteReprovadosInput) {
-        somenteReprovadosInput.addEventListener('change', (event) => {
-          state.somenteReprovados = event.target.checked;
-          renderApp();
-        });
-      }
-      document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
-      const exportBtn = document.getElementById('export-btn');
-      if (exportBtn && turma) exportBtn.addEventListener('click', () => exportTurmaToPdf(turma, alunos));
-      document.querySelectorAll('.alunos-sortable').forEach((th) => th.addEventListener('click', () => {
-        const col = th.dataset.col;
-        if (state.sortCol === col) state.sortAsc = !state.sortAsc;
-        else { state.sortCol = col; state.sortAsc = true; }
-        renderApp();
-      }));
-    } else {
+    const logoutHeaderBtn = document.getElementById('logout-btn-header');
+    if (logoutHeaderBtn) logoutHeaderBtn.addEventListener('click', () => auth.signOut());
+
+    if (state.view === 'ead') {
       const unidadeSelect = document.getElementById('ead-unidade-select');
       if (unidadeSelect) {
         unidadeSelect.addEventListener('change', (event) => {
@@ -526,37 +554,80 @@
       }
       const exportEadBtn = document.getElementById('export-ead-btn');
       if (exportEadBtn) exportEadBtn.addEventListener('click', () => exportEadToPdf(eadView.rows, state.eadUnidade));
+      return;
+    }
+
+    // view === 'alunos'
+    if (!authReady) {
+      wireAuthGate(mode);
+      return;
+    }
+    const { turma, alunos } = alunosView;
+    document.getElementById('turma-select').addEventListener('change', (event) => {
+      state.turmaId = event.target.value;
+      state.search = '';
+      renderApp();
+    });
+    const buscaInput = document.getElementById('busca-aluno');
+    if (buscaInput) {
+      buscaInput.addEventListener('input', (event) => {
+        state.search = event.target.value;
+        renderApp();
+        document.getElementById('busca-aluno').focus();
+        document.getElementById('busca-aluno').selectionStart = document.getElementById('busca-aluno').value.length;
+      });
+    }
+    const somenteReprovadosInput = document.getElementById('somente-reprovados');
+    if (somenteReprovadosInput) {
+      somenteReprovadosInput.addEventListener('change', (event) => {
+        state.somenteReprovados = event.target.checked;
+        renderApp();
+      });
+    }
+    const exportBtn = document.getElementById('export-btn');
+    if (exportBtn && turma) exportBtn.addEventListener('click', () => exportTurmaToPdf(turma, alunos));
+    document.querySelectorAll('.alunos-sortable').forEach((th) => th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (state.sortCol === col) state.sortAsc = !state.sortAsc;
+      else { state.sortCol = col; state.sortAsc = true; }
+      renderApp();
+    }));
+  }
+
+  async function refreshSetupComplete() {
+    try {
+      const snap = await db.ref('public/setupComplete').once('value');
+      state.setupComplete = snap.val() === true;
+    } catch (err) {
+      // Regras negam leitura de public/setupComplete apenas em casos anormais;
+      // segue assumindo setup concluido (tela de login padrao) se isso falhar.
+      state.setupComplete = true;
     }
   }
 
   auth.onAuthStateChanged(async (user) => {
     state.user = user;
-    let setupComplete = true;
-    try {
-      const setupSnap = await db.ref('public/setupComplete').once('value');
-      setupComplete = setupSnap.val() === true;
-    } catch (err) {
-      // Regras negam leitura de public/setupComplete apenas em casos anormais;
-      // segue assumindo setup concluido (tela de login padrao) se isso falhar.
-    }
-    if (!user) {
-      renderLogin(setupComplete ? 'login' : 'setup');
-      return;
-    }
-    try {
-      const profileSnap = await db.ref('users/' + user.uid).once('value');
-      const profile = profileSnap.val();
-      if (profile && profile.active) {
-        state.profile = profile;
-        const dataSnap = await db.ref('alunosPorTurma').once('value');
-        state.data = { turmas: {}, ...(dataSnap.val() || {}) };
-        renderApp();
-        return;
+    state.profile = null;
+    state.data = null;
+    if (state.setupComplete === null) await refreshSetupComplete();
+    if (user) {
+      try {
+        const profileSnap = await db.ref('users/' + user.uid).once('value');
+        const profile = profileSnap.val();
+        if (profile && profile.active) {
+          state.profile = profile;
+          const dataSnap = await db.ref('alunosPorTurma').once('value');
+          state.data = { turmas: {}, ...(dataSnap.val() || {}) };
+        }
+      } catch (err) {
+        state.authErrorMsg = traduzErro(err);
       }
-      renderLogin(setupComplete ? 'pending' : 'setup');
-    } catch (err) {
-      renderLogin('login');
-      showError(traduzErro(err));
     }
+    state.authResolved = true;
+    renderApp();
   });
+
+  // Primeira pintura: a oferta EAD nao depende de login, entao a tela ja
+  // aparece de cara. "Alunos por Turma" so pede acesso quando for aberta.
+  renderApp();
 })();
