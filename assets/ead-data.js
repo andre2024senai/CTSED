@@ -1,5 +1,5 @@
 window.EAD_OFERTAS = {
-  "geradoEm": "2026-08-03",
+  "geradoEm": "2026-08-17",
   "turmas": [
     {
       "id": 106005,
@@ -9,16 +9,6 @@ window.EAD_OFERTAS = {
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=106005",
       "ucs": [
         {
-          "uc": "Sustentabilidade nos processos industriais",
-          "cargaHoraria": 8,
-          "inicio": "2026-04-13",
-          "fim": "2026-07-17",
-          "regulares": 18,
-          "cursando": 18,
-          "aprovados": 0,
-          "reprovados": 0
-        },
-        {
           "uc": "Introdução a Indústria 4.0",
           "cargaHoraria": 24,
           "inicio": "2026-08-10",
@@ -27,6 +17,16 @@ window.EAD_OFERTAS = {
           "cursando": 5,
           "aprovados": 13,
           "reprovados": 0
+        },
+        {
+          "uc": "Sustentabilidade nos processos industriais",
+          "cargaHoraria": 8,
+          "inicio": "2026-08-24",
+          "fim": "2026-11-20",
+          "regulares": 18,
+          "cursando": 3,
+          "aprovados": 14,
+          "reprovados": 1
         },
         {
           "uc": "Criatividade e Ideação em Projetos de Inovação",
@@ -108,7 +108,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Manutenção de Sistemas Automatizados",
           "inicio": "2026-06-10",
-          "fim": "2026-08-20"
+          "fim": "2026-08-21"
         },
         {
           "uc": "Modelagem de Projetos de Inovação",
@@ -123,7 +123,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Projetos de Controle e Sistemas Automatizados",
           "inicio": "2026-06-23",
-          "fim": "2026-09-11"
+          "fim": "2026-09-10"
         },
         {
           "uc": "Projetos de Intertravamento de Segurança de Processos Industriais",
@@ -152,8 +152,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Sustentabilidade nos Processos Industriais",
-          "inicio": "2026-04-13",
-          "fim": "2026-07-17"
+          "inicio": "2026-08-24",
+          "fim": "2026-11-20"
         }
       ]
     },
@@ -254,7 +254,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Integração de Dispositivos Automatizados",
           "inicio": "2026-04-30",
-          "fim": "2026-07-10"
+          "fim": "2026-08-21"
         },
         {
           "uc": "Introdução a Indústria 4.0",
@@ -279,7 +279,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Projetos de Controle e Sistemas Automatizados",
           "inicio": "2026-07-01",
-          "fim": "2026-09-11"
+          "fim": "2026-09-10"
         },
         {
           "uc": "Projetos de Intertravamento de Segurança de Processos Industriais",
@@ -325,9 +325,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 24,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 15,
+          "regulares": 16,
           "cursando": 15,
-          "aprovados": 0,
+          "aprovados": 1,
           "reprovados": 0
         },
         {
@@ -335,9 +335,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-08-10",
           "fim": "2026-11-06",
-          "regulares": 15,
+          "regulares": 16,
           "cursando": 1,
-          "aprovados": 14,
+          "aprovados": 15,
           "reprovados": 0
         },
         {
@@ -345,8 +345,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -355,9 +355,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": null,
           "fim": null,
-          "regulares": 15,
+          "regulares": 16,
           "cursando": 0,
-          "aprovados": 15,
+          "aprovados": 16,
           "reprovados": 0
         },
         {
@@ -365,9 +365,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": null,
           "fim": null,
-          "regulares": 15,
+          "regulares": 16,
           "cursando": 0,
-          "aprovados": 15,
+          "aprovados": 16,
           "reprovados": 0
         },
         {
@@ -375,9 +375,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": null,
           "fim": null,
-          "regulares": 15,
+          "regulares": 16,
           "cursando": 0,
-          "aprovados": 15,
+          "aprovados": 16,
           "reprovados": 0
         },
         {
@@ -385,9 +385,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": null,
           "fim": null,
-          "regulares": 15,
+          "regulares": 16,
           "cursando": 0,
-          "aprovados": 15,
+          "aprovados": 16,
           "reprovados": 0
         }
       ],
@@ -399,8 +399,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Implementação de Negócios Inovadores",
-          "inicio": "2026-11-10",
-          "fim": "2026-11-17"
+          "inicio": "2026-10-15",
+          "fim": "2026-10-30"
         },
         {
           "uc": "Instrumentação e Controle de Processos Industriais ",
@@ -424,8 +424,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Manutenção de Sistemas Automatizados",
-          "inicio": "2026-10-07",
-          "fim": "2026-12-08"
+          "inicio": "2026-08-25",
+          "fim": "2026-12-03"
         },
         {
           "uc": "Projetos de Acionamentos Eletroeletrônicos",
@@ -439,8 +439,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Projetos de Intertravamento de Segurança de Processos Industriais",
-          "inicio": "2026-10-22",
-          "fim": "2026-12-09"
+          "inicio": "2026-10-29",
+          "fim": "2026-12-11"
         },
         {
           "uc": "Prototipagem de Negócios Inovadores",
@@ -476,8 +476,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2026-10-20",
           "fim": "2026-10-27",
-          "regulares": 22,
-          "cursando": 22,
+          "regulares": 21,
+          "cursando": 21,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -486,9 +486,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": null,
           "fim": null,
-          "regulares": 22,
+          "regulares": 21,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 21,
           "reprovados": 0
         },
         {
@@ -496,19 +496,19 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 24,
           "inicio": null,
           "fim": null,
-          "regulares": 22,
-          "cursando": 0,
-          "aprovados": 21,
-          "reprovados": 1
+          "regulares": 21,
+          "cursando": 1,
+          "aprovados": 20,
+          "reprovados": 0
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
           "cargaHoraria": 16,
           "inicio": null,
           "fim": null,
-          "regulares": 22,
+          "regulares": 21,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 21,
           "reprovados": 0
         },
         {
@@ -516,9 +516,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": null,
           "fim": null,
-          "regulares": 22,
+          "regulares": 21,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 21,
           "reprovados": 0
         },
         {
@@ -526,9 +526,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": null,
           "fim": null,
-          "regulares": 22,
+          "regulares": 21,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 21,
           "reprovados": 0
         },
         {
@@ -536,9 +536,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": null,
           "fim": null,
-          "regulares": 22,
+          "regulares": 21,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 21,
           "reprovados": 0
         }
       ],
@@ -550,8 +550,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Implementação de Negócios Inovadores",
-          "inicio": "2026-11-10",
-          "fim": "2026-11-17"
+          "inicio": "2026-10-09",
+          "fim": "2026-10-23"
         },
         {
           "uc": "Instrumentação e Controle de Processos Industriais ",
@@ -560,13 +560,13 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Integração de Dispositivos Automatizados",
-          "inicio": "2026-08-12",
+          "inicio": "2026-08-05",
           "fim": "2026-11-27"
         },
         {
           "uc": "Manutenção de Sistemas Automatizados",
-          "inicio": "2026-10-07",
-          "fim": "2026-12-08"
+          "inicio": "2026-08-25",
+          "fim": "2026-12-03"
         },
         {
           "uc": "Projetos de Acionamentos Eletroeletrônicos",
@@ -580,8 +580,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Projetos de Intertravamento de Segurança de Processos Industriais",
-          "inicio": "2026-10-15",
-          "fim": "2026-11-26"
+          "inicio": "2026-10-29",
+          "fim": "2026-12-07"
         },
         {
           "uc": "Sistemas de Supervisão e Controle",
@@ -882,12 +882,12 @@ window.EAD_OFERTAS = {
       "diarioTurma": [
         {
           "uc": "Compatibilização Técnica em BIM",
-          "inicio": "2027-08-05",
-          "fim": "2027-09-30"
+          "inicio": "2027-08-03",
+          "fim": "2027-10-05"
         },
         {
           "uc": "Construção Civil Sustentável",
-          "inicio": "2026-11-23",
+          "inicio": "2026-12-10",
           "fim": "2027-03-01"
         },
         {
@@ -922,13 +922,13 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Métodos Modernos de Construção Civil",
-          "inicio": "2027-05-26",
+          "inicio": "2027-05-12",
           "fim": "2027-07-21"
         },
         {
           "uc": "Planejamento, Orçamento e Viabilidade Técnica de Projetos",
-          "inicio": "2027-09-08",
-          "fim": "2027-11-03"
+          "inicio": "2027-09-01",
+          "fim": "2027-10-27"
         },
         {
           "uc": "Processos Construtivos",
@@ -943,16 +943,16 @@ window.EAD_OFERTAS = {
         {
           "uc": "Projeto Elétrico",
           "inicio": "2026-09-21",
-          "fim": "2027-02-25"
+          "fim": "2026-12-10"
         },
         {
           "uc": "Projeto Estrutural e Resistência dos Materiais",
           "inicio": "2027-03-02",
-          "fim": "2027-05-25"
+          "fim": "2027-05-20"
         },
         {
           "uc": "Projeto Executivo de Construção Civil",
-          "inicio": "2027-11-08",
+          "inicio": "2027-10-19",
           "fim": "2027-12-08"
         },
         {
@@ -962,18 +962,18 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Projeto Preventivo Contra Incêndios",
-          "inicio": "2027-04-22",
-          "fim": "2027-07-20"
+          "inicio": "2027-05-17",
+          "fim": "2027-07-21"
         },
         {
           "uc": "Projetos de Infraestrutura Urbana",
-          "inicio": "2027-03-29",
-          "fim": "2027-05-24"
+          "inicio": "2027-03-17",
+          "fim": "2027-05-12"
         },
         {
           "uc": "Renderização e Visualização 3D de Projetos",
-          "inicio": "2027-10-05",
-          "fim": "2027-11-16"
+          "inicio": "2027-09-30",
+          "fim": "2027-12-02"
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -987,7 +987,7 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Tecnologias para Construção Civil",
-          "inicio": "2027-08-04",
+          "inicio": "2027-08-02",
           "fim": "2027-09-01"
         },
         {
@@ -1009,8 +1009,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1019,8 +1019,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1029,8 +1029,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2027-03-01",
           "fim": "2027-07-22",
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1039,8 +1039,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2027-03-01",
           "fim": "2027-07-22",
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1049,8 +1049,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 24,
           "inicio": "2027-08-09",
           "fim": "2027-12-02",
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1059,8 +1059,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2027-08-09",
           "fim": "2027-12-02",
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -1160,9 +1160,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 33,
+          "regulares": 32,
           "cursando": 0,
-          "aprovados": 32,
+          "aprovados": 31,
           "reprovados": 1
         },
         {
@@ -1170,8 +1170,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 33,
-          "cursando": 33,
+          "regulares": 32,
+          "cursando": 32,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1180,8 +1180,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2027-02-08",
           "fim": "2027-07-16",
-          "regulares": 33,
-          "cursando": 33,
+          "regulares": 32,
+          "cursando": 32,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1190,8 +1190,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2027-02-08",
           "fim": "2027-07-16",
-          "regulares": 33,
-          "cursando": 33,
+          "regulares": 32,
+          "cursando": 32,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1200,8 +1200,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 24,
           "inicio": "2027-08-02",
           "fim": "2027-12-08",
-          "regulares": 33,
-          "cursando": 33,
+          "regulares": 32,
+          "cursando": 32,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1210,8 +1210,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2027-08-02",
           "fim": "2027-12-08",
-          "regulares": 33,
-          "cursando": 33,
+          "regulares": 32,
+          "cursando": 32,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -1385,8 +1385,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Gestão da Instalação de Sistemas Eletroeletrônicos",
-          "inicio": "2026-09-21",
-          "fim": "2026-10-29"
+          "inicio": "2026-09-17",
+          "fim": "2026-10-22"
         },
         {
           "uc": "Gestão da Manutenção de Sistemas Eletroeletrônicos",
@@ -1406,7 +1406,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Instalação de Sistemas Eletroeletrônicos Industriais",
           "inicio": "2026-08-10",
-          "fim": "2026-10-08"
+          "fim": "2026-10-07"
         },
         {
           "uc": "Introdução a Indústria 4.0",
@@ -1441,7 +1441,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Manutenção de Sistemas Eletrônicos Industriais",
           "inicio": "2026-08-13",
-          "fim": "2026-09-29"
+          "fim": "2026-09-15"
         },
         {
           "uc": "Projetos de Acionamento e Controle Industriais",
@@ -1451,7 +1451,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Projetos de Circuitos Eletrônicos Industriais",
           "inicio": "2026-10-14",
-          "fim": "2026-12-10"
+          "fim": "2026-12-03"
         },
         {
           "uc": "Projetos de Instalações Elétricas Prediais",
@@ -1493,9 +1493,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "regulares": 25,
-          "cursando": 25,
-          "aprovados": 0,
-          "reprovados": 0
+          "cursando": 0,
+          "aprovados": 22,
+          "reprovados": 3
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
@@ -1557,7 +1557,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Fabricação Mecânica Aplicada à Manutenção  e à Montagem",
           "inicio": "2026-08-06",
-          "fim": "2026-12-09"
+          "fim": "2026-12-03"
         },
         {
           "uc": "Fundamentos da Eletricidade Industrial",
@@ -1668,8 +1668,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 14,
-          "cursando": 14,
+          "regulares": 19,
+          "cursando": 19,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1678,8 +1678,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 14,
-          "cursando": 14,
+          "regulares": 19,
+          "cursando": 19,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1688,8 +1688,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2027-08-02",
           "fim": "2027-12-17",
-          "regulares": 14,
-          "cursando": 14,
+          "regulares": 19,
+          "cursando": 19,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1698,8 +1698,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2027-08-02",
           "fim": "2027-12-17",
-          "regulares": 14,
-          "cursando": 14,
+          "regulares": 19,
+          "cursando": 19,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1708,8 +1708,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 30,
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
-          "regulares": 14,
-          "cursando": 14,
+          "regulares": 19,
+          "cursando": 19,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1718,8 +1718,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 24,
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
-          "regulares": 14,
-          "cursando": 14,
+          "regulares": 19,
+          "cursando": 19,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1728,8 +1728,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
-          "regulares": 14,
-          "cursando": 14,
+          "regulares": 19,
+          "cursando": 19,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -1854,9 +1854,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 24,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 17,
+          "aprovados": 16,
           "reprovados": 7
         },
         {
@@ -1864,9 +1864,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 24,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 16,
+          "aprovados": 15,
           "reprovados": 8
         },
         {
@@ -1874,9 +1874,9 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2026-05-04",
           "fim": "2026-06-18",
-          "regulares": 24,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 20,
+          "aprovados": 19,
           "reprovados": 4
         },
         {
@@ -1884,8 +1884,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 24,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 24,
-          "cursando": 24,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1894,8 +1894,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 24,
-          "cursando": 24,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1904,8 +1904,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 24,
-          "cursando": 24,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1914,8 +1914,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 32,
           "inicio": "2027-07-05",
           "fim": "2027-12-08",
-          "regulares": 24,
-          "cursando": 24,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1924,8 +1924,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2027-07-05",
           "fim": "2027-12-08",
-          "regulares": 24,
-          "cursando": 24,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -2070,8 +2070,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 20,
+          "cursando": 20,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2080,8 +2080,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 20,
+          "cursando": 20,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2090,8 +2090,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2026-09-01",
           "fim": "2026-10-01",
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 20,
+          "cursando": 20,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2100,8 +2100,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 24,
           "inicio": "2026-11-16",
           "fim": "2027-05-27",
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 20,
+          "cursando": 20,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2110,8 +2110,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2026-11-16",
           "fim": "2027-05-27",
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 20,
+          "cursando": 20,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2120,8 +2120,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-11-16",
           "fim": "2027-05-27",
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 20,
+          "cursando": 20,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2130,8 +2130,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 32,
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 20,
+          "cursando": 20,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2140,8 +2140,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 20,
+          "cursando": 20,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -2154,8 +2154,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Desenho Técnico Aplicado a Projetos Elétricos",
-          "inicio": "2026-08-11",
-          "fim": "2026-11-11"
+          "inicio": "2026-08-20",
+          "fim": "2026-11-10"
         },
         {
           "uc": "Eficiência Energética",
@@ -2165,12 +2165,12 @@ window.EAD_OFERTAS = {
         {
           "uc": "Fundamentos da Eletricidade",
           "inicio": "2026-07-20",
-          "fim": "2026-09-30"
+          "fim": "2026-09-29"
         },
         {
           "uc": "Fundamentos de Sistemas Elétricos",
-          "inicio": "2026-09-03",
-          "fim": "2026-11-12"
+          "inicio": "2026-08-31",
+          "fim": "2026-11-09"
         },
         {
           "uc": "Gestão Operacional Integrada",
@@ -2297,9 +2297,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "regulares": 25,
-          "cursando": 25,
-          "aprovados": 0,
-          "reprovados": 0
+          "cursando": 0,
+          "aprovados": 21,
+          "reprovados": 4
         },
         {
           "uc": "Criatividade e Ideação em Projetos de Inovação",
@@ -3305,8 +3305,8 @@ window.EAD_OFERTAS = {
         },
         {
           "uc": "Análises Microbiológicas",
-          "inicio": "2026-10-09",
-          "fim": "2026-12-16"
+          "inicio": "2026-10-23",
+          "fim": "2026-12-11"
         },
         {
           "uc": "Controle dos Processos Industriais e Laboratoriais",
@@ -3331,7 +3331,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Fundamentos das Técnicas Laboratoriais",
           "inicio": "2026-08-07",
-          "fim": "2026-11-11"
+          "fim": "2026-10-21"
         },
         {
           "uc": "Fundamentos de Bioquímica e Microbiologia",
@@ -3416,7 +3416,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Química Analítica",
           "inicio": "2026-08-10",
-          "fim": "2026-12-15"
+          "fim": "2026-12-09"
         },
         {
           "uc": "Química Orgânica Experimental",
@@ -4271,28 +4271,28 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 15,
+          "regulares": 10,
           "cursando": 0,
-          "aprovados": 12,
-          "reprovados": 3
+          "aprovados": 10,
+          "reprovados": 0
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
           "cargaHoraria": 12,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 15,
+          "regulares": 10,
           "cursando": 0,
-          "aprovados": 12,
-          "reprovados": 3
+          "aprovados": 10,
+          "reprovados": 0
         },
         {
           "uc": "Introdução a Indústria 4.0",
           "cargaHoraria": 24,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 10,
+          "cursando": 10,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4301,8 +4301,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 10,
+          "cursando": 10,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4311,8 +4311,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 10,
+          "cursando": 10,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4321,8 +4321,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2026-08-31",
           "fim": "2026-10-01",
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 10,
+          "cursando": 10,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4331,8 +4331,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2027-02-26",
           "fim": "2027-07-30",
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 10,
+          "cursando": 10,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -4457,28 +4457,28 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 40,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 17,
+          "regulares": 13,
           "cursando": 0,
           "aprovados": 11,
-          "reprovados": 6
+          "reprovados": 2
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
           "cargaHoraria": 12,
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
-          "regulares": 17,
+          "regulares": 13,
           "cursando": 0,
           "aprovados": 11,
-          "reprovados": 6
+          "reprovados": 2
         },
         {
           "uc": "Introdução a Indústria 4.0",
           "cargaHoraria": 24,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 17,
-          "cursando": 17,
+          "regulares": 13,
+          "cursando": 13,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4487,8 +4487,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 12,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 17,
-          "cursando": 17,
+          "regulares": 13,
+          "cursando": 13,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4497,8 +4497,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 8,
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
-          "regulares": 17,
-          "cursando": 17,
+          "regulares": 13,
+          "cursando": 13,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4507,8 +4507,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2026-08-31",
           "fim": "2026-10-01",
-          "regulares": 17,
-          "cursando": 17,
+          "regulares": 13,
+          "cursando": 13,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4517,8 +4517,8 @@ window.EAD_OFERTAS = {
           "cargaHoraria": 16,
           "inicio": "2026-12-11",
           "fim": "2027-06-24",
-          "regulares": 17,
-          "cursando": 17,
+          "regulares": 13,
+          "cursando": 13,
           "aprovados": 0,
           "reprovados": 0
         }
