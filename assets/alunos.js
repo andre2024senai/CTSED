@@ -459,7 +459,7 @@
             <table>
               <thead><tr>
                 <th>Turma</th><th>Turno</th><th>Curso</th><th>Unidade</th><th>UC 100% EAD</th>
-                <th class="center">Carga Horária</th><th>Início</th><th>Fim</th><th>Status</th><th class="center">Cursando</th>
+                <th class="center">Carga Horária</th><th>Início</th><th>Fim</th><th>Status</th>
               </tr></thead>
               <tbody>
                 ${rows.map(({ turma, uc, status, periodo }) => `
@@ -473,7 +473,6 @@
                     <td>${formatarData(uc.inicio)}</td>
                     <td>${formatarData(uc.fim)}</td>
                     <td><span class="ead-status-badge status-${status.key}">${status.label}</span></td>
-                    <td class="center">${uc.cursando}</td>
                   </tr>
                 `).join('')}
               </tbody>
@@ -534,10 +533,10 @@
         y += 4;
 
         doc.autoTable({
-          head: [['Turma', 'Curso', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status', 'Cursando']],
+          head: [['Turma', 'Curso', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status']],
           body: lista.map(({ turma, uc, status }) => [
             turma.nome, turma.curso, uc.uc, `${uc.cargaHoraria || '?'}h`,
-            formatarData(uc.inicio), formatarData(uc.fim), status.label, String(uc.cursando),
+            formatarData(uc.inicio), formatarData(uc.fim), status.label,
           ]),
           startY: y,
           margin: { left: marginLeft, right: marginLeft },
