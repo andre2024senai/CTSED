@@ -463,7 +463,7 @@
               </tr></thead>
               <tbody>
                 ${rows.map(({ turma, uc, status, periodo }) => `
-                  <tr>
+                  <tr class="${status.key === 'andamento' ? 'row-andamento' : status.key === 'futura' ? 'row-entrando' : ''}">
                     <td><strong>${escapeHtml(turma.nome)}</strong>${turma.link ? `<br><a class="turma-link" href="${escapeHtml(turma.link)}" target="_blank" rel="noreferrer">Abrir no SGN</a>` : ''}</td>
                     <td>${escapeHtml(periodo.label)}</td>
                     <td>${escapeHtml(turma.curso)}</td>
@@ -543,11 +543,23 @@
           margin: { left: marginLeft, right: marginLeft },
           styles: { fontSize: 8, cellPadding: 2, valign: 'top', lineColor: [220, 229, 255], lineWidth: 0.1 },
           headStyles: { fillColor: [16, 20, 77], textColor: 255, fontStyle: 'bold' },
-          alternateRowStyles: { fillColor: [249, 251, 255] },
+          // Farol: linha inteira tingida pelo status da UC na data de hoje
+          // (verde = andamento, amarelo = entrando), igual na tela.
           didParseCell: (data) => {
-            if (data.section === 'body' && data.column.index === 6 && data.cell.raw === 'Em andamento') {
-              data.cell.styles.textColor = [12, 107, 36];
-              data.cell.styles.fontStyle = 'bold';
+            if (data.section !== 'body') return;
+            const statusRaw = data.row.raw[6];
+            if (statusRaw === 'Em andamento') {
+              data.cell.styles.fillColor = [214, 247, 224];
+              if (data.column.index === 6) {
+                data.cell.styles.textColor = [12, 107, 36];
+                data.cell.styles.fontStyle = 'bold';
+              }
+            } else if (statusRaw === 'Entrando') {
+              data.cell.styles.fillColor = [255, 244, 199];
+              if (data.column.index === 6) {
+                data.cell.styles.textColor = [146, 100, 6];
+                data.cell.styles.fontStyle = 'bold';
+              }
             }
           },
         });

@@ -456,7 +456,7 @@ mark {
   color: var(--azul);
 }
 .ead-status-badge.status-andamento { background: #0C6B24; color: #fff; }
-.ead-status-badge.status-futura { background: var(--azul-vivo); color: #fff; }
+.ead-status-badge.status-futura { background: #B45309; color: #fff; }
 .ead-status-badge.status-concluida { background: var(--muted); color: #fff; }
 .ead-status-badge.status-sem-diario { background: #9F1239; color: #fff; }
 .ead-uc-meta {

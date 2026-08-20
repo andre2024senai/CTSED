@@ -102,7 +102,13 @@
 .uc-collapse-summary.cursando { background: #F1F3F9; color: #3A4256; border: 1px solid #D7DCEA; }
 .uc-collapse .uc-chip-stack { margin-top: 6px; }
 .row-alerta td:first-child { border-left: 3px solid #9F1239; }
-.row-alerta { background: #FFFBFB; }
+/* tbody tr.<classe> pra vencer a listra zebrada (tbody tr:nth-child(even))
+   em especificidade — um seletor so de classe perderia pras linhas pares. */
+tbody tr.row-alerta { background: #FFFBFB; }
+tbody tr.row-andamento { background: #ECFDF3; }
+.row-andamento td:first-child { border-left: 3px solid #0C6B24; }
+tbody tr.row-entrando { background: #FFFBEB; }
+.row-entrando td:first-child { border-left: 3px solid #B45309; }
 .contact-link { color: var(--azul); font-weight: 700; text-decoration: none; }
 .contact-link:hover { text-decoration: underline; }
 .checkbox-field { justify-content: flex-end; }
