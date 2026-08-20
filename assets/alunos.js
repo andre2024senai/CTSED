@@ -468,7 +468,7 @@
                     <td>${escapeHtml(periodo.label)}</td>
                     <td>${escapeHtml(turma.curso)}</td>
                     <td>${escapeHtml(turma.unidade)}</td>
-                    <td>${escapeHtml(uc.uc)}</td>
+                    <td>${escapeHtml(uc.uc)}${uc.idDiario ? `<br><small class="diario-id">Diário nº ${escapeHtml(uc.idDiario)}</small>` : ''}</td>
                     <td class="center">${uc.cargaHoraria || '?'}h</td>
                     <td>${formatarData(uc.inicio)}</td>
                     <td>${formatarData(uc.fim)}</td>

@@ -21,6 +21,12 @@ import openpyxl
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 NAME_MAP = {"Técnico em Internet das Coisas - IoT": "Técnico em Internet das Coisas"}
+# Corrige erros de digitação nas grades curriculares (fonte externa, Google
+# Sheets) que impedem o nome da UC de bater com o nome usado no diário do
+# SGN. Chave = nome errado normalizado (ver norm()), valor = nome correto.
+UC_NAME_FIXES = {
+    "sustentabiblidade nos processos industriais": "Sustentabilidade nos Processos Industriais",
+}
 
 
 def norm(s):
@@ -73,6 +79,7 @@ def parse_grade(rows):
             continue
         if uc.lower().startswith("versão") or "carga horária" in uc.lower():
             continue
+        uc = UC_NAME_FIXES.get(norm(uc), uc)
         if pres == 0 and total > 0:
             ead_ucs[norm(uc)] = {"uc": uc, "cargaHoraria": int(total)}
     return course_name, ead_ucs
@@ -203,6 +210,7 @@ def main():
         uc_norm = norm(uc_original)
         diarios_by_turma[idt][uc_norm].append({
             "uc": uc_original,
+            "idDiario": row[idx["id_diario"]] if "id_diario" in idx else None,
             "inicio": row[idx["inicio_diario"]],
             "fim": row[idx["termino_diario"]],
         })
@@ -239,11 +247,13 @@ def main():
             escolhido = escolher_diario(diarios, hoje)
             inicio = escolhido["inicio"].date().isoformat() if escolhido and escolhido["inicio"] else None
             fim = escolhido["fim"].date().isoformat() if escolhido and escolhido["fim"] else None
+            id_diario = escolhido["idDiario"] if escolhido else None
             ucs_out.append({
                 "uc": info["uc"],
                 "cargaHoraria": info["cargaHoraria"],
                 "inicio": inicio,
                 "fim": fim,
+                "idDiario": id_diario,
                 "regulares": len(regs),
                 "cursando": sum(1 for s in regs if uc_norm in s["cursando"]),
                 "aprovados": sum(1 for s in regs if uc_norm in s["aprovadas"]),
@@ -258,6 +268,7 @@ def main():
                 continue
             diario_turma_out.append({
                 "uc": escolhido["uc"],
+                "idDiario": escolhido["idDiario"],
                 "inicio": escolhido["inicio"].date().isoformat() if escolhido["inicio"] else None,
                 "fim": escolhido["fim"].date().isoformat() if escolhido["fim"] else None,
             })

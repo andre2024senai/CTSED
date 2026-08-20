@@ -3,3 +3,7 @@ scripts/alunos-privado.json
 
 # Cache local do Firebase CLI
 .firebase/
+
+# Cache de bytecode do Python
+__pycache__/
+*.pyc

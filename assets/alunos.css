@@ -101,6 +101,7 @@
 .uc-collapse-summary.reprovada { background: #FFF1F2; color: #9F1239; border: 1px solid #FFB4B4; }
 .uc-collapse-summary.cursando { background: #F1F3F9; color: #3A4256; border: 1px solid #D7DCEA; }
 .uc-collapse .uc-chip-stack { margin-top: 6px; }
+.diario-id { color: var(--muted); font-weight: 650; }
 .row-alerta td:first-child { border-left: 3px solid #9F1239; }
 /* tbody tr.<classe> pra vencer a listra zebrada (tbody tr:nth-child(even))
    em especificidade — um seletor so de classe perderia pras linhas pares. */
