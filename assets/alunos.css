@@ -35,16 +35,20 @@
   font-weight: 700;
 }
 .alunos-toolbar {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto auto;
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   align-items: end;
   margin-bottom: 14px;
 }
+.alunos-toolbar .field {
+  flex: 1 1 190px;
+  min-width: 150px;
+}
 .alunos-toolbar-actions {
   display: flex;
   gap: 8px;
-  grid-column: -1;
+  margin-left: auto;
 }
 .empty-cell { color: var(--muted); }
 .alunos-sortable {
@@ -114,5 +118,6 @@
 }
 .checkbox-inline input { width: 16px; height: 16px; cursor: pointer; }
 @media (max-width: 900px) {
-  .alunos-toolbar { grid-template-columns: 1fr; }
+  .alunos-toolbar .field { flex-basis: 100%; }
+  .alunos-toolbar-actions { margin-left: 0; flex-basis: 100%; }
 }

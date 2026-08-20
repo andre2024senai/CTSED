@@ -9,7 +9,7 @@
     authResolved: false, setupComplete: null, authErrorMsg: '',
     view: 'ead',
     turmaId: '', search: '', sortCol: 'nome', sortAsc: true, somenteReprovados: false,
-    eadUnidade: '',
+    eadUnidade: '', eadPeriodo: '',
   };
 
   function escapeHtml(value) {
@@ -178,6 +178,20 @@
       return { key: 'futura', label: 'Entrando' };
     }
     return { key: 'andamento', label: 'Em andamento' };
+  }
+
+  const LABEL_PERIODO = { M: 'Matutino', V: 'Vespertino', N: 'Noturno' };
+  const ORDEM_PERIODO = ['M', 'V', 'N', 'outro'];
+
+  function periodoDaTurma(nomeTurma) {
+    // O nome da turma termina com a letra do turno + numero da turma,
+    // ex.: "T TSEG 2026/1 N1" -> N (Noturno), "T DESI 2026/1 V1" -> V (Vespertino).
+    const partes = String(nomeTurma || '').trim().split(/\s+/);
+    const ultimo = partes[partes.length - 1] || '';
+    const m = ultimo.match(/^([MVN])\d+$/i);
+    if (!m) return { key: 'outro', label: 'Outro turno' };
+    const letra = m[1].toUpperCase();
+    return { key: letra, label: LABEL_PERIODO[letra] };
   }
 
   function formatarTelefone(digitos) {
@@ -351,15 +365,17 @@
 
   // ---------- Aba "UCs EAD do semestre" ----------
 
-  function eadRows(unidadeFiltro) {
+  function eadRows(unidadeFiltro, periodoFiltro) {
     const turmas = (window.EAD_OFERTAS && window.EAD_OFERTAS.turmas) || [];
     const rows = [];
     turmas.forEach((turma) => {
       if (unidadeFiltro && turma.unidade !== unidadeFiltro) return;
+      const periodo = periodoDaTurma(turma.nome);
+      if (periodoFiltro && periodo.key !== periodoFiltro) return;
       (turma.ucs || []).forEach((uc) => {
         const status = statusOfertaUC(uc);
         if (status.key !== 'andamento' && status.key !== 'futura') return;
-        rows.push({ turma, uc, status });
+        rows.push({ turma, uc, status, periodo });
       });
     });
     rows.sort((a, b) => {
@@ -372,10 +388,37 @@
     return rows;
   }
 
+  // Agrupa por Unidade SENAI e, dentro dela, por turno (M/V/N), ordenando
+  // cada bloco de turno pela data de inicio (ordem de entrada).
+  function agruparPorUnidadeETurno(rows) {
+    const porUnidade = new Map();
+    rows.forEach((row) => {
+      const unidade = row.turma.unidade || 'Sem unidade';
+      if (!porUnidade.has(unidade)) porUnidade.set(unidade, new Map());
+      const porTurno = porUnidade.get(unidade);
+      if (!porTurno.has(row.periodo.key)) porTurno.set(row.periodo.key, []);
+      porTurno.get(row.periodo.key).push(row);
+    });
+    porUnidade.forEach((porTurno) => {
+      porTurno.forEach((lista) => {
+        lista.sort((a, b) => {
+          const ia = a.uc.inicio || '9999';
+          const ib = b.uc.inicio || '9999';
+          if (ia !== ib) return ia < ib ? -1 : 1;
+          const porTurma = a.turma.nome.localeCompare(b.turma.nome, 'pt-BR');
+          if (porTurma !== 0) return porTurma;
+          return a.uc.uc.localeCompare(b.uc.uc, 'pt-BR');
+        });
+      });
+    });
+    return porUnidade;
+  }
+
   function renderEadView() {
     const turmas = (window.EAD_OFERTAS && window.EAD_OFERTAS.turmas) || [];
     const unidades = [...new Set(turmas.map((t) => t.unidade))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
-    const rows = eadRows(state.eadUnidade);
+    const turnosPresentes = new Set(turmas.map((t) => periodoDaTurma(t.nome).key));
+    const rows = eadRows(state.eadUnidade, state.eadPeriodo);
     const emAndamento = rows.filter((r) => r.status.key === 'andamento').length;
     const entrando = rows.length - emAndamento;
 
@@ -387,7 +430,7 @@
         </div>
         ${window.EAD_OFERTAS && window.EAD_OFERTAS.geradoEm ? `<p class="ead-panel-note">Matrículas de ${formatarData(window.EAD_OFERTAS.geradoEm)}</p>` : ''}
         <div class="ead-resumo">
-          <p>${rows.length} oferta${rows.length === 1 ? '' : 's'} EAD ${state.eadUnidade ? 'nessa unidade' : 'no total'} — apenas o que está em andamento ou entrando (concluídas ficam de fora)</p>
+          <p>${rows.length} oferta${rows.length === 1 ? '' : 's'} EAD ${state.eadUnidade || state.eadPeriodo ? 'com esse filtro' : 'no total'} — apenas o que está em andamento ou entrando (concluídas ficam de fora)</p>
           ${emAndamento || entrando ? `<p class="ead-highlight">${emAndamento} em andamento agora · ${entrando} entrando em breve</p>` : ''}
         </div>
         <div class="alunos-toolbar">
@@ -398,23 +441,31 @@
               ${unidades.map((u) => `<option value="${escapeHtml(u)}" ${u === state.eadUnidade ? 'selected' : ''}>${escapeHtml(u)}</option>`).join('')}
             </select>
           </label>
+          <label class="field">
+            <span>Turno</span>
+            <select id="ead-periodo-select">
+              <option value="">Todos os turnos</option>
+              ${ORDEM_PERIODO.filter((p) => turnosPresentes.has(p)).map((p) => `<option value="${p}" ${p === state.eadPeriodo ? 'selected' : ''}>${p === 'outro' ? 'Outro turno' : LABEL_PERIODO[p]}</option>`).join('')}
+            </select>
+          </label>
           <div class="alunos-toolbar-actions">
             <button id="export-ead-btn" class="clear-btn" type="button" ${rows.length ? '' : 'disabled'}>Exportar PDF por unidade</button>
           </div>
         </div>
-        <p class="ead-panel-note">O PDF organiza as turmas em blocos por Unidade SENAI, prontos pra repassar ao pedagógico avisar os alunos.</p>
+        <p class="ead-panel-note">O PDF organiza as turmas em blocos por Unidade SENAI e, dentro de cada unidade, por turno (Matutino, Vespertino, Noturno), na ordem de entrada por data.</p>
         ${rows.length ? `
         <div class="table-shell">
           <div class="table-scroll">
             <table>
               <thead><tr>
-                <th>Turma</th><th>Curso</th><th>Unidade</th><th>UC 100% EAD</th>
+                <th>Turma</th><th>Turno</th><th>Curso</th><th>Unidade</th><th>UC 100% EAD</th>
                 <th class="center">Carga Horária</th><th>Início</th><th>Fim</th><th>Status</th><th class="center">Cursando</th>
               </tr></thead>
               <tbody>
-                ${rows.map(({ turma, uc, status }) => `
+                ${rows.map(({ turma, uc, status, periodo }) => `
                   <tr>
                     <td><strong>${escapeHtml(turma.nome)}</strong>${turma.link ? `<br><a class="turma-link" href="${escapeHtml(turma.link)}" target="_blank" rel="noreferrer">Abrir no SGN</a>` : ''}</td>
+                    <td>${escapeHtml(periodo.label)}</td>
                     <td>${escapeHtml(turma.curso)}</td>
                     <td>${escapeHtml(turma.unidade)}</td>
                     <td>${escapeHtml(uc.uc)}</td>
@@ -430,12 +481,12 @@
           </div>
         </div>
         <p class="result-count">${rows.length} oferta${rows.length === 1 ? '' : 's'} EAD</p>
-        ` : `<div class="empty-state">Nenhuma UC 100% EAD em andamento ou entrando no momento${state.eadUnidade ? ' nessa unidade' : ''}.</div>`}
+        ` : `<div class="empty-state">Nenhuma UC 100% EAD em andamento ou entrando no momento com esse filtro.</div>`}
       </div>`;
     return { html, rows };
   }
 
-  function exportEadToPdf(rows, unidadeFiltro) {
+  function exportEadToPdf(rows, unidadeFiltro, periodoFiltro) {
     if (!window.jspdf) { alert('Biblioteca de PDF não carregada. Recarregue a página.'); return; }
     if (!rows.length) { alert('Nenhuma oferta para exportar com esse filtro.'); return; }
     const { jsPDF } = window.jspdf;
@@ -443,57 +494,72 @@
     const marginLeft = 14;
     const pageHeight = doc.internal.pageSize.getHeight();
 
-    // Um bloco por Unidade SENAI, pra facilitar o pedagogico repassar aos alunos.
-    const grupos = new Map();
-    rows.forEach((row) => {
-      const chave = row.turma.unidade || 'Sem unidade';
-      if (!grupos.has(chave)) grupos.set(chave, []);
-      grupos.get(chave).push(row);
-    });
-    const unidades = [...grupos.keys()].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    // Um bloco por Unidade SENAI e, dentro dela, um sub-bloco por turno
+    // (Matutino/Vespertino/Noturno), cada um na ordem de entrada por data.
+    const agrupado = agruparPorUnidadeETurno(rows);
+    const unidades = [...agrupado.keys()].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    const periodoLabel = periodoFiltro ? (periodoFiltro === 'outro' ? 'Outro turno' : LABEL_PERIODO[periodoFiltro]) : '';
 
     doc.setFontSize(14);
     doc.setTextColor(16, 20, 77);
-    doc.text('UCs 100% EAD do semestre vigente' + (unidadeFiltro ? ' — ' + unidadeFiltro : ''), marginLeft, 16);
+    doc.text(
+      'UCs 100% EAD do semestre vigente' + (unidadeFiltro ? ' — ' + unidadeFiltro : '') + (periodoLabel ? ' — ' + periodoLabel : ''),
+      marginLeft, 16,
+    );
     doc.setFontSize(9);
     doc.setTextColor(100);
     doc.text(
-      `Gerado em ${new Date().toLocaleDateString('pt-BR')}  ·  ${rows.length} oferta${rows.length === 1 ? '' : 's'} em ${unidades.length} unidade${unidades.length === 1 ? '' : 's'} (em andamento ou entrando)`,
+      `Gerado em ${new Date().toLocaleDateString('pt-BR')}  ·  ${rows.length} oferta${rows.length === 1 ? '' : 's'} em ${unidades.length} unidade${unidades.length === 1 ? '' : 's'} (em andamento ou entrando, por turno e ordem de entrada)`,
       marginLeft, 22,
     );
 
     let y = 30;
     unidades.forEach((unidade) => {
-      const grupoRows = grupos.get(unidade);
+      const porTurno = agrupado.get(unidade);
+      const totalUnidade = [...porTurno.values()].reduce((n, lista) => n + lista.length, 0);
       if (y > pageHeight - 40) { doc.addPage(); y = 16; }
-      doc.setFontSize(11.5);
+      doc.setFontSize(12.5);
       doc.setTextColor(16, 20, 77);
-      doc.text(`${unidade}  ·  ${grupoRows.length} oferta${grupoRows.length === 1 ? '' : 's'}`, marginLeft, y);
-      y += 5;
+      doc.text(`${unidade}  ·  ${totalUnidade} oferta${totalUnidade === 1 ? '' : 's'}`, marginLeft, y);
+      y += 6;
 
-      doc.autoTable({
-        head: [['Turma', 'Curso', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status', 'Cursando']],
-        body: grupoRows.map(({ turma, uc, status }) => [
-          turma.nome, turma.curso, uc.uc, `${uc.cargaHoraria || '?'}h`,
-          formatarData(uc.inicio), formatarData(uc.fim), status.label, String(uc.cursando),
-        ]),
-        startY: y,
-        margin: { left: marginLeft, right: marginLeft },
-        styles: { fontSize: 8, cellPadding: 2, valign: 'top', lineColor: [220, 229, 255], lineWidth: 0.1 },
-        headStyles: { fillColor: [16, 20, 77], textColor: 255, fontStyle: 'bold' },
-        alternateRowStyles: { fillColor: [249, 251, 255] },
-        didParseCell: (data) => {
-          if (data.section === 'body' && data.column.index === 6 && data.cell.raw === 'Em andamento') {
-            data.cell.styles.textColor = [12, 107, 36];
-            data.cell.styles.fontStyle = 'bold';
-          }
-        },
+      ORDEM_PERIODO.forEach((turnoKey) => {
+        const lista = porTurno.get(turnoKey);
+        if (!lista || !lista.length) return;
+        if (y > pageHeight - 30) { doc.addPage(); y = 16; }
+        doc.setFontSize(10.5);
+        doc.setTextColor(60, 68, 110);
+        const label = turnoKey === 'outro' ? 'Outro turno' : LABEL_PERIODO[turnoKey];
+        doc.text(`${label} (${lista.length})`, marginLeft + 2, y);
+        y += 4;
+
+        doc.autoTable({
+          head: [['Turma', 'Curso', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status', 'Cursando']],
+          body: lista.map(({ turma, uc, status }) => [
+            turma.nome, turma.curso, uc.uc, `${uc.cargaHoraria || '?'}h`,
+            formatarData(uc.inicio), formatarData(uc.fim), status.label, String(uc.cursando),
+          ]),
+          startY: y,
+          margin: { left: marginLeft, right: marginLeft },
+          styles: { fontSize: 8, cellPadding: 2, valign: 'top', lineColor: [220, 229, 255], lineWidth: 0.1 },
+          headStyles: { fillColor: [16, 20, 77], textColor: 255, fontStyle: 'bold' },
+          alternateRowStyles: { fillColor: [249, 251, 255] },
+          didParseCell: (data) => {
+            if (data.section === 'body' && data.column.index === 6 && data.cell.raw === 'Em andamento') {
+              data.cell.styles.textColor = [12, 107, 36];
+              data.cell.styles.fontStyle = 'bold';
+            }
+          },
+        });
+        y = doc.lastAutoTable.finalY + 8;
       });
-      y = doc.lastAutoTable.finalY + 10;
+      y += 3;
     });
 
     const stamp = new Date().toISOString().slice(0, 10);
-    doc.save(`ucs-ead-semestre-por-unidade${unidadeFiltro ? '-' + unidadeFiltro.replace(/[^a-z0-9]+/gi, '-') : ''}_${stamp}.pdf`);
+    const sufixoUnidade = unidadeFiltro ? '-' + unidadeFiltro.replace(/[^a-z0-9]+/gi, '-') : '';
+    const sufixoTurno = periodoLabel ? '-' + periodoLabel.replace(/[^a-z0-9]+/gi, '-') : '';
+    doc.save(`ucs-ead-semestre-por-unidade${sufixoUnidade}${sufixoTurno}_${stamp}.pdf`);
   }
 
   // ---------- Casca comum ----------
@@ -552,8 +618,15 @@
           renderApp();
         });
       }
+      const periodoSelect = document.getElementById('ead-periodo-select');
+      if (periodoSelect) {
+        periodoSelect.addEventListener('change', (event) => {
+          state.eadPeriodo = event.target.value;
+          renderApp();
+        });
+      }
       const exportEadBtn = document.getElementById('export-ead-btn');
-      if (exportEadBtn) exportEadBtn.addEventListener('click', () => exportEadToPdf(eadView.rows, state.eadUnidade));
+      if (exportEadBtn) exportEadBtn.addEventListener('click', () => exportEadToPdf(eadView.rows, state.eadUnidade, state.eadPeriodo));
       return;
     }
 
