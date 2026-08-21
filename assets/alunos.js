@@ -375,8 +375,8 @@
       groupField: 'unidade',
       groupLabel: 'Unidade',
       groupSelectTodos: 'Todas as unidades',
-      eyebrow: 'Turmas ETG',
-      titulo: 'UCs 100% EAD do semestre vigente',
+      eyebrow: 'Turmas Técnico Gratuito',
+      titulo: 'UCs 100% EAD do semestre vigente — Técnico Gratuito',
       pdfNota: 'O PDF organiza as turmas em blocos por Unidade SENAI e, dentro de cada unidade, por turno (Matutino, Vespertino, Noturno), na ordem de entrada por data.',
       exportLabel: 'Exportar PDF por unidade',
       filenamePrefix: 'ucs-ead-semestre-por-unidade',
@@ -389,11 +389,11 @@
       groupField: 'supervisor',
       groupLabel: 'Supervisor',
       groupSelectTodos: 'Todos os supervisores',
-      eyebrow: 'Turmas CTC',
-      titulo: 'UCs 100% EAD do semestre vigente — CTC',
-      pdfNota: 'O PDF organiza as turmas em blocos por Supervisor, na ordem de entrada por data. Turmas CTC de Jaraguá do Sul (alunos pagantes).',
+      eyebrow: 'Turmas Técnico Mercado',
+      titulo: 'UCs 100% EAD do semestre vigente — Técnico Mercado',
+      pdfNota: 'O PDF organiza as turmas em blocos por Supervisor, na ordem de entrada por data. Turmas Técnico Mercado de Jaraguá do Sul (alunos pagantes).',
       exportLabel: 'Exportar PDF por supervisor',
-      filenamePrefix: 'ucs-ead-semestre-ctc-por-supervisor',
+      filenamePrefix: 'ucs-ead-semestre-tecnico-mercado-por-supervisor',
       filtroGrupoKey: 'ctcGrupo',
       filtroPeriodoKey: 'ctcPeriodo',
     },
@@ -580,7 +580,7 @@
         doc.autoTable({
           head: [['Turma', 'Curso', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status']],
           body: lista.map(({ turma, uc, status }) => [
-            turma.nome, turma.curso, uc.uc, `${uc.cargaHoraria || '?'}h`,
+            turma.nome, turma.curso, uc.uc + (uc.idDiario ? `\nDiário nº ${uc.idDiario}` : ''), `${uc.cargaHoraria || '?'}h`,
             formatarData(uc.inicio), formatarData(uc.fim), status.label,
           ]),
           startY: y,
@@ -636,8 +636,8 @@
           <div class="color-line"></div>
           <div class="header-inner">
             <div class="header-copy">
-              <h1>CTSED &middot; Turmas ETG</h1>
-              <p class="subtitle">${authReady ? `Área privada &middot; ${escapeHtml(state.profile.display_name || state.user.email)}` : 'Oferta de UCs 100% EAD do semestre vigente'}</p>
+              <h1>Calendário de UC EAD</h1>
+              <p class="subtitle">${authReady ? `Área privada &middot; ${escapeHtml(state.profile.display_name || state.user.email)}` : 'Técnico Gratuito e Técnico Comunidade/Mercado'}</p>
             </div>
           </div>
           <div class="stats-strip">
@@ -650,7 +650,7 @@
         </header>
         <nav class="main-nav" role="tablist" aria-label="Seções">
           <button type="button" role="tab" aria-selected="${state.view === 'ead'}" class="nav-btn${state.view === 'ead' ? ' active' : ''}" data-view="ead">UCs EAD do semestre</button>
-          <button type="button" role="tab" aria-selected="${state.view === 'ctc'}" class="nav-btn${state.view === 'ctc' ? ' active' : ''}" data-view="ctc">UCs EAD CTC</button>
+          <button type="button" role="tab" aria-selected="${state.view === 'ctc'}" class="nav-btn${state.view === 'ctc' ? ' active' : ''}" data-view="ctc">UCs EAD Técnico Mercado</button>
           <button type="button" role="tab" aria-selected="${state.view === 'alunos'}" class="nav-btn${state.view === 'alunos' ? ' active' : ''}" data-view="alunos">Alunos por Turma${authReady ? '' : ' 🔒'}</button>
         </nav>
         <main class="main-content">
