@@ -27,6 +27,17 @@ NAME_MAP = {"Técnico em Internet das Coisas - IoT": "Técnico em Internet das C
 UC_NAME_FIXES = {
     "sustentabiblidade nos processos industriais": "Sustentabilidade nos Processos Industriais",
 }
+# Turmas CTC (Curso Técnico em Comunidade, alunos pagantes) não têm gratuidade
+# por turma como o ETG, mas têm um supervisor responsável por turno.
+SUPERVISOR_POR_TURNO = {"M": "José Júlio Vieira", "N": "Samuel Mendes"}
+
+
+def periodo_turno(nome_turma):
+    """Extrai o turno (M/V/N) do final do nome da turma, ex.: "T TELM 2025/1 M1" -> "M"."""
+    partes = str(nome_turma or "").strip().split()
+    ultimo = partes[-1] if partes else ""
+    m = re.match(r"^([MVN])\d+$", ultimo, re.IGNORECASE)
+    return m.group(1).upper() if m else None
 
 
 def norm(s):
@@ -140,7 +151,18 @@ def main():
     incoming_dir = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else default_incoming)
 
     with open(os.path.join(SCRIPTS_DIR, "etg_turmas.json"), encoding="utf-8") as f:
-        target_ids = set(json.load(f)["ids"])
+        target_ids_etg = set(json.load(f)["ids"])
+
+    with open(os.path.join(BASE_DIR, "assets", "turmas-ctc.js"), encoding="utf-8") as f:
+        ctc_src = f.read()
+    ctc_json = re.sub(r"^\s*window\.TURMAS_CTC\s*=\s*", "", ctc_src.strip())
+    ctc_json = re.sub(r";\s*$", "", ctc_json)
+    turmas_ctc_cadastro = json.loads(ctc_json)
+    target_ids_ctc = {int(t["codigoTurma"]) for t in turmas_ctc_cadastro}
+
+    origem_por_id = {idt: "etg" for idt in target_ids_etg}
+    origem_por_id.update({idt: "ctc" for idt in target_ids_ctc})
+    target_ids = target_ids_etg | target_ids_ctc
 
     with open(os.path.join(SCRIPTS_DIR, "grade_sources.json"), encoding="utf-8") as f:
         grade_sources = json.load(f)
@@ -187,11 +209,12 @@ def main():
             "curso": curso,
             "unidade": (row[idx["unidade_execucao"]] or "").replace("SENAI/SC - ", ""),
             "link": f"https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma={idt}",
+            "origem": origem_por_id[idt],
         }
     wb.close()
     faltando = target_ids - set(turmas.keys())
     if faltando:
-        print(f"  AVISO: turmas ETG configuradas mas nao encontradas no relatorio: {sorted(faltando)}")
+        print(f"  AVISO: turmas ETG/CTC configuradas mas nao encontradas no relatorio (provavelmente ja encerradas): {sorted(faltando)}")
 
     wb = openpyxl.load_workbook(diarios_path, read_only=True, data_only=True)
     ws = wb["Planilha1"] if "Planilha1" in wb.sheetnames else wb.worksheets[0]
@@ -237,7 +260,8 @@ def main():
     wb.close()
 
     hoje = datetime.date.today()
-    output_turmas = []
+    output_turmas_etg = []
+    output_turmas_ctc = []
     for idt, t in sorted(turmas.items(), key=lambda kv: (kv[1]["curso"], kv[1]["nome"])):
         ead_ucs = course_ead[t["curso"]]
         regs = matricula_by_turma.get(idt, [])
@@ -273,17 +297,28 @@ def main():
                 "fim": escolhido["fim"].date().isoformat() if escolhido["fim"] else None,
             })
 
-        output_turmas.append({
+        turma_out = {
             "id": t["id"], "nome": t["nome"], "curso": t["curso"],
             "unidade": t["unidade"], "link": t["link"], "ucs": ucs_out,
             "diarioTurma": diario_turma_out,
-        })
+        }
+        if t["origem"] == "ctc":
+            turma_out["supervisor"] = SUPERVISOR_POR_TURNO.get(periodo_turno(t["nome"]), "Outro turno")
+            output_turmas_ctc.append(turma_out)
+        else:
+            output_turmas_etg.append(turma_out)
 
-    output = {"geradoEm": gerado_em, "turmas": output_turmas}
-    out_path = os.path.join(BASE_DIR, "assets", "ead-data.js")
-    with open(out_path, "w", encoding="utf-8") as f:
-        f.write("window.EAD_OFERTAS = " + json.dumps(output, ensure_ascii=False, indent=2) + ";\n")
-    print(f"Gravado {out_path} ({len(output_turmas)} turmas)")
+    output_etg = {"geradoEm": gerado_em, "turmas": output_turmas_etg}
+    out_path_etg = os.path.join(BASE_DIR, "assets", "ead-data.js")
+    with open(out_path_etg, "w", encoding="utf-8") as f:
+        f.write("window.EAD_OFERTAS = " + json.dumps(output_etg, ensure_ascii=False, indent=2) + ";\n")
+    print(f"Gravado {out_path_etg} ({len(output_turmas_etg)} turmas)")
+
+    output_ctc = {"geradoEm": gerado_em, "turmas": output_turmas_ctc}
+    out_path_ctc = os.path.join(BASE_DIR, "assets", "ead-data-ctc.js")
+    with open(out_path_ctc, "w", encoding="utf-8") as f:
+        f.write("window.EAD_OFERTAS_CTC = " + json.dumps(output_ctc, ensure_ascii=False, indent=2) + ";\n")
+    print(f"Gravado {out_path_ctc} ({len(output_turmas_ctc)} turmas)")
 
 
 if __name__ == "__main__":

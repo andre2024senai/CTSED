@@ -10,6 +10,7 @@
     view: 'ead',
     turmaId: '', search: '', sortCol: 'nome', sortAsc: true, somenteReprovados: false,
     eadUnidade: '', eadPeriodo: '',
+    ctcGrupo: '', ctcPeriodo: '',
   };
 
   function escapeHtml(value) {
@@ -363,13 +364,47 @@
     doc.save(`alunos_${turma.nome.replace(/[^a-z0-9]+/gi, '-')}_${stamp}.pdf`);
   }
 
-  // ---------- Aba "UCs EAD do semestre" ----------
+  // ---------- Abas "UCs EAD do semestre" (ETG) e "UCs EAD CTC" ----------
+  // As duas abas compartilham a mesma logica; so muda a fonte de dados e o
+  // campo usado pra agrupar (Unidade SENAI no ETG, Supervisor no CTC).
 
-  function eadRows(unidadeFiltro, periodoFiltro) {
-    const turmas = (window.EAD_OFERTAS && window.EAD_OFERTAS.turmas) || [];
+  const EAD_DATASETS = {
+    ead: {
+      getTurmas: () => (window.EAD_OFERTAS && window.EAD_OFERTAS.turmas) || [],
+      geradoEm: () => window.EAD_OFERTAS && window.EAD_OFERTAS.geradoEm,
+      groupField: 'unidade',
+      groupLabel: 'Unidade',
+      groupSelectTodos: 'Todas as unidades',
+      eyebrow: 'Turmas ETG',
+      titulo: 'UCs 100% EAD do semestre vigente',
+      pdfNota: 'O PDF organiza as turmas em blocos por Unidade SENAI e, dentro de cada unidade, por turno (Matutino, Vespertino, Noturno), na ordem de entrada por data.',
+      exportLabel: 'Exportar PDF por unidade',
+      filenamePrefix: 'ucs-ead-semestre-por-unidade',
+      filtroGrupoKey: 'eadUnidade',
+      filtroPeriodoKey: 'eadPeriodo',
+    },
+    ctc: {
+      getTurmas: () => (window.EAD_OFERTAS_CTC && window.EAD_OFERTAS_CTC.turmas) || [],
+      geradoEm: () => window.EAD_OFERTAS_CTC && window.EAD_OFERTAS_CTC.geradoEm,
+      groupField: 'supervisor',
+      groupLabel: 'Supervisor',
+      groupSelectTodos: 'Todos os supervisores',
+      eyebrow: 'Turmas CTC',
+      titulo: 'UCs 100% EAD do semestre vigente — CTC',
+      pdfNota: 'O PDF organiza as turmas em blocos por Supervisor, na ordem de entrada por data. Turmas CTC de Jaraguá do Sul (alunos pagantes).',
+      exportLabel: 'Exportar PDF por supervisor',
+      filenamePrefix: 'ucs-ead-semestre-ctc-por-supervisor',
+      filtroGrupoKey: 'ctcGrupo',
+      filtroPeriodoKey: 'ctcPeriodo',
+    },
+  };
+
+  function eadRows(viewKey, grupoFiltro, periodoFiltro) {
+    const cfg = EAD_DATASETS[viewKey];
+    const turmas = cfg.getTurmas();
     const rows = [];
     turmas.forEach((turma) => {
-      if (unidadeFiltro && turma.unidade !== unidadeFiltro) return;
+      if (grupoFiltro && turma[cfg.groupField] !== grupoFiltro) return;
       const periodo = periodoDaTurma(turma.nome);
       if (periodoFiltro && periodo.key !== periodoFiltro) return;
       (turma.ucs || []).forEach((uc) => {
@@ -388,18 +423,19 @@
     return rows;
   }
 
-  // Agrupa por Unidade SENAI e, dentro dela, por turno (M/V/N), ordenando
-  // cada bloco de turno pela data de inicio (ordem de entrada).
-  function agruparPorUnidadeETurno(rows) {
-    const porUnidade = new Map();
+  // Agrupa pelo campo indicado (Unidade ou Supervisor) e, dentro de cada
+  // grupo, por turno (M/V/N), ordenando cada bloco pela data de inicio
+  // (ordem de entrada).
+  function agruparPorGrupoETurno(rows, groupField) {
+    const porGrupo = new Map();
     rows.forEach((row) => {
-      const unidade = row.turma.unidade || 'Sem unidade';
-      if (!porUnidade.has(unidade)) porUnidade.set(unidade, new Map());
-      const porTurno = porUnidade.get(unidade);
+      const grupo = row.turma[groupField] || 'Sem ' + groupField;
+      if (!porGrupo.has(grupo)) porGrupo.set(grupo, new Map());
+      const porTurno = porGrupo.get(grupo);
       if (!porTurno.has(row.periodo.key)) porTurno.set(row.periodo.key, []);
       porTurno.get(row.periodo.key).push(row);
     });
-    porUnidade.forEach((porTurno) => {
+    porGrupo.forEach((porTurno) => {
       porTurno.forEach((lista) => {
         lista.sort((a, b) => {
           const ia = a.uc.inicio || '9999';
@@ -411,54 +447,58 @@
         });
       });
     });
-    return porUnidade;
+    return porGrupo;
   }
 
-  function renderEadView() {
-    const turmas = (window.EAD_OFERTAS && window.EAD_OFERTAS.turmas) || [];
-    const unidades = [...new Set(turmas.map((t) => t.unidade))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  function renderEadView(viewKey) {
+    const cfg = EAD_DATASETS[viewKey];
+    const turmas = cfg.getTurmas();
+    const grupos = [...new Set(turmas.map((t) => t[cfg.groupField]))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
     const turnosPresentes = new Set(turmas.map((t) => periodoDaTurma(t.nome).key));
-    const rows = eadRows(state.eadUnidade, state.eadPeriodo);
+    const grupoFiltro = state[cfg.filtroGrupoKey];
+    const periodoFiltro = state[cfg.filtroPeriodoKey];
+    const rows = eadRows(viewKey, grupoFiltro, periodoFiltro);
     const emAndamento = rows.filter((r) => r.status.key === 'andamento').length;
     const entrando = rows.length - emAndamento;
+    const geradoEm = cfg.geradoEm();
 
     const html = `
       <div class="panel-card">
         <div class="panel-title">
-          <span class="eyebrow">Turmas ETG</span>
-          <h2>UCs 100% EAD do semestre vigente</h2>
+          <span class="eyebrow">${escapeHtml(cfg.eyebrow)}</span>
+          <h2>${escapeHtml(cfg.titulo)}</h2>
         </div>
-        ${window.EAD_OFERTAS && window.EAD_OFERTAS.geradoEm ? `<p class="ead-panel-note">Matrículas de ${formatarData(window.EAD_OFERTAS.geradoEm)}</p>` : ''}
+        ${geradoEm ? `<p class="ead-panel-note">Matrículas de ${formatarData(geradoEm)}</p>` : ''}
         <div class="ead-resumo">
-          <p>${rows.length} oferta${rows.length === 1 ? '' : 's'} EAD ${state.eadUnidade || state.eadPeriodo ? 'com esse filtro' : 'no total'} — apenas o que está em andamento ou entrando (concluídas ficam de fora)</p>
+          <p>${rows.length} oferta${rows.length === 1 ? '' : 's'} EAD ${grupoFiltro || periodoFiltro ? 'com esse filtro' : 'no total'} — apenas o que está em andamento ou entrando (concluídas ficam de fora)</p>
           ${emAndamento || entrando ? `<p class="ead-highlight">${emAndamento} em andamento agora · ${entrando} entrando em breve</p>` : ''}
         </div>
         <div class="alunos-toolbar">
           <label class="field">
-            <span>Unidade</span>
-            <select id="ead-unidade-select">
-              <option value="">Todas as unidades</option>
-              ${unidades.map((u) => `<option value="${escapeHtml(u)}" ${u === state.eadUnidade ? 'selected' : ''}>${escapeHtml(u)}</option>`).join('')}
+            <span>${escapeHtml(cfg.groupLabel)}</span>
+            <select id="ead-grupo-select">
+              <option value="">${escapeHtml(cfg.groupSelectTodos)}</option>
+              ${grupos.map((g) => `<option value="${escapeHtml(g)}" ${g === grupoFiltro ? 'selected' : ''}>${escapeHtml(g)}</option>`).join('')}
             </select>
           </label>
           <label class="field">
             <span>Turno</span>
             <select id="ead-periodo-select">
               <option value="">Todos os turnos</option>
-              ${ORDEM_PERIODO.filter((p) => turnosPresentes.has(p)).map((p) => `<option value="${p}" ${p === state.eadPeriodo ? 'selected' : ''}>${p === 'outro' ? 'Outro turno' : LABEL_PERIODO[p]}</option>`).join('')}
+              ${ORDEM_PERIODO.filter((p) => turnosPresentes.has(p)).map((p) => `<option value="${p}" ${p === periodoFiltro ? 'selected' : ''}>${p === 'outro' ? 'Outro turno' : LABEL_PERIODO[p]}</option>`).join('')}
             </select>
           </label>
           <div class="alunos-toolbar-actions">
-            <button id="export-ead-btn" class="clear-btn" type="button" ${rows.length ? '' : 'disabled'}>Exportar PDF por unidade</button>
+            <button id="export-ead-btn" class="clear-btn" type="button" ${rows.length ? '' : 'disabled'}>${escapeHtml(cfg.exportLabel)}</button>
           </div>
         </div>
-        <p class="ead-panel-note">O PDF organiza as turmas em blocos por Unidade SENAI e, dentro de cada unidade, por turno (Matutino, Vespertino, Noturno), na ordem de entrada por data.</p>
+        <p class="ead-panel-note">${escapeHtml(cfg.pdfNota)}</p>
         ${rows.length ? `
         <div class="table-shell">
           <div class="table-scroll">
             <table>
               <thead><tr>
-                <th>Turma</th><th>Turno</th><th>Curso</th><th>Unidade</th><th>UC 100% EAD</th>
+                <th>Turma</th><th>Turno</th><th>Curso</th><th>${escapeHtml(cfg.groupLabel)}</th><th>UC 100% EAD</th>
                 <th class="center">Carga Horária</th><th>Início</th><th>Fim</th><th>Status</th>
               </tr></thead>
               <tbody>
@@ -467,7 +507,7 @@
                     <td><strong>${escapeHtml(turma.nome)}</strong>${turma.link ? `<br><a class="turma-link" href="${escapeHtml(turma.link)}" target="_blank" rel="noreferrer">Abrir no SGN</a>` : ''}</td>
                     <td>${escapeHtml(periodo.label)}</td>
                     <td>${escapeHtml(turma.curso)}</td>
-                    <td>${escapeHtml(turma.unidade)}</td>
+                    <td>${escapeHtml(turma[cfg.groupField])}</td>
                     <td>${escapeHtml(uc.uc)}${uc.idDiario ? `<br><small class="diario-id">Diário nº ${escapeHtml(uc.idDiario)}</small>` : ''}</td>
                     <td class="center">${uc.cargaHoraria || '?'}h</td>
                     <td>${formatarData(uc.inicio)}</td>
@@ -485,52 +525,57 @@
     return { html, rows };
   }
 
-  function exportEadToPdf(rows, unidadeFiltro, periodoFiltro) {
+  function exportEadToPdf(viewKey, rows, grupoFiltro, periodoFiltro) {
     if (!window.jspdf) { alert('Biblioteca de PDF não carregada. Recarregue a página.'); return; }
     if (!rows.length) { alert('Nenhuma oferta para exportar com esse filtro.'); return; }
+    const cfg = EAD_DATASETS[viewKey];
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
     const marginLeft = 14;
     const pageHeight = doc.internal.pageSize.getHeight();
 
-    // Um bloco por Unidade SENAI e, dentro dela, um sub-bloco por turno
-    // (Matutino/Vespertino/Noturno), cada um na ordem de entrada por data.
-    const agrupado = agruparPorUnidadeETurno(rows);
-    const unidades = [...agrupado.keys()].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    // Um bloco por grupo (Unidade SENAI no ETG, Supervisor no CTC) e, dentro
+    // dele, um sub-bloco por turno quando houver mais de um presente, cada
+    // um na ordem de entrada por data.
+    const agrupado = agruparPorGrupoETurno(rows, cfg.groupField);
+    const gruposOrdenados = [...agrupado.keys()].sort((a, b) => a.localeCompare(b, 'pt-BR'));
     const periodoLabel = periodoFiltro ? (periodoFiltro === 'outro' ? 'Outro turno' : LABEL_PERIODO[periodoFiltro]) : '';
 
     doc.setFontSize(14);
     doc.setTextColor(16, 20, 77);
     doc.text(
-      'UCs 100% EAD do semestre vigente' + (unidadeFiltro ? ' — ' + unidadeFiltro : '') + (periodoLabel ? ' — ' + periodoLabel : ''),
+      cfg.titulo + (grupoFiltro ? ' — ' + grupoFiltro : '') + (periodoLabel ? ' — ' + periodoLabel : ''),
       marginLeft, 16,
     );
     doc.setFontSize(9);
     doc.setTextColor(100);
     doc.text(
-      `Gerado em ${new Date().toLocaleDateString('pt-BR')}  ·  ${rows.length} oferta${rows.length === 1 ? '' : 's'} em ${unidades.length} unidade${unidades.length === 1 ? '' : 's'} (em andamento ou entrando, por turno e ordem de entrada)`,
+      `Gerado em ${new Date().toLocaleDateString('pt-BR')}  ·  ${rows.length} oferta${rows.length === 1 ? '' : 's'} em ${gruposOrdenados.length} ${cfg.groupLabel.toLowerCase()}${gruposOrdenados.length === 1 ? '' : 's'} (em andamento ou entrando, por turno e ordem de entrada)`,
       marginLeft, 22,
     );
 
     let y = 30;
-    unidades.forEach((unidade) => {
-      const porTurno = agrupado.get(unidade);
-      const totalUnidade = [...porTurno.values()].reduce((n, lista) => n + lista.length, 0);
+    gruposOrdenados.forEach((grupo) => {
+      const porTurno = agrupado.get(grupo);
+      const totalGrupo = [...porTurno.values()].reduce((n, lista) => n + lista.length, 0);
       if (y > pageHeight - 40) { doc.addPage(); y = 16; }
       doc.setFontSize(12.5);
       doc.setTextColor(16, 20, 77);
-      doc.text(`${unidade}  ·  ${totalUnidade} oferta${totalUnidade === 1 ? '' : 's'}`, marginLeft, y);
+      doc.text(`${grupo}  ·  ${totalGrupo} oferta${totalGrupo === 1 ? '' : 's'}`, marginLeft, y);
       y += 6;
 
+      const mostrarSubTitulo = porTurno.size > 1;
       ORDEM_PERIODO.forEach((turnoKey) => {
         const lista = porTurno.get(turnoKey);
         if (!lista || !lista.length) return;
-        if (y > pageHeight - 30) { doc.addPage(); y = 16; }
-        doc.setFontSize(10.5);
-        doc.setTextColor(60, 68, 110);
-        const label = turnoKey === 'outro' ? 'Outro turno' : LABEL_PERIODO[turnoKey];
-        doc.text(`${label} (${lista.length})`, marginLeft + 2, y);
-        y += 4;
+        if (mostrarSubTitulo) {
+          if (y > pageHeight - 30) { doc.addPage(); y = 16; }
+          doc.setFontSize(10.5);
+          doc.setTextColor(60, 68, 110);
+          const label = turnoKey === 'outro' ? 'Outro turno' : LABEL_PERIODO[turnoKey];
+          doc.text(`${label} (${lista.length})`, marginLeft + 2, y);
+          y += 4;
+        }
 
         doc.autoTable({
           head: [['Turma', 'Curso', 'UC 100% EAD', 'Carga Horária', 'Início', 'Fim', 'Status']],
@@ -568,9 +613,9 @@
     });
 
     const stamp = new Date().toISOString().slice(0, 10);
-    const sufixoUnidade = unidadeFiltro ? '-' + unidadeFiltro.replace(/[^a-z0-9]+/gi, '-') : '';
+    const sufixoGrupo = grupoFiltro ? '-' + grupoFiltro.replace(/[^a-z0-9]+/gi, '-') : '';
     const sufixoTurno = periodoLabel ? '-' + periodoLabel.replace(/[^a-z0-9]+/gi, '-') : '';
-    doc.save(`ucs-ead-semestre-por-unidade${sufixoUnidade}${sufixoTurno}_${stamp}.pdf`);
+    doc.save(`${cfg.filenamePrefix}${sufixoGrupo}${sufixoTurno}_${stamp}.pdf`);
   }
 
   // ---------- Casca comum ----------
@@ -578,9 +623,10 @@
   function renderApp() {
     const mode = authMode();
     const authReady = mode === 'ready';
+    const isEadView = state.view === 'ead' || state.view === 'ctc';
     const alunosView = (state.view === 'alunos' && authReady) ? renderAlunosView() : null;
-    const eadView = state.view === 'ead' ? renderEadView() : null;
-    const bodyHtml = state.view === 'ead'
+    const eadView = isEadView ? renderEadView(state.view) : null;
+    const bodyHtml = isEadView
       ? eadView.html
       : (authReady ? alunosView.html : renderAuthGatePanel(mode));
 
@@ -604,6 +650,7 @@
         </header>
         <nav class="main-nav" role="tablist" aria-label="Seções">
           <button type="button" role="tab" aria-selected="${state.view === 'ead'}" class="nav-btn${state.view === 'ead' ? ' active' : ''}" data-view="ead">UCs EAD do semestre</button>
+          <button type="button" role="tab" aria-selected="${state.view === 'ctc'}" class="nav-btn${state.view === 'ctc' ? ' active' : ''}" data-view="ctc">UCs EAD CTC</button>
           <button type="button" role="tab" aria-selected="${state.view === 'alunos'}" class="nav-btn${state.view === 'alunos' ? ' active' : ''}" data-view="alunos">Alunos por Turma${authReady ? '' : ' 🔒'}</button>
         </nav>
         <main class="main-content">
@@ -621,23 +668,28 @@
     const logoutHeaderBtn = document.getElementById('logout-btn-header');
     if (logoutHeaderBtn) logoutHeaderBtn.addEventListener('click', () => auth.signOut());
 
-    if (state.view === 'ead') {
-      const unidadeSelect = document.getElementById('ead-unidade-select');
-      if (unidadeSelect) {
-        unidadeSelect.addEventListener('change', (event) => {
-          state.eadUnidade = event.target.value;
+    if (isEadView) {
+      const cfg = EAD_DATASETS[state.view];
+      const grupoSelect = document.getElementById('ead-grupo-select');
+      if (grupoSelect) {
+        grupoSelect.addEventListener('change', (event) => {
+          state[cfg.filtroGrupoKey] = event.target.value;
           renderApp();
         });
       }
       const periodoSelect = document.getElementById('ead-periodo-select');
       if (periodoSelect) {
         periodoSelect.addEventListener('change', (event) => {
-          state.eadPeriodo = event.target.value;
+          state[cfg.filtroPeriodoKey] = event.target.value;
           renderApp();
         });
       }
       const exportEadBtn = document.getElementById('export-ead-btn');
-      if (exportEadBtn) exportEadBtn.addEventListener('click', () => exportEadToPdf(eadView.rows, state.eadUnidade, state.eadPeriodo));
+      if (exportEadBtn) {
+        exportEadBtn.addEventListener('click', () => exportEadToPdf(
+          state.view, eadView.rows, state[cfg.filtroGrupoKey], state[cfg.filtroPeriodoKey],
+        ));
+      }
       return;
     }
 
