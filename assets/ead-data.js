@@ -1,5 +1,5 @@
 window.EAD_OFERTAS = {
-  "geradoEm": "2026-08-17",
+  "geradoEm": "2026-08-24",
   "turmas": [
     {
       "id": 106005,
@@ -23,12 +23,12 @@ window.EAD_OFERTAS = {
           "uc": "Sustentabilidade nos processos industriais",
           "cargaHoraria": 8,
           "inicio": "2026-08-24",
-          "fim": "2026-11-20",
+          "fim": "2026-09-11",
           "idDiario": 555558,
           "regulares": 18,
-          "cursando": 3,
+          "cursando": 4,
           "aprovados": 14,
-          "reprovados": 1
+          "reprovados": 0
         },
         {
           "uc": "Criatividade e Ideação em Projetos de Inovação",
@@ -175,7 +175,7 @@ window.EAD_OFERTAS = {
           "uc": "Sustentabilidade nos Processos Industriais",
           "idDiario": 555558,
           "inicio": "2026-08-24",
-          "fim": "2026-11-20"
+          "fim": "2026-09-11"
         }
       ]
     },
@@ -193,8 +193,8 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17",
           "idDiario": 445572,
           "regulares": 18,
-          "cursando": 18,
-          "aprovados": 0,
+          "cursando": 0,
+          "aprovados": 18,
           "reprovados": 0
         },
         {
@@ -371,9 +371,9 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17",
           "idDiario": 463382,
           "regulares": 16,
-          "cursando": 15,
-          "aprovados": 1,
-          "reprovados": 0
+          "cursando": 0,
+          "aprovados": 11,
+          "reprovados": 5
         },
         {
           "uc": "Introdução ao Desenvolvimento de Projetos",
@@ -465,7 +465,7 @@ window.EAD_OFERTAS = {
           "uc": "Integração de Dispositivos Automatizados",
           "idDiario": 463362,
           "inicio": "2026-08-05",
-          "fim": "2026-11-13"
+          "fim": "2026-12-04"
         },
         {
           "uc": "Introdução a Indústria 4.0",
@@ -482,7 +482,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Manutenção de Sistemas Automatizados",
           "idDiario": 463361,
-          "inicio": "2026-08-25",
+          "inicio": "2026-10-14",
           "fim": "2026-12-03"
         },
         {
@@ -637,12 +637,12 @@ window.EAD_OFERTAS = {
           "uc": "Integração de Dispositivos Automatizados",
           "idDiario": 463388,
           "inicio": "2026-08-05",
-          "fim": "2026-11-27"
+          "fim": "2026-11-24"
         },
         {
           "uc": "Manutenção de Sistemas Automatizados",
           "idDiario": 463387,
-          "inicio": "2026-08-25",
+          "inicio": "2026-10-14",
           "fim": "2026-12-03"
         },
         {
@@ -1156,8 +1156,8 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17",
           "idDiario": 520170,
           "regulares": 22,
-          "cursando": 22,
-          "aprovados": 0,
+          "cursando": 0,
+          "aprovados": 22,
           "reprovados": 0
         },
         {
@@ -1328,9 +1328,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 517995,
-          "regulares": 32,
+          "regulares": 31,
           "cursando": 0,
-          "aprovados": 31,
+          "aprovados": 30,
           "reprovados": 1
         },
         {
@@ -1339,8 +1339,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 517994,
-          "regulares": 32,
-          "cursando": 32,
+          "regulares": 31,
+          "cursando": 31,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1350,8 +1350,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-08",
           "fim": "2027-07-16",
           "idDiario": 517992,
-          "regulares": 32,
-          "cursando": 32,
+          "regulares": 31,
+          "cursando": 31,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1361,8 +1361,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-08",
           "fim": "2027-07-16",
           "idDiario": 517993,
-          "regulares": 32,
-          "cursando": 32,
+          "regulares": 31,
+          "cursando": 31,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1372,8 +1372,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-02",
           "fim": "2027-12-08",
           "idDiario": 517990,
-          "regulares": 32,
-          "cursando": 32,
+          "regulares": 31,
+          "cursando": 31,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1383,8 +1383,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-02",
           "fim": "2027-12-08",
           "idDiario": 517991,
-          "regulares": 32,
-          "cursando": 32,
+          "regulares": 31,
+          "cursando": 31,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -1394,7 +1394,7 @@ window.EAD_OFERTAS = {
           "uc": "Banco de Dados",
           "idDiario": 517987,
           "inicio": "2026-07-11",
-          "fim": "2026-12-04"
+          "fim": "2026-11-17"
         },
         {
           "uc": "Desenvolvimento de Sistemas",
@@ -1465,8 +1465,8 @@ window.EAD_OFERTAS = {
         {
           "uc": "Programação de Aplicativos",
           "idDiario": 517986,
-          "inicio": "2026-09-01",
-          "fim": "2026-12-03"
+          "inicio": "2026-08-25",
+          "fim": "2026-12-01"
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -1699,9 +1699,9 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17",
           "idDiario": 518162,
           "regulares": 25,
-          "cursando": 25,
-          "aprovados": 0,
-          "reprovados": 0
+          "cursando": 0,
+          "aprovados": 23,
+          "reprovados": 2
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -2394,7 +2394,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Criatividade e Ideação em Projetos de Inovação",
           "cargaHoraria": 16,
-          "inicio": "2026-09-01",
+          "inicio": "2026-08-31",
           "fim": "2026-10-01",
           "idDiario": 541391,
           "regulares": 20,
@@ -2462,7 +2462,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Criatividade e Ideação em Projetos de Inovação",
           "idDiario": 541391,
-          "inicio": "2026-09-01",
+          "inicio": "2026-08-31",
           "fim": "2026-10-01"
         },
         {
@@ -2625,9 +2625,9 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17",
           "idDiario": 517977,
           "regulares": 25,
-          "cursando": 25,
-          "aprovados": 0,
-          "reprovados": 0
+          "cursando": 0,
+          "aprovados": 17,
+          "reprovados": 8
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -2875,9 +2875,9 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17",
           "idDiario": 518201,
           "regulares": 22,
-          "cursando": 22,
-          "aprovados": 0,
-          "reprovados": 0
+          "cursando": 0,
+          "aprovados": 14,
+          "reprovados": 8
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -2894,7 +2894,7 @@ window.EAD_OFERTAS = {
           "uc": "Otimização de Processos de Produção Mecânica",
           "cargaHoraria": 30,
           "inicio": "2026-08-31",
-          "fim": "2026-10-28",
+          "fim": "2026-10-30",
           "idDiario": 518192,
           "regulares": 22,
           "cursando": 22,
@@ -3016,7 +3016,7 @@ window.EAD_OFERTAS = {
           "uc": "Otimização de Processos de Produção Mecânica",
           "idDiario": 518192,
           "inicio": "2026-08-31",
-          "fim": "2026-10-28"
+          "fim": "2026-10-30"
         },
         {
           "uc": "Planejamento e Controle da Manutenção",
@@ -3076,9 +3076,9 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17",
           "idDiario": 518218,
           "regulares": 22,
-          "cursando": 0,
-          "aprovados": 15,
-          "reprovados": 7
+          "cursando": 22,
+          "aprovados": 0,
+          "reprovados": 0
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -3276,10 +3276,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 520130,
-          "regulares": 27,
+          "regulares": 26,
           "cursando": 0,
           "aprovados": 7,
-          "reprovados": 20
+          "reprovados": 19
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -3287,10 +3287,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 520131,
-          "regulares": 27,
+          "regulares": 26,
           "cursando": 0,
           "aprovados": 3,
-          "reprovados": 24
+          "reprovados": 23
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
@@ -3298,8 +3298,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-04-01",
           "fim": "2027-12-16",
           "idDiario": 520129,
-          "regulares": 27,
-          "cursando": 27,
+          "regulares": 26,
+          "cursando": 26,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -3309,8 +3309,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-04-01",
           "fim": "2027-12-16",
           "idDiario": 520128,
-          "regulares": 27,
-          "cursando": 27,
+          "regulares": 26,
+          "cursando": 26,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -3320,8 +3320,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-04-01",
           "fim": "2027-12-16",
           "idDiario": 520132,
-          "regulares": 27,
-          "cursando": 27,
+          "regulares": 26,
+          "cursando": 26,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -3331,8 +3331,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-04-01",
           "fim": "2027-12-16",
           "idDiario": 520133,
-          "regulares": 27,
-          "cursando": 27,
+          "regulares": 26,
+          "cursando": 26,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -3752,8 +3752,8 @@ window.EAD_OFERTAS = {
         {
           "uc": "Introdução ao Desenvolvimento de Projetos",
           "cargaHoraria": 12,
-          "inicio": "2026-08-03",
-          "fim": "2026-12-16",
+          "inicio": "2026-08-24",
+          "fim": "2026-11-20",
           "idDiario": 517949,
           "regulares": 20,
           "cursando": 20,
@@ -3877,8 +3877,8 @@ window.EAD_OFERTAS = {
         {
           "uc": "Introdução ao Desenvolvimento de Projetos",
           "idDiario": 517949,
-          "inicio": "2026-08-03",
-          "fim": "2026-12-16"
+          "inicio": "2026-08-24",
+          "fim": "2026-11-20"
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
@@ -3895,7 +3895,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Modelagem de Projetos de Inovação",
           "idDiario": 517933,
-          "inicio": "2026-08-03",
+          "inicio": "2026-10-01",
           "fim": "2026-12-16"
         },
         {
@@ -3968,9 +3968,9 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17",
           "idDiario": 517922,
           "regulares": 29,
-          "cursando": 0,
-          "aprovados": 23,
-          "reprovados": 6
+          "cursando": 29,
+          "aprovados": 0,
+          "reprovados": 0
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -4223,10 +4223,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-03-30",
           "fim": "2026-08-28",
           "idDiario": 518100,
-          "regulares": 19,
-          "cursando": 19,
-          "aprovados": 0,
-          "reprovados": 0
+          "regulares": 16,
+          "cursando": 0,
+          "aprovados": 12,
+          "reprovados": 4
         },
         {
           "uc": "Introdução ao Desenvolvimento de Projetos",
@@ -4234,8 +4234,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518098,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4245,8 +4245,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518099,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4256,8 +4256,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-31",
           "fim": "2026-11-12",
           "idDiario": 518092,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4267,8 +4267,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-31",
           "fim": "2026-10-01",
           "idDiario": 518083,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4278,8 +4278,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-08",
           "fim": "2027-07-02",
           "idDiario": 518091,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4289,8 +4289,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-08",
           "fim": "2027-07-02",
           "idDiario": 518097,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4300,8 +4300,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-07-05",
           "fim": "2027-12-08",
           "idDiario": 518095,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4311,8 +4311,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-07-05",
           "fim": "2027-12-08",
           "idDiario": 518096,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 16,
+          "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -4459,10 +4459,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518922,
-          "regulares": 15,
+          "regulares": 11,
           "cursando": 0,
           "aprovados": 2,
-          "reprovados": 13
+          "reprovados": 9
         },
         {
           "uc": "Introdução ao Desenvolvimento de Projetos",
@@ -4470,8 +4470,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518920,
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 11,
+          "cursando": 11,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4481,8 +4481,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518921,
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 11,
+          "cursando": 11,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4492,8 +4492,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-31",
           "fim": "2026-11-12",
           "idDiario": 518914,
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 11,
+          "cursando": 11,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4503,8 +4503,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-10-12",
           "fim": "2026-11-19",
           "idDiario": 518905,
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 11,
+          "cursando": 11,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4514,8 +4514,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-03-29",
           "fim": "2027-08-20",
           "idDiario": 518913,
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 11,
+          "cursando": 11,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4525,8 +4525,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-03-29",
           "fim": "2027-08-20",
           "idDiario": 518919,
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 11,
+          "cursando": 11,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4536,8 +4536,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-30",
           "fim": "2027-12-08",
           "idDiario": 518917,
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 11,
+          "cursando": 11,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4547,8 +4547,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-30",
           "fim": "2027-12-08",
           "idDiario": 518918,
-          "regulares": 15,
-          "cursando": 15,
+          "regulares": 11,
+          "cursando": 11,
           "aprovados": 0,
           "reprovados": 0
         }
