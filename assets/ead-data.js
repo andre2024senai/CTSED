@@ -1,5 +1,5 @@
 window.EAD_OFERTAS = {
-  "geradoEm": "2026-08-24",
+  "geradoEm": "2026-08-31",
   "turmas": [
     {
       "id": 106005,
@@ -1286,7 +1286,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Modelagem de Sistemas",
           "idDiario": 520159,
-          "inicio": "2026-10-30",
+          "inicio": "2026-11-03",
           "fim": "2027-02-26"
         },
         {
