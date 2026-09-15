@@ -1,5 +1,5 @@
 window.EAD_OFERTAS = {
-  "geradoEm": "2026-08-31",
+  "geradoEm": "2026-09-08",
   "turmas": [
     {
       "id": 106005,
@@ -365,17 +365,6 @@ window.EAD_OFERTAS = {
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=110373",
       "ucs": [
         {
-          "uc": "Introdução a Indústria 4.0",
-          "cargaHoraria": 24,
-          "inicio": "2026-04-13",
-          "fim": "2026-07-17",
-          "idDiario": 463382,
-          "regulares": 16,
-          "cursando": 0,
-          "aprovados": 11,
-          "reprovados": 5
-        },
-        {
           "uc": "Introdução ao Desenvolvimento de Projetos",
           "cargaHoraria": 12,
           "inicio": "2026-08-10",
@@ -407,6 +396,17 @@ window.EAD_OFERTAS = {
           "cursando": 0,
           "aprovados": 16,
           "reprovados": 0
+        },
+        {
+          "uc": "Introdução a Indústria 4.0",
+          "cargaHoraria": 24,
+          "inicio": null,
+          "fim": null,
+          "idDiario": null,
+          "regulares": 16,
+          "cursando": 0,
+          "aprovados": 11,
+          "reprovados": 5
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
@@ -468,12 +468,6 @@ window.EAD_OFERTAS = {
           "fim": "2026-12-04"
         },
         {
-          "uc": "Introdução a Indústria 4.0",
-          "idDiario": 463382,
-          "inicio": "2026-04-13",
-          "fim": "2026-07-17"
-        },
-        {
           "uc": "Introdução ao Desenvolvimento de Projetos",
           "idDiario": 547968,
           "inicio": "2026-08-10",
@@ -482,7 +476,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Manutenção de Sistemas Automatizados",
           "idDiario": 463361,
-          "inicio": "2026-10-14",
+          "inicio": "2026-09-30",
           "fim": "2026-12-03"
         },
         {
@@ -642,7 +636,7 @@ window.EAD_OFERTAS = {
         {
           "uc": "Manutenção de Sistemas Automatizados",
           "idDiario": 463387,
-          "inicio": "2026-10-14",
+          "inicio": "2026-09-30",
           "fim": "2026-12-03"
         },
         {
@@ -696,9 +690,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-17",
           "fim": "2026-07-17",
           "idDiario": 522750,
-          "regulares": 27,
+          "regulares": 26,
           "cursando": 0,
-          "aprovados": 25,
+          "aprovados": 24,
           "reprovados": 2
         },
         {
@@ -707,9 +701,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-17",
           "fim": "2026-07-17",
           "idDiario": 522751,
-          "regulares": 27,
+          "regulares": 26,
           "cursando": 0,
-          "aprovados": 26,
+          "aprovados": 25,
           "reprovados": 1
         },
         {
@@ -718,9 +712,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-17",
           "fim": "2026-07-17",
           "idDiario": 522752,
-          "regulares": 27,
+          "regulares": 26,
           "cursando": 0,
-          "aprovados": 24,
+          "aprovados": 23,
           "reprovados": 3
         },
         {
@@ -729,9 +723,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-05-04",
           "fim": "2026-06-18",
           "idDiario": 522743,
-          "regulares": 27,
+          "regulares": 26,
           "cursando": 0,
-          "aprovados": 26,
+          "aprovados": 25,
           "reprovados": 1
         },
         {
@@ -740,8 +734,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 522749,
-          "regulares": 27,
-          "cursando": 27,
+          "regulares": 26,
+          "cursando": 26,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -751,8 +745,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-03-16",
           "fim": "2027-07-15",
           "idDiario": 522748,
-          "regulares": 27,
-          "cursando": 27,
+          "regulares": 26,
+          "cursando": 26,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -762,8 +756,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-02",
           "fim": "2027-12-08",
           "idDiario": 522747,
-          "regulares": 27,
-          "cursando": 27,
+          "regulares": 26,
+          "cursando": 26,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -940,10 +934,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518901,
-          "regulares": 12,
+          "regulares": 8,
           "cursando": 0,
-          "aprovados": 6,
-          "reprovados": 6
+          "aprovados": 5,
+          "reprovados": 3
         },
         {
           "uc": "Introdução à Qualidade e Produtividade",
@@ -951,8 +945,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518897,
-          "regulares": 12,
-          "cursando": 12,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -962,8 +956,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518898,
-          "regulares": 12,
-          "cursando": 12,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -973,8 +967,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-09-17",
           "fim": "2027-03-01",
           "idDiario": 518899,
-          "regulares": 12,
-          "cursando": 12,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -984,8 +978,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-09-17",
           "fim": "2027-03-01",
           "idDiario": 518900,
-          "regulares": 12,
-          "cursando": 12,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -995,8 +989,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-03-02",
           "fim": "2027-05-25",
           "idDiario": 518896,
-          "regulares": 12,
-          "cursando": 12,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -1501,9 +1495,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 517842,
-          "regulares": 25,
+          "regulares": 24,
           "cursando": 0,
-          "aprovados": 21,
+          "aprovados": 20,
           "reprovados": 4
         },
         {
@@ -1512,8 +1506,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 517840,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 24,
+          "cursando": 24,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1523,8 +1517,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 517841,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 24,
+          "cursando": 24,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1534,8 +1528,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-08",
           "fim": "2027-07-02",
           "idDiario": 517837,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 24,
+          "cursando": 24,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1545,8 +1539,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-08",
           "fim": "2027-07-02",
           "idDiario": 517838,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 24,
+          "cursando": 24,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1556,8 +1550,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-08",
           "fim": "2027-07-02",
           "idDiario": 517839,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 24,
+          "cursando": 24,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -1698,9 +1692,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518162,
-          "regulares": 25,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 23,
+          "aprovados": 21,
           "reprovados": 2
         },
         {
@@ -1709,9 +1703,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518163,
-          "regulares": 25,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 20,
           "reprovados": 3
         },
         {
@@ -1720,8 +1714,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-24",
           "fim": "2027-07-22",
           "idDiario": 518160,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1731,8 +1725,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-24",
           "fim": "2027-07-22",
           "idDiario": 518161,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1742,8 +1736,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-02",
           "fim": "2027-12-08",
           "idDiario": 518145,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1753,8 +1747,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-02",
           "fim": "2027-12-08",
           "idDiario": 518158,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1764,8 +1758,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-02",
           "fim": "2027-12-08",
           "idDiario": 518159,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -1912,8 +1906,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 541441,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1923,8 +1917,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 541440,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1934,8 +1928,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-02",
           "fim": "2027-12-17",
           "idDiario": 541443,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1945,8 +1939,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-08-02",
           "fim": "2027-12-17",
           "idDiario": 541442,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1956,8 +1950,8 @@ window.EAD_OFERTAS = {
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
           "idDiario": 541426,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1967,8 +1961,8 @@ window.EAD_OFERTAS = {
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
           "idDiario": 541445,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -1978,8 +1972,8 @@ window.EAD_OFERTAS = {
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
           "idDiario": 541444,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -2126,10 +2120,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518053,
-          "regulares": 23,
+          "regulares": 22,
           "cursando": 0,
           "aprovados": 16,
-          "reprovados": 7
+          "reprovados": 6
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -2137,10 +2131,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518054,
-          "regulares": 23,
+          "regulares": 22,
           "cursando": 0,
           "aprovados": 15,
-          "reprovados": 8
+          "reprovados": 7
         },
         {
           "uc": "Criatividade e Ideação em Projetos de Inovação",
@@ -2148,9 +2142,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-05-04",
           "fim": "2026-06-18",
           "idDiario": 518045,
-          "regulares": 23,
+          "regulares": 22,
           "cursando": 0,
-          "aprovados": 19,
+          "aprovados": 18,
           "reprovados": 4
         },
         {
@@ -2159,8 +2153,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518050,
-          "regulares": 23,
-          "cursando": 23,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2170,8 +2164,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518051,
-          "regulares": 23,
-          "cursando": 23,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2181,8 +2175,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518052,
-          "regulares": 23,
-          "cursando": 23,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2192,8 +2186,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-07-05",
           "fim": "2027-12-08",
           "idDiario": 518030,
-          "regulares": 23,
-          "cursando": 23,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2203,8 +2197,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-07-05",
           "fim": "2027-12-08",
           "idDiario": 518049,
-          "regulares": 23,
-          "cursando": 23,
+          "regulares": 22,
+          "cursando": 22,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -2375,8 +2369,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 541399,
-          "regulares": 20,
-          "cursando": 20,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2386,8 +2380,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 541398,
-          "regulares": 20,
-          "cursando": 20,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2397,8 +2391,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-31",
           "fim": "2026-10-01",
           "idDiario": 541391,
-          "regulares": 20,
-          "cursando": 20,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2408,8 +2402,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-11-16",
           "fim": "2027-05-27",
           "idDiario": 541402,
-          "regulares": 20,
-          "cursando": 20,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2419,8 +2413,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-11-16",
           "fim": "2027-05-27",
           "idDiario": 541401,
-          "regulares": 20,
-          "cursando": 20,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2430,8 +2424,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-11-16",
           "fim": "2027-05-27",
           "idDiario": 541400,
-          "regulares": 20,
-          "cursando": 20,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2441,8 +2435,8 @@ window.EAD_OFERTAS = {
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
           "idDiario": 541380,
-          "regulares": 20,
-          "cursando": 20,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -2452,8 +2446,8 @@ window.EAD_OFERTAS = {
           "inicio": "2028-01-17",
           "fim": "2028-05-26",
           "idDiario": 541403,
-          "regulares": 20,
-          "cursando": 20,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -3276,10 +3270,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 520130,
-          "regulares": 26,
+          "regulares": 23,
           "cursando": 0,
           "aprovados": 7,
-          "reprovados": 19
+          "reprovados": 16
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -3287,10 +3281,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 520131,
-          "regulares": 26,
+          "regulares": 23,
           "cursando": 0,
           "aprovados": 3,
-          "reprovados": 23
+          "reprovados": 20
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
@@ -3298,8 +3292,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-04-01",
           "fim": "2027-12-16",
           "idDiario": 520129,
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -3309,8 +3303,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-04-01",
           "fim": "2027-12-16",
           "idDiario": 520128,
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -3320,8 +3314,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-04-01",
           "fim": "2027-12-16",
           "idDiario": 520132,
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -3331,8 +3325,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-04-01",
           "fim": "2027-12-16",
           "idDiario": 520133,
-          "regulares": 26,
-          "cursando": 26,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -3455,9 +3449,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 517894,
-          "regulares": 25,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 20,
           "reprovados": 3
         },
         {
@@ -3466,9 +3460,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 517895,
-          "regulares": 25,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 20,
           "reprovados": 3
         },
         {
@@ -3477,9 +3471,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 517896,
-          "regulares": 25,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 20,
           "reprovados": 3
         },
         {
@@ -3488,9 +3482,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-05-04",
           "fim": "2026-06-18",
           "idDiario": 517878,
-          "regulares": 25,
+          "regulares": 23,
           "cursando": 0,
-          "aprovados": 22,
+          "aprovados": 20,
           "reprovados": 3
         },
         {
@@ -3499,8 +3493,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 517893,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -3510,8 +3504,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-17",
           "fim": "2027-07-02",
           "idDiario": 517892,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -3521,8 +3515,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-07-05",
           "fim": "2027-12-08",
           "idDiario": 517891,
-          "regulares": 25,
-          "cursando": 25,
+          "regulares": 23,
+          "cursando": 23,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -4695,9 +4689,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518120,
-          "regulares": 19,
+          "regulares": 18,
           "cursando": 0,
-          "aprovados": 15,
+          "aprovados": 14,
           "reprovados": 4
         },
         {
@@ -4706,9 +4700,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518121,
-          "regulares": 19,
+          "regulares": 18,
           "cursando": 0,
-          "aprovados": 15,
+          "aprovados": 14,
           "reprovados": 4
         },
         {
@@ -4717,8 +4711,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518117,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4728,8 +4722,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518118,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4739,8 +4733,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518119,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4750,8 +4744,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-31",
           "fim": "2026-10-01",
           "idDiario": 518115,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4761,8 +4755,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-08",
           "fim": "2027-07-02",
           "idDiario": 518116,
-          "regulares": 19,
-          "cursando": 19,
+          "regulares": 18,
+          "cursando": 18,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -4909,9 +4903,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518942,
-          "regulares": 10,
+          "regulares": 9,
           "cursando": 0,
-          "aprovados": 10,
+          "aprovados": 9,
           "reprovados": 0
         },
         {
@@ -4920,9 +4914,9 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 518943,
-          "regulares": 10,
+          "regulares": 9,
           "cursando": 0,
-          "aprovados": 10,
+          "aprovados": 9,
           "reprovados": 0
         },
         {
@@ -4931,8 +4925,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518939,
-          "regulares": 10,
-          "cursando": 10,
+          "regulares": 9,
+          "cursando": 9,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4942,8 +4936,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518940,
-          "regulares": 10,
-          "cursando": 10,
+          "regulares": 9,
+          "cursando": 9,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4953,8 +4947,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 518941,
-          "regulares": 10,
-          "cursando": 10,
+          "regulares": 9,
+          "cursando": 9,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4964,8 +4958,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-31",
           "fim": "2026-10-01",
           "idDiario": 518937,
-          "regulares": 10,
-          "cursando": 10,
+          "regulares": 9,
+          "cursando": 9,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -4975,8 +4969,8 @@ window.EAD_OFERTAS = {
           "inicio": "2027-02-26",
           "fim": "2027-07-30",
           "idDiario": 518938,
-          "regulares": 10,
-          "cursando": 10,
+          "regulares": 9,
+          "cursando": 9,
           "aprovados": 0,
           "reprovados": 0
         }
@@ -5123,10 +5117,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 520153,
-          "regulares": 13,
+          "regulares": 8,
           "cursando": 0,
-          "aprovados": 11,
-          "reprovados": 2
+          "aprovados": 8,
+          "reprovados": 0
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -5134,10 +5128,10 @@ window.EAD_OFERTAS = {
           "inicio": "2026-04-13",
           "fim": "2026-07-17",
           "idDiario": 520154,
-          "regulares": 13,
+          "regulares": 8,
           "cursando": 0,
-          "aprovados": 11,
-          "reprovados": 2
+          "aprovados": 8,
+          "reprovados": 0
         },
         {
           "uc": "Introdução a Indústria 4.0",
@@ -5145,8 +5139,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 520150,
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -5156,8 +5150,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 520151,
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -5167,8 +5161,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-24",
           "fim": "2026-11-20",
           "idDiario": 520152,
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -5178,8 +5172,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-08-31",
           "fim": "2026-10-01",
           "idDiario": 520148,
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         },
@@ -5189,8 +5183,8 @@ window.EAD_OFERTAS = {
           "inicio": "2026-12-11",
           "fim": "2027-06-24",
           "idDiario": 520149,
-          "regulares": 13,
-          "cursando": 13,
+          "regulares": 8,
+          "cursando": 8,
           "aprovados": 0,
           "reprovados": 0
         }
