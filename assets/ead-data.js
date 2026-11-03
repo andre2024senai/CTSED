@@ -1,5 +1,5 @@
 window.EAD_OFERTAS = {
-  "geradoEm": "2026-10-19",
+  "geradoEm": "2026-10-26",
   "turmas": [
     {
       "id": 106005,
@@ -288,22 +288,10 @@ window.EAD_OFERTAS = {
           "fim": "2026-11-20"
         },
         {
-          "uc": "Implementação de Negócios Inovadores",
-          "idDiario": 463367,
-          "inicio": "2026-10-15",
-          "fim": "2026-10-30"
-        },
-        {
-          "uc": "Projetos de Controle e Sistemas Automatizados",
-          "idDiario": 463358,
-          "inicio": "2026-08-06",
-          "fim": "2026-12-03"
-        },
-        {
-          "uc": "Sistemas Lógicos Programáveis",
-          "idDiario": 463369,
-          "inicio": "2026-02-25",
-          "fim": "2026-07-22"
+          "uc": "Projetos de Intertravamento de Segurança de Processos Industriais",
+          "idDiario": 463357,
+          "inicio": "2026-10-13",
+          "fim": "2026-12-07"
         },
         {
           "uc": "Projetos de Acionamentos Eletroeletrônicos",
@@ -312,9 +300,9 @@ window.EAD_OFERTAS = {
           "fim": "2026-06-05"
         },
         {
-          "uc": "Manutenção de Sistemas Automatizados",
-          "idDiario": 463361,
-          "inicio": "2026-09-30",
+          "uc": "Projetos de Controle e Sistemas Automatizados",
+          "idDiario": 463358,
+          "inicio": "2026-08-06",
           "fim": "2026-12-03"
         },
         {
@@ -336,10 +324,10 @@ window.EAD_OFERTAS = {
           "fim": "2026-11-06"
         },
         {
-          "uc": "Projetos de Intertravamento de Segurança de Processos Industriais",
-          "idDiario": 463357,
-          "inicio": "2026-10-13",
-          "fim": "2026-12-07"
+          "uc": "Manutenção de Sistemas Automatizados",
+          "idDiario": 463361,
+          "inicio": "2026-09-30",
+          "fim": "2026-12-03"
         },
         {
           "uc": "Instrumentação e Controle de Processos Industriais ",
@@ -348,10 +336,22 @@ window.EAD_OFERTAS = {
           "fim": "2026-03-17"
         },
         {
+          "uc": "Sistemas Lógicos Programáveis",
+          "idDiario": 463369,
+          "inicio": "2026-02-25",
+          "fim": "2026-07-22"
+        },
+        {
           "uc": "Sistemas de Supervisão e Controle",
           "idDiario": 463360,
           "inicio": "2026-04-09",
           "fim": "2026-05-28"
+        },
+        {
+          "uc": "Implementação de Negócios Inovadores",
+          "idDiario": 463367,
+          "inicio": "2026-10-15",
+          "fim": "2026-10-30"
         },
         {
           "uc": "Comissionamento de Sistemas Automatizados",
@@ -371,8 +371,8 @@ window.EAD_OFERTAS = {
         {
           "uc": "Sustentabilidade nos processos industriais",
           "cargaHoraria": 8,
-          "inicio": "2026-10-20",
-          "fim": "2026-10-27",
+          "inicio": "2026-08-24",
+          "fim": "2026-11-20",
           "idDiario": 463403,
           "regulares": 21,
           "cursando": 21,
@@ -454,16 +454,34 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-16"
         },
         {
+          "uc": "Sustentabilidade nos Processos Industriais",
+          "idDiario": 463403,
+          "inicio": "2026-08-24",
+          "fim": "2026-11-20"
+        },
+        {
+          "uc": "Sistemas Lógicos Programáveis",
+          "idDiario": 463395,
+          "inicio": "2026-02-25",
+          "fim": "2026-07-22"
+        },
+        {
           "uc": "Projetos de Acionamentos Eletroeletrônicos",
           "idDiario": 463385,
           "inicio": "2026-03-16",
           "fim": "2026-05-08"
         },
         {
-          "uc": "Projetos de Controle e Sistemas Automatizados",
-          "idDiario": 463384,
-          "inicio": "2026-08-06",
-          "fim": "2026-11-16"
+          "uc": "Manutenção de Sistemas Automatizados",
+          "idDiario": 463387,
+          "inicio": "2026-09-30",
+          "fim": "2026-12-08"
+        },
+        {
+          "uc": "Projetos de Intertravamento de Segurança de Processos Industriais",
+          "idDiario": 463383,
+          "inicio": "2026-10-29",
+          "fim": "2026-12-07"
         },
         {
           "uc": "Implementação de Negócios Inovadores",
@@ -484,34 +502,16 @@ window.EAD_OFERTAS = {
           "fim": "2026-03-17"
         },
         {
-          "uc": "Sistemas Lógicos Programáveis",
-          "idDiario": 463395,
-          "inicio": "2026-02-25",
-          "fim": "2026-07-22"
-        },
-        {
-          "uc": "Projetos de Intertravamento de Segurança de Processos Industriais",
-          "idDiario": 463383,
-          "inicio": "2026-10-29",
-          "fim": "2026-12-07"
-        },
-        {
-          "uc": "Sustentabilidade nos Processos Industriais",
-          "idDiario": 463403,
-          "inicio": "2026-10-20",
-          "fim": "2026-10-27"
+          "uc": "Projetos de Controle e Sistemas Automatizados",
+          "idDiario": 463384,
+          "inicio": "2026-08-06",
+          "fim": "2026-11-16"
         },
         {
           "uc": "Integração de Dispositivos Automatizados",
           "idDiario": 463388,
           "inicio": "2026-08-05",
           "fim": "2026-10-09"
-        },
-        {
-          "uc": "Manutenção de Sistemas Automatizados",
-          "idDiario": 463387,
-          "inicio": "2026-09-30",
-          "fim": "2026-12-08"
         }
       ]
     },
@@ -620,10 +620,10 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17"
         },
         {
-          "uc": "Sistemas Eletrônicos e Microcontrolados",
-          "idDiario": 522739,
-          "inicio": "2026-10-21",
-          "fim": "2027-03-15"
+          "uc": "Instrumentação e Controle de Processos Industriais ",
+          "idDiario": 522736,
+          "inicio": "2026-08-10",
+          "fim": "2026-11-30"
         },
         {
           "uc": "Fundamentos de Eletroeletrônica",
@@ -660,12 +660,6 @@ window.EAD_OFERTAS = {
           "idDiario": 522738,
           "inicio": "2026-08-05",
           "fim": "2026-09-17"
-        },
-        {
-          "uc": "Instrumentação e Controle de Processos Industriais ",
-          "idDiario": 522736,
-          "inicio": "2026-08-10",
-          "fim": "2026-11-30"
         },
         {
           "uc": "Introdução a Indústria 4.0",
@@ -744,6 +738,12 @@ window.EAD_OFERTAS = {
           "idDiario": 522727,
           "inicio": "2027-08-02",
           "fim": "2027-12-08"
+        },
+        {
+          "uc": "Sistemas Eletrônicos e Microcontrolados",
+          "idDiario": 522739,
+          "inicio": "2026-10-21",
+          "fim": "2027-03-15"
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -859,6 +859,12 @@ window.EAD_OFERTAS = {
           "fim": "2026-11-20"
         },
         {
+          "uc": "Projeto Hidrossanitário",
+          "idDiario": 518887,
+          "inicio": "2026-09-17",
+          "fim": "2026-12-08"
+        },
+        {
           "uc": "Métodos Modernos de Construção Civil",
           "idDiario": 518884,
           "inicio": "2027-05-12",
@@ -887,12 +893,6 @@ window.EAD_OFERTAS = {
           "idDiario": 518900,
           "inicio": "2026-08-24",
           "fim": "2026-11-20"
-        },
-        {
-          "uc": "Projeto Elétrico",
-          "idDiario": 518888,
-          "inicio": "2026-09-21",
-          "fim": "2026-12-10"
         },
         {
           "uc": "Projeto Executivo de Construção Civil",
@@ -955,10 +955,10 @@ window.EAD_OFERTAS = {
           "fim": "2026-09-16"
         },
         {
-          "uc": "Projeto Hidrossanitário",
-          "idDiario": 518887,
-          "inicio": "2026-09-17",
-          "fim": "2026-12-08"
+          "uc": "Projeto Elétrico",
+          "idDiario": 518888,
+          "inicio": "2026-09-21",
+          "fim": "2026-12-10"
         },
         {
           "uc": "Processos Construtivos",
@@ -1056,22 +1056,34 @@ window.EAD_OFERTAS = {
           "fim": "2027-05-21"
         },
         {
+          "uc": "Modelagem de Sistemas",
+          "idDiario": 520159,
+          "inicio": "2026-10-29",
+          "fim": "2027-02-26"
+        },
+        {
           "uc": "Desenvolvimento de Sistemas",
           "idDiario": 520158,
           "inicio": "2027-03-01",
           "fim": "2027-07-13"
         },
         {
-          "uc": "Modelagem de Sistemas",
-          "idDiario": 520159,
-          "inicio": "2026-11-03",
-          "fim": "2027-02-26"
+          "uc": "Programação de Aplicativos",
+          "idDiario": 520161,
+          "inicio": "2026-08-26",
+          "fim": "2026-12-09"
         },
         {
           "uc": "Implantação de Sistemas",
           "idDiario": 520156,
           "inicio": "2027-08-18",
           "fim": "2027-09-29"
+        },
+        {
+          "uc": "Banco de Dados",
+          "idDiario": 520162,
+          "inicio": "2026-08-19",
+          "fim": "2026-10-30"
         },
         {
           "uc": "Teste de Sistemas",
@@ -1114,18 +1126,6 @@ window.EAD_OFERTAS = {
           "idDiario": 520155,
           "inicio": "2027-10-04",
           "fim": "2027-12-01"
-        },
-        {
-          "uc": "Banco de Dados",
-          "idDiario": 520162,
-          "inicio": "2026-08-19",
-          "fim": "2026-11-03"
-        },
-        {
-          "uc": "Programação de Aplicativos",
-          "idDiario": 520161,
-          "inicio": "2026-08-26",
-          "fim": "2026-12-09"
         }
       ]
     },
@@ -1217,16 +1217,10 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-22"
         },
         {
-          "uc": "Programação de Aplicativos",
-          "idDiario": 517986,
-          "inicio": "2026-08-25",
-          "fim": "2026-12-01"
-        },
-        {
-          "uc": "Modelagem de Sistemas",
-          "idDiario": 517984,
-          "inicio": "2026-08-26",
-          "fim": "2026-12-09"
+          "uc": "Banco de Dados",
+          "idDiario": 517987,
+          "inicio": "2026-07-11",
+          "fim": "2026-12-03"
         },
         {
           "uc": "Introdução ao Desenvolvimento de Projetos",
@@ -1277,16 +1271,22 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-06"
         },
         {
+          "uc": "Programação de Aplicativos",
+          "idDiario": 517986,
+          "inicio": "2026-08-25",
+          "fim": "2026-12-01"
+        },
+        {
           "uc": "Introdução a Qualidade e Produtividade",
           "idDiario": 517992,
           "inicio": "2027-02-22",
           "fim": "2027-05-21"
         },
         {
-          "uc": "Banco de Dados",
-          "idDiario": 517987,
-          "inicio": "2026-07-11",
-          "fim": "2026-12-03"
+          "uc": "Modelagem de Sistemas",
+          "idDiario": 517984,
+          "inicio": "2026-08-26",
+          "fim": "2026-12-09"
         },
         {
           "uc": "Implantação de Sistemas",
@@ -1378,22 +1378,22 @@ window.EAD_OFERTAS = {
       ],
       "diarioTurma": [
         {
-          "uc": "Fundamentos da Eletroeletrônica",
-          "idDiario": 517825,
-          "inicio": "2026-03-23",
-          "fim": "2026-07-15"
-        },
-        {
-          "uc": "Manutenção de Sistemas Eletrônicos Industriais",
-          "idDiario": 517832,
-          "inicio": "2026-08-13",
-          "fim": "2026-09-15"
+          "uc": "Instalação de Sistemas Eletroeletrônicos Industriais",
+          "idDiario": 517836,
+          "inicio": "2026-08-10",
+          "fim": "2026-10-07"
         },
         {
           "uc": "Instalação de Sistemas Elétricos Prediais",
           "idDiario": 517834,
           "inicio": "2027-02-08",
           "fim": "2027-07-02"
+        },
+        {
+          "uc": "Projetos de Circuitos Eletrônicos Industriais",
+          "idDiario": 517828,
+          "inicio": "2026-10-14",
+          "fim": "2026-12-02"
         },
         {
           "uc": "Projetos de Acionamento e Controle Industriais",
@@ -1406,6 +1406,12 @@ window.EAD_OFERTAS = {
           "idDiario": 517833,
           "inicio": "2027-07-05",
           "fim": "2027-12-08"
+        },
+        {
+          "uc": "Manutenção de Sistemas Eletrônicos Industriais",
+          "idDiario": 517832,
+          "inicio": "2026-08-13",
+          "fim": "2026-09-15"
         },
         {
           "uc": "Eletrônica Analógica",
@@ -1438,16 +1444,22 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-02"
         },
         {
-          "uc": "Projetos de Circuitos Eletrônicos Industriais",
-          "idDiario": 517828,
-          "inicio": "2026-10-14",
-          "fim": "2026-12-03"
-        },
-        {
           "uc": "Eletrônica Digital",
           "idDiario": 517824,
           "inicio": "2026-03-24",
           "fim": "2026-05-12"
+        },
+        {
+          "uc": "Fundamentos da Eletroeletrônica",
+          "idDiario": 517825,
+          "inicio": "2026-03-23",
+          "fim": "2026-07-15"
+        },
+        {
+          "uc": "Gestão da Instalação de Sistemas Eletroeletrônicos",
+          "idDiario": 517835,
+          "inicio": "2026-09-17",
+          "fim": "2026-10-15"
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -1462,16 +1474,16 @@ window.EAD_OFERTAS = {
           "fim": "2027-05-21"
         },
         {
+          "uc": "Gestão da Manutenção de Sistemas Eletroeletrônicos",
+          "idDiario": 517831,
+          "inicio": "2026-10-16",
+          "fim": "2026-12-03"
+        },
+        {
           "uc": "Saúde e Segurança no Trabalho",
           "idDiario": 517841,
           "inicio": "2026-08-24",
           "fim": "2026-11-20"
-        },
-        {
-          "uc": "Gestão da Manutenção de Sistemas Eletroeletrônicos",
-          "idDiario": 517831,
-          "inicio": "2026-10-16",
-          "fim": "2026-12-08"
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
@@ -1480,22 +1492,10 @@ window.EAD_OFERTAS = {
           "fim": "2027-05-21"
         },
         {
-          "uc": "Instalação de Sistemas Eletroeletrônicos Industriais",
-          "idDiario": 517836,
-          "inicio": "2026-08-10",
-          "fim": "2026-10-07"
-        },
-        {
           "uc": "Projetos de Instalações Elétricas Prediais",
           "idDiario": 517826,
           "inicio": "2027-02-08",
           "fim": "2027-07-02"
-        },
-        {
-          "uc": "Gestão da Instalação de Sistemas Eletroeletrônicos",
-          "idDiario": 517835,
-          "inicio": "2026-09-17",
-          "fim": "2026-10-15"
         }
       ]
     },
@@ -1610,22 +1610,10 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-22"
         },
         {
-          "uc": "Organização da Produção Mecânica",
-          "idDiario": 518150,
-          "inicio": "2026-10-19",
-          "fim": "2027-02-23"
-        },
-        {
           "uc": "Introdução à Fabricação Mecânica",
           "idDiario": 518155,
           "inicio": "2026-04-16",
           "fim": "2026-06-25"
-        },
-        {
-          "uc": "Montagem de Sistemas Elétricos",
-          "idDiario": 518152,
-          "inicio": "2026-08-05",
-          "fim": "2026-12-10"
         },
         {
           "uc": "Controladores Lógicos  Programáveis",
@@ -1658,16 +1646,16 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
+          "uc": "Montagem de Sistemas Mecânicos",
+          "idDiario": 518151,
+          "inicio": "2026-08-11",
+          "fim": "2027-02-22"
+        },
+        {
           "uc": "Fundamentos da Tecnologia Mecânica",
           "idDiario": 518156,
           "inicio": "2026-03-23",
           "fim": "2026-07-22"
-        },
-        {
-          "uc": "Fabricação Mecânica Aplicada à Manutenção  e à Montagem",
-          "idDiario": 518153,
-          "inicio": "2026-08-06",
-          "fim": "2026-12-03"
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -1676,10 +1664,22 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17"
         },
         {
+          "uc": "Organização da Produção Mecânica",
+          "idDiario": 518150,
+          "inicio": "2026-10-19",
+          "fim": "2027-02-23"
+        },
+        {
           "uc": "Manutenção Mecânica de Máquinas e Equipamentos",
           "idDiario": 518148,
           "inicio": "2027-03-01",
           "fim": "2027-07-19"
+        },
+        {
+          "uc": "Montagem de Sistemas Elétricos",
+          "idDiario": 518152,
+          "inicio": "2026-08-05",
+          "fim": "2026-12-10"
         },
         {
           "uc": "Sustentabilidade nos Processos Industriais",
@@ -1688,10 +1688,10 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-22"
         },
         {
-          "uc": "Montagem de Sistemas Mecânicos",
-          "idDiario": 518151,
-          "inicio": "2026-08-11",
-          "fim": "2027-02-22"
+          "uc": "Fabricação Mecânica Aplicada à Manutenção  e à Montagem",
+          "idDiario": 518153,
+          "inicio": "2026-08-06",
+          "fim": "2026-12-03"
         },
         {
           "uc": "Manutenção de Sistemas Automatizados",
@@ -1806,10 +1806,22 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-16"
         },
         {
+          "uc": "Leitura de Desenho e Metrologia Mecânica",
+          "idDiario": 541439,
+          "inicio": "2026-07-20",
+          "fim": "2026-11-19"
+        },
+        {
           "uc": "Organização da Produção Mecânica",
           "idDiario": 541435,
           "inicio": "2027-01-18",
           "fim": "2027-07-16"
+        },
+        {
+          "uc": "Fundamentos da Tecnologia Mecânica",
+          "idDiario": 541437,
+          "inicio": "2026-08-05",
+          "fim": "2026-12-02"
         },
         {
           "uc": "Planejamento e Controle da Manutenção",
@@ -1830,6 +1842,18 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-17"
         },
         {
+          "uc": "Introdução à Fabricação Mecânica",
+          "idDiario": 541438,
+          "inicio": "2026-09-21",
+          "fim": "2026-11-24"
+        },
+        {
+          "uc": "Fundamentos da Eletricidade Industrial",
+          "idDiario": 541436,
+          "inicio": "2026-08-06",
+          "fim": "2026-12-01"
+        },
+        {
           "uc": "Introdução a Indústria 4.0",
           "idDiario": 541445,
           "inicio": "2028-02-07",
@@ -1842,18 +1866,6 @@ window.EAD_OFERTAS = {
           "fim": "2028-05-12"
         },
         {
-          "uc": "Leitura de Desenho e Metrologia Mecânica",
-          "idDiario": 541439,
-          "inicio": "2026-07-20",
-          "fim": "2026-11-19"
-        },
-        {
-          "uc": "Introdução à Fabricação Mecânica",
-          "idDiario": 541438,
-          "inicio": "2026-09-21",
-          "fim": "2026-11-24"
-        },
-        {
           "uc": "Manutenção Mecânica de Máquinas e Equipamentos",
           "idDiario": 541430,
           "inicio": "2027-08-02",
@@ -1864,12 +1876,6 @@ window.EAD_OFERTAS = {
           "idDiario": 541425,
           "inicio": "2028-02-07",
           "fim": "2028-05-12"
-        },
-        {
-          "uc": "Fundamentos da Tecnologia Mecânica",
-          "idDiario": 541437,
-          "inicio": "2026-08-05",
-          "fim": "2026-12-02"
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
@@ -1912,12 +1918,6 @@ window.EAD_OFERTAS = {
           "idDiario": 541444,
           "inicio": "2028-02-07",
           "fim": "2028-05-12"
-        },
-        {
-          "uc": "Fundamentos da Eletricidade Industrial",
-          "idDiario": 541436,
-          "inicio": "2026-08-06",
-          "fim": "2026-12-01"
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -2031,6 +2031,18 @@ window.EAD_OFERTAS = {
           "fim": "2026-11-20"
         },
         {
+          "uc": "Instalação e Manutenção Elétrica Predial",
+          "idDiario": 518041,
+          "inicio": "2026-08-12",
+          "fim": "2026-12-03"
+        },
+        {
+          "uc": "Desenho Técnico Aplicado a Projetos Elétricos",
+          "idDiario": 518048,
+          "inicio": "2026-04-02",
+          "fim": "2026-07-16"
+        },
+        {
           "uc": "Integração de Sistemas Elétricos Automatizados",
           "idDiario": 518038,
           "inicio": "2027-02-08",
@@ -2049,12 +2061,6 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
-          "uc": "Desenho Técnico Aplicado a Projetos Elétricos",
-          "idDiario": 518048,
-          "inicio": "2026-04-02",
-          "fim": "2026-07-16"
-        },
-        {
           "uc": "Prototipagem de Negócios Inovadores",
           "idDiario": 518043,
           "inicio": "2027-02-08",
@@ -2065,12 +2071,6 @@ window.EAD_OFERTAS = {
           "idDiario": 518039,
           "inicio": "2027-02-08",
           "fim": "2027-07-02"
-        },
-        {
-          "uc": "Projetos Elétricos Prediais",
-          "idDiario": 518040,
-          "inicio": "2026-08-11",
-          "fim": "2026-12-10"
         },
         {
           "uc": "Gestão Operacional Integrada",
@@ -2109,12 +2109,6 @@ window.EAD_OFERTAS = {
           "fim": "2026-11-20"
         },
         {
-          "uc": "Instalação e Manutenção Elétrica Predial",
-          "idDiario": 518041,
-          "inicio": "2026-08-12",
-          "fim": "2026-12-03"
-        },
-        {
           "uc": "Projetos de Instalações Elétricas de Potência",
           "idDiario": 518032,
           "inicio": "2027-07-05",
@@ -2125,6 +2119,12 @@ window.EAD_OFERTAS = {
           "idDiario": 518053,
           "inicio": "2026-04-13",
           "fim": "2026-07-17"
+        },
+        {
+          "uc": "Projetos Elétricos Prediais",
+          "idDiario": 518040,
+          "inicio": "2026-08-11",
+          "fim": "2026-12-10"
         },
         {
           "uc": "Criatividade e Ideação em Projetos de Inovação",
@@ -2304,6 +2304,12 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
+          "uc": "Fundamentos de Sistemas Elétricos",
+          "idDiario": 541397,
+          "inicio": "2026-08-31",
+          "fim": "2026-11-09"
+        },
+        {
           "uc": "Introdução a Qualidade e Produtividade",
           "idDiario": 541401,
           "inicio": "2026-11-16",
@@ -2320,12 +2326,6 @@ window.EAD_OFERTAS = {
           "idDiario": 541381,
           "inicio": "2028-02-07",
           "fim": "2028-05-12"
-        },
-        {
-          "uc": "Fundamentos de Sistemas Elétricos",
-          "idDiario": 541397,
-          "inicio": "2026-08-31",
-          "fim": "2026-11-09"
         },
         {
           "uc": "Manutenção e Operação de Sistemas Elétricos de Potência - SEP",
@@ -2376,6 +2376,12 @@ window.EAD_OFERTAS = {
           "fim": "2026-09-24"
         },
         {
+          "uc": "Desenho Técnico Aplicado a Projetos Elétricos",
+          "idDiario": 541395,
+          "inicio": "2026-08-20",
+          "fim": "2026-11-10"
+        },
+        {
           "uc": "Instalação e Manutenção Elétrica Predial",
           "idDiario": 541389,
           "inicio": "2026-11-16",
@@ -2410,12 +2416,6 @@ window.EAD_OFERTAS = {
           "idDiario": 541394,
           "inicio": "2028-02-07",
           "fim": "2028-05-12"
-        },
-        {
-          "uc": "Desenho Técnico Aplicado a Projetos Elétricos",
-          "idDiario": 541395,
-          "inicio": "2026-08-20",
-          "fim": "2026-11-10"
         },
         {
           "uc": "Integração de Sistemas Elétricos Automatizados",
@@ -2530,6 +2530,12 @@ window.EAD_OFERTAS = {
           "fim": "2026-06-18"
         },
         {
+          "uc": "Programação de Drivers para Dispositivos de Automação",
+          "idDiario": 517963,
+          "inicio": "2026-10-22",
+          "fim": "2026-12-04"
+        },
+        {
           "uc": "Fundamentos da Instrumentação",
           "idDiario": 517966,
           "inicio": "2026-05-05",
@@ -2542,6 +2548,12 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
+          "uc": "Programação de Sistemas Embarcados",
+          "idDiario": 517962,
+          "inicio": "2026-08-19",
+          "fim": "2026-12-07"
+        },
+        {
           "uc": "Manutenção de Sistemas Embarcados",
           "idDiario": 517961,
           "inicio": "2027-02-08",
@@ -2552,6 +2564,18 @@ window.EAD_OFERTAS = {
           "idDiario": 517978,
           "inicio": "2026-04-13",
           "fim": "2026-07-17"
+        },
+        {
+          "uc": "Gestão de Projetos de Automação e TI",
+          "idDiario": 517968,
+          "inicio": "2026-09-29",
+          "fim": "2026-10-26"
+        },
+        {
+          "uc": "Fundamentos da Metrologia e Desenho Técnico",
+          "idDiario": 517967,
+          "inicio": "2026-03-30",
+          "fim": "2026-06-01"
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -2636,30 +2660,6 @@ window.EAD_OFERTAS = {
           "idDiario": 517972,
           "inicio": "2027-02-08",
           "fim": "2027-07-02"
-        },
-        {
-          "uc": "Programação de Drivers para Dispositivos de Automação",
-          "idDiario": 517963,
-          "inicio": "2026-10-22",
-          "fim": "2026-12-04"
-        },
-        {
-          "uc": "Gestão de Projetos de Automação e TI",
-          "idDiario": 517968,
-          "inicio": "2026-09-29",
-          "fim": "2026-10-26"
-        },
-        {
-          "uc": "Programação de Sistemas Embarcados",
-          "idDiario": 517962,
-          "inicio": "2026-08-19",
-          "fim": "2026-12-07"
-        },
-        {
-          "uc": "Fundamentos da Metrologia e Desenho Técnico",
-          "idDiario": 517967,
-          "inicio": "2026-03-30",
-          "fim": "2026-06-01"
         },
         {
           "uc": "Implementação de Negócios Inovadores",
@@ -2779,12 +2779,6 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-22"
         },
         {
-          "uc": "Processos de Fabricação Mecânica",
-          "idDiario": 518190,
-          "inicio": "2026-08-13",
-          "fim": "2027-02-17"
-        },
-        {
           "uc": "Planejamento e Controle da Manutenção",
           "idDiario": 518187,
           "inicio": "2027-02-22",
@@ -2797,16 +2791,16 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-21"
         },
         {
-          "uc": "Gerenciamento de Projetos",
-          "idDiario": 518186,
-          "inicio": "2027-08-02",
-          "fim": "2027-12-08"
-        },
-        {
           "uc": "Planejamento e Controle da Produção",
           "idDiario": 518191,
           "inicio": "2026-08-07",
           "fim": "2027-02-18"
+        },
+        {
+          "uc": "Gerenciamento de Projetos",
+          "idDiario": 518186,
+          "inicio": "2027-08-02",
+          "fim": "2027-12-08"
         },
         {
           "uc": "Saúde e Segurança no Trabalho",
@@ -2837,6 +2831,12 @@ window.EAD_OFERTAS = {
           "idDiario": 518198,
           "inicio": "2027-02-22",
           "fim": "2027-07-23"
+        },
+        {
+          "uc": "Processos de Fabricação Mecânica",
+          "idDiario": 518190,
+          "inicio": "2026-08-13",
+          "fim": "2027-02-17"
         },
         {
           "uc": "Fundamentos da Tecnologia Mecânica",
@@ -2986,16 +2986,16 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-22"
         },
         {
-          "uc": "Processos de Fabricação Mecânica",
-          "idDiario": 518207,
-          "inicio": "2026-08-13",
-          "fim": "2027-02-17"
-        },
-        {
           "uc": "Gerenciamento de Projetos",
           "idDiario": 518203,
           "inicio": "2027-08-02",
           "fim": "2027-12-08"
+        },
+        {
+          "uc": "Processos de Fabricação Mecânica",
+          "idDiario": 518207,
+          "inicio": "2026-08-13",
+          "fim": "2027-02-17"
         },
         {
           "uc": "Desenvolvimento de Sistemas de Automação Mecânica",
@@ -3014,6 +3014,12 @@ window.EAD_OFERTAS = {
           "idDiario": 518202,
           "inicio": "2027-08-02",
           "fim": "2027-12-08"
+        },
+        {
+          "uc": "Planejamento e Controle da Produção",
+          "idDiario": 518208,
+          "inicio": "2026-08-12",
+          "fim": "2027-02-18"
         },
         {
           "uc": "Planejamento e Controle da Manutenção",
@@ -3038,12 +3044,6 @@ window.EAD_OFERTAS = {
           "idDiario": 518205,
           "inicio": "2027-02-25",
           "fim": "2027-07-22"
-        },
-        {
-          "uc": "Planejamento e Controle da Produção",
-          "idDiario": 518208,
-          "inicio": "2026-08-12",
-          "fim": "2027-02-18"
         },
         {
           "uc": "Leitura de Desenho e Metrologia Mecânica",
@@ -3195,16 +3195,16 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
-          "uc": "Introdução à Gestão Organizacional",
-          "idDiario": 520126,
-          "inicio": "2026-03-30",
-          "fim": "2026-08-24"
-        },
-        {
           "uc": "Planejamento da Produção",
           "idDiario": 520125,
           "inicio": "2026-06-11",
           "fim": "2026-11-26"
+        },
+        {
+          "uc": "Introdução à Gestão Organizacional",
+          "idDiario": 520126,
+          "inicio": "2026-03-30",
+          "fim": "2026-08-24"
         },
         {
           "uc": "Processos de Manutenção e Melhoria da Produção",
@@ -3343,18 +3343,6 @@ window.EAD_OFERTAS = {
       ],
       "diarioTurma": [
         {
-          "uc": "Química Analítica",
-          "idDiario": 517890,
-          "inicio": "2026-08-11",
-          "fim": "2026-12-09"
-        },
-        {
-          "uc": "Química Orgânica Experimental",
-          "idDiario": 517888,
-          "inicio": "2026-10-19",
-          "fim": "2026-11-16"
-        },
-        {
           "uc": "Pesquisas e Aplicação de Produtos e Serviços",
           "idDiario": 517881,
           "inicio": "2027-07-05",
@@ -3469,6 +3457,12 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-13"
         },
         {
+          "uc": "Química Orgânica Experimental",
+          "idDiario": 517888,
+          "inicio": "2026-10-19",
+          "fim": "2026-11-16"
+        },
+        {
           "uc": "Introdução ao Desenvolvimento de Projetos",
           "idDiario": 517893,
           "inicio": "2026-08-24",
@@ -3503,6 +3497,12 @@ window.EAD_OFERTAS = {
           "idDiario": 517873,
           "inicio": "2026-03-23",
           "fim": "2026-07-20"
+        },
+        {
+          "uc": "Química Analítica",
+          "idDiario": 517890,
+          "inicio": "2026-08-11",
+          "fim": "2026-12-09"
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -3605,6 +3605,12 @@ window.EAD_OFERTAS = {
           "fim": "2026-10-02"
         },
         {
+          "uc": "Modelagem de Projetos de Inovação",
+          "idDiario": 517933,
+          "inicio": "2026-10-22",
+          "fim": "2026-11-27"
+        },
+        {
           "uc": "Operação de Processos Industriais",
           "idDiario": 517939,
           "inicio": "2027-07-05",
@@ -3633,12 +3639,6 @@ window.EAD_OFERTAS = {
           "idDiario": 517947,
           "inicio": "2027-07-05",
           "fim": "2027-12-08"
-        },
-        {
-          "uc": "Fundamentos de Processos Químicos Industriais",
-          "idDiario": 517925,
-          "inicio": "2026-08-05",
-          "fim": "2026-10-21"
         },
         {
           "uc": "Físico-química Aplicada",
@@ -3677,28 +3677,28 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-02"
         },
         {
+          "uc": "Química Analítica",
+          "idDiario": 517946,
+          "inicio": "2026-08-10",
+          "fim": "2026-12-08"
+        },
+        {
           "uc": "Introdução a Indústria 4.0",
           "idDiario": 517948,
           "inicio": "2027-02-22",
           "fim": "2027-05-21"
         },
         {
-          "uc": "Modelagem de Projetos de Inovação",
-          "idDiario": 517933,
-          "inicio": "2026-10-22",
-          "fim": "2026-11-27"
+          "uc": "Fundamentos de Processos Químicos Industriais",
+          "idDiario": 517925,
+          "inicio": "2026-08-05",
+          "fim": "2026-10-21"
         },
         {
           "uc": "Desenvolvimento de Métodos Analíticos, Produtos e Processos",
           "idDiario": 517936,
           "inicio": "2027-07-05",
           "fim": "2027-12-08"
-        },
-        {
-          "uc": "Química Analítica",
-          "idDiario": 517946,
-          "inicio": "2026-08-10",
-          "fim": "2026-12-08"
         },
         {
           "uc": "Pesquisas e Aplicação de Produtos e Serviços",
@@ -3813,6 +3813,12 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-02"
         },
         {
+          "uc": "Química Analítica",
+          "idDiario": 517918,
+          "inicio": "2026-08-11",
+          "fim": "2026-12-08"
+        },
+        {
           "uc": "Saúde e Segurança no Trabalho",
           "idDiario": 517924,
           "inicio": "2026-04-13",
@@ -3823,6 +3829,12 @@ window.EAD_OFERTAS = {
           "idDiario": 517919,
           "inicio": "2027-07-05",
           "fim": "2027-12-08"
+        },
+        {
+          "uc": "Química Orgânica Experimental",
+          "idDiario": 517916,
+          "inicio": "2026-10-15",
+          "fim": "2026-11-11"
         },
         {
           "uc": "Físico-química Aplicada",
@@ -3885,12 +3897,6 @@ window.EAD_OFERTAS = {
           "fim": "2026-11-20"
         },
         {
-          "uc": "Química Analítica",
-          "idDiario": 517918,
-          "inicio": "2026-08-11",
-          "fim": "2026-12-08"
-        },
-        {
           "uc": "Modelagem de Projetos de Inovação",
           "idDiario": 517905,
           "inicio": "2027-02-15",
@@ -3931,12 +3937,6 @@ window.EAD_OFERTAS = {
           "idDiario": 517906,
           "inicio": "2026-05-04",
           "fim": "2026-06-18"
-        },
-        {
-          "uc": "Química Orgânica Experimental",
-          "idDiario": 517916,
-          "inicio": "2026-10-15",
-          "fim": "2026-11-11"
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -3983,17 +3983,6 @@ window.EAD_OFERTAS = {
       "unidade": "Jaraguá do Sul",
       "link": "https://sgn.sesisenai.org.br/pages/execucaoEducacao/execucao-educacao.html?idTurma=125108",
       "ucs": [
-        {
-          "uc": "Introdução à Tecnologia da Informação e Comunicação",
-          "cargaHoraria": 40,
-          "inicio": "2026-03-30",
-          "fim": "2026-08-28",
-          "idDiario": 518100,
-          "regulares": 16,
-          "cursando": 0,
-          "aprovados": 12,
-          "reprovados": 4
-        },
         {
           "uc": "Introdução ao Desenvolvimento de Projetos",
           "cargaHoraria": 12,
@@ -4081,6 +4070,17 @@ window.EAD_OFERTAS = {
           "cursando": 16,
           "aprovados": 0,
           "reprovados": 0
+        },
+        {
+          "uc": "Introdução à Tecnologia da Informação e Comunicação",
+          "cargaHoraria": 40,
+          "inicio": null,
+          "fim": null,
+          "idDiario": null,
+          "regulares": 16,
+          "cursando": 0,
+          "aprovados": 12,
+          "reprovados": 4
         }
       ],
       "diarioTurma": [
@@ -4127,12 +4127,6 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
-          "uc": "Fundamentos de Segurança e Saúde do Trabalho",
-          "idDiario": 518093,
-          "inicio": "2026-03-30",
-          "fim": "2026-07-20"
-        },
-        {
           "uc": "Sustentabilidade nos Processos Industriais",
           "idDiario": 518096,
           "inicio": "2027-07-05",
@@ -4149,18 +4143,6 @@ window.EAD_OFERTAS = {
           "idDiario": 518088,
           "inicio": "2027-02-08",
           "fim": "2027-07-02"
-        },
-        {
-          "uc": "Ciências Aplicadas à Segurança e Saúde do Trabalho",
-          "idDiario": 518094,
-          "inicio": "2026-04-01",
-          "fim": "2026-07-03"
-        },
-        {
-          "uc": "Introdução à Tecnologia da Informação e Comunicação",
-          "idDiario": 518100,
-          "inicio": "2026-03-30",
-          "fim": "2026-08-28"
         },
         {
           "uc": "Monitoramento dos Programas e Documentos de Segurança e Saúde do Trabalho",
@@ -4321,6 +4303,12 @@ window.EAD_OFERTAS = {
       ],
       "diarioTurma": [
         {
+          "uc": "Rotinas de Segurança e Saúde do Trabalho",
+          "idDiario": 518911,
+          "inicio": "2026-10-06",
+          "fim": "2027-03-24"
+        },
+        {
           "uc": "Gestão de Auditorias em de Segurança e Saúde do Trabalho",
           "idDiario": 518907,
           "inicio": "2027-08-30",
@@ -4421,12 +4409,6 @@ window.EAD_OFERTAS = {
           "idDiario": 518906,
           "inicio": "2027-08-30",
           "fim": "2027-12-08"
-        },
-        {
-          "uc": "Rotinas de Segurança e Saúde do Trabalho",
-          "idDiario": 518911,
-          "inicio": "2026-10-06",
-          "fim": "2027-03-24"
         },
         {
           "uc": "Implementação de Negócios Inovadores",
@@ -4559,6 +4541,12 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-17"
         },
         {
+          "uc": "Processo de Modelagem Industrial",
+          "idDiario": 518109,
+          "inicio": "2026-04-15",
+          "fim": "2026-07-22"
+        },
+        {
           "uc": "Sustentabilidade nos Processos Industriais",
           "idDiario": 518119,
           "inicio": "2026-08-24",
@@ -4569,12 +4557,6 @@ window.EAD_OFERTAS = {
           "idDiario": 518118,
           "inicio": "2026-08-24",
           "fim": "2026-11-20"
-        },
-        {
-          "uc": "Fundamentos da Moda",
-          "idDiario": 518110,
-          "inicio": "2026-06-02",
-          "fim": "2026-07-10"
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -4607,6 +4589,12 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
+          "uc": "Processo de Corte Industrial",
+          "idDiario": 518108,
+          "inicio": "2026-08-10",
+          "fim": "2026-12-07"
+        },
+        {
           "uc": "Análise Técnica do Desenvolvimento de Produtos do Vestuário",
           "idDiario": 518104,
           "inicio": "2027-07-05",
@@ -4619,10 +4607,10 @@ window.EAD_OFERTAS = {
           "fim": "2027-07-02"
         },
         {
-          "uc": "Processo de Corte Industrial",
-          "idDiario": 518108,
-          "inicio": "2026-08-10",
-          "fim": "2026-12-07"
+          "uc": "Fundamentos da Moda",
+          "idDiario": 518110,
+          "inicio": "2026-06-02",
+          "fim": "2026-07-10"
         },
         {
           "uc": "Introdução a Qualidade e Produtividade",
@@ -4637,10 +4625,10 @@ window.EAD_OFERTAS = {
           "fim": "2026-12-08"
         },
         {
-          "uc": "Processo de Modelagem Industrial",
-          "idDiario": 518109,
-          "inicio": "2026-04-15",
-          "fim": "2026-07-22"
+          "uc": "Fundamentos da Confecção do Vestuário",
+          "idDiario": 518111,
+          "inicio": "2026-03-30",
+          "fim": "2026-06-29"
         },
         {
           "uc": "Modelagem de Projetos de Inovação",
@@ -4653,12 +4641,6 @@ window.EAD_OFERTAS = {
           "idDiario": 518113,
           "inicio": "2027-02-08",
           "fim": "2027-07-02"
-        },
-        {
-          "uc": "Fundamentos da Confecção do Vestuário",
-          "idDiario": 518111,
-          "inicio": "2026-03-30",
-          "fim": "2026-06-29"
         }
       ]
     },
@@ -4755,10 +4737,10 @@ window.EAD_OFERTAS = {
           "fim": "2026-08-05"
         },
         {
-          "uc": "Processo de Corte Industrial",
-          "idDiario": 518930,
-          "inicio": "2026-08-12",
-          "fim": "2026-11-18"
+          "uc": "Planejamento da Produção do Vestuário",
+          "idDiario": 518928,
+          "inicio": "2026-08-17",
+          "fim": "2027-02-25"
         },
         {
           "uc": "Sustentabilidade nos Processos Industriais",
@@ -4773,6 +4755,12 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
+          "uc": "Processo de Corte Industrial",
+          "idDiario": 518930,
+          "inicio": "2026-08-12",
+          "fim": "2026-11-18"
+        },
+        {
           "uc": "Prototipagem de Negócios Inovadores",
           "idDiario": 518935,
           "inicio": "2027-02-26",
@@ -4783,12 +4771,6 @@ window.EAD_OFERTAS = {
           "idDiario": 518940,
           "inicio": "2026-08-24",
           "fim": "2026-11-20"
-        },
-        {
-          "uc": "Processo de Costura Industrial",
-          "idDiario": 518929,
-          "inicio": "2026-08-13",
-          "fim": "2026-12-03"
         },
         {
           "uc": "Controle dos Processos do Vestuário",
@@ -4815,12 +4797,6 @@ window.EAD_OFERTAS = {
           "fim": "2026-11-20"
         },
         {
-          "uc": "Planejamento da Produção do Vestuário",
-          "idDiario": 518928,
-          "inicio": "2026-08-17",
-          "fim": "2027-02-25"
-        },
-        {
           "uc": "Especificações Técnicas de Produtos e Processos do Vestuário",
           "idDiario": 518927,
           "inicio": "2027-02-26",
@@ -4831,6 +4807,12 @@ window.EAD_OFERTAS = {
           "idDiario": 518938,
           "inicio": "2027-02-26",
           "fim": "2027-07-30"
+        },
+        {
+          "uc": "Processo de Costura Industrial",
+          "idDiario": 518929,
+          "inicio": "2026-08-13",
+          "fim": "2026-12-03"
         },
         {
           "uc": "Introdução à Tecnologia da Informação e Comunicação",
@@ -4999,12 +4981,6 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
-          "uc": "Processo de Corte Industrial",
-          "idDiario": 520141,
-          "inicio": "2026-08-10",
-          "fim": "2026-12-07"
-        },
-        {
           "uc": "Sustentabilidade nos Processos Industriais",
           "idDiario": 520152,
           "inicio": "2026-08-24",
@@ -5041,10 +5017,16 @@ window.EAD_OFERTAS = {
           "fim": "2026-07-21"
         },
         {
-          "uc": "Processo de Costura Industrial",
-          "idDiario": 520140,
-          "inicio": "2026-08-05",
-          "fim": "2026-12-09"
+          "uc": "Planejamento da Produção do Vestuário",
+          "idDiario": 520139,
+          "inicio": "2026-08-06",
+          "fim": "2026-12-10"
+        },
+        {
+          "uc": "Processo de Corte Industrial",
+          "idDiario": 520141,
+          "inicio": "2026-08-10",
+          "fim": "2026-12-07"
         },
         {
           "uc": "Gestão de Equipes da Confecção do Vestuário",
@@ -5071,6 +5053,12 @@ window.EAD_OFERTAS = {
           "fim": "2027-12-08"
         },
         {
+          "uc": "Processo de Costura Industrial",
+          "idDiario": 520140,
+          "inicio": "2026-08-05",
+          "fim": "2026-12-09"
+        },
+        {
           "uc": "Análise Técnica do Desenvolvimento de Produtos do Vestuário",
           "idDiario": 520137,
           "inicio": "2027-06-25",
@@ -5081,12 +5069,6 @@ window.EAD_OFERTAS = {
           "idDiario": 520142,
           "inicio": "2026-04-08",
           "fim": "2026-07-15"
-        },
-        {
-          "uc": "Planejamento da Produção do Vestuário",
-          "idDiario": 520139,
-          "inicio": "2026-08-06",
-          "fim": "2026-12-10"
         }
       ]
     }
